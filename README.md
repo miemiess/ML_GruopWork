@@ -8,9 +8,9 @@ EMGInsight 使用公开的表面肌电（sEMG）数据，研究手势识别、�
 
 **当前阶段：基础工作区搭建。** 数据适配器、特征提取、模型、训练流程与离线演示尚待实现，目前没有实验结果或训练好的模型。[项目提案](Group_12_EMGInsight_Visual_Proposal_Revised.pdf)是项目参考依据，三个任务的最终范围将根据数据可行性确定。
 
-[数据集指南](data/README.md) · [研究与评估规范](docs/research_protocol.md) · [贡献指南](CONTRIBUTING.md) · [实验记录模板](docs/experiment_template.md)
+[需求清单与认领](docs/requirements.md) · [架构与模块](docs/architecture.md) · [贡献流程](贡献.md) · [数据集指南](data/README.md)
 
-## 项目要求
+## 项目约束
 
 - **不使用深度学习。** 采用传统分类与回归方法。
 - **使用 Python/NumPy 自行实现核心机器学习算法。** 可以使用库模型进行参考对比，但必须明确标注，不能代替自行实现的算法。
@@ -66,35 +66,38 @@ EMGInsight 使用公开的表面肌电（sEMG）数据，研究手势识别、�
 4. 创建面向 `main` 的 Pull Request（PR），说明验证结果与数据假设。
 5. 由另一位组员审阅，处理反馈后合并。
 
-共同维护的 `main` 应保持可用，日常开发通过功能分支与 PR 合并；经明确约定的小范围文档修改也可直接提交 `main`，本次中文化采用直接提交。这是小组协作约定，当前基础工作区未配置强制分支保护。详见[贡献指南](CONTRIBUTING.md)。
+仓库当前只保留 `main`，组员认领需求后自行创建短期分支，合并后删除。完整操作见[贡献.md](贡献.md)，包括进度认领、建分支、提交、同步、冲突处理、PR 审阅、合并和分支清理。本次架构规划直接提交主线；后续功能开发采用 PR。当前没有新增强制分支保护。
 
-## 工作区结构
+## 架构与工作区
+
+采用一个模块化 Python 项目：三个任务分别适配数据，公共模块共享契约与算法，由统一编排层串联。详细职责、依赖方向、数组形状、模型接口及运行文件格式见[架构约定](docs/architecture.md)。
 
 ```text
 .
-├── docs/                       # 研究规范、决策记录与实验记录模板
-├── data/                       # 数据获取与来源指南，本地数据不提交
-│   ├── raw/                    # 保持不变的原始数据
-│   ├── interim/                # 清洗和时间对齐后的中间数据
-│   ├── processed/              # 特征、标签、分组与划分信息
-│   └── manifests/              # 经检查的数据来源与文件校验记录
-├── src/emginsight/              # 公共 Python 包
-│   ├── datasets/               # 各数据集独立的适配器
-│   ├── preprocessing/          # 分窗、滤波及仅在训练集上拟合的变换
-│   ├── features/               # 公共特征提取
-│   ├── models/                 # 自行实现的传统机器学习算法
-│   └── evaluation/             # 分组划分、指标计算与对比工具
-├── notebooks/experiments/       # 数据探索与实验，复用公共包中的函数
-├── configs/                    # 纳入版本管理的实验配置
-├── tests/                      # 后续添加算法、防泄漏与适配器测试
-├── results/                    # 经检查的摘要与图表，大型文件不提交
-├── demo/                       # 计划中的离线推理演示
-├── CONTRIBUTING.md             # 贡献与协作指南
-├── pyproject.toml              # 包信息与工具配置
-└── requirements.txt            # 开发环境安装入口
+├── docs/                       # 架构、需求、研究规范、实验记录与报告
+├── data/                       # 原始/中间/处理数据（本地），来源清单与划分
+├── src/emginsight/
+│   ├── core/                   # 公共数据契约、配置校验与异常
+│   ├── datasets/               # UCI、putEMG-Force、Zenodo 独立适配器
+│   ├── splitting/              # 分窗前按用户或会话划分
+│   ├── preprocessing/          # 滤波、分窗、仅训练集拟合的变换
+│   ├── features/               # RMS、MAV、WL 等确定性特征
+│   ├── models/                 # 自定义基线、kNN、逻辑回归、岭回归
+│   ├── evaluation/             # 指标、图表与公平对比
+│   ├── artifacts/              # 保存及恢复模型、配置、环境与结果
+│   └── pipelines/              # 统一训练、评估、推理入口
+├── notebooks/experiments/       # 探索与可视化，调用公共包
+├── configs/                    # 三任务配置与模板
+├── tests/                      # 按模块的单元测试、集成测试与合成样例
+├── results/                    # 公开摘要/图表；本地运行文件保持忽略
+├── demo/                       # 调用统一推理入口的离线展示
+├── 贡献.md                     # 完整中文协作流程
+├── CONTRIBUTING.md             # GitHub 贡献指南入口
+├── pyproject.toml              # Python 包与工具设置
+└── requirements.txt            # 安装入口
 ```
 
-项目提案 PDF 保留在仓库根目录，沿用原有引用。目前各模块目录主要包含规划说明，尚未实现模型。
+以上模块目录已经建立，算法、命令行与测试实现仍待需求开发。项目提案保留在根目录。公共接口先确定，各模块使用合成数据独立验证，再通过统一流程集成。
 
 ## 环境安装
 
@@ -127,21 +130,22 @@ python -m pip check
 
 目前尚无训练或演示命令。添加测试后使用 `python -m pytest`；当前基础工作区没有可执行测试，会报告未收集到测试并返回退出码 5。详见[测试说明](tests/README.md)。
 
-## 实验复现
+## 需求清单
 
-1. 按照[数据集指南](data/README.md)从原始来源获取数据，原始文件保存在本地并保持不变。
-2. 复制[实验配置示例](configs/experiment.example.toml)，填写各数据集对应的设置并记录数据来源。
-3. 保存准确的用户与采集会话划分标识、标签规则、窗口参数、通道编号、预处理、模型参数和随机种子。
-4. 在本地运行目录记录 Git 提交版本，并通过 `python --version` 和 `python -m pip freeze` 保存环境信息。
-5. 训练流程实现后，使用[实验记录模板](docs/experiment_template.md)记录准确命令与评估指标，仅提交经检查的结果摘要和图表。
+完整开发范围共 **22 项需求**，每项均列出目标、前置需求、交付目录、验收条件与验证方式。请从[详细需求清单](docs/requirements.md)选择任务，在 [GitHub Issues](https://github.com/miemiess/ML_GruopWork/issues) 搜索编号并认领，然后建立自己的分支。
 
-基础配置中的依赖版本范围不能保证环境完全一致。每次报告结果时应保存实际安装的准确版本，首个流程验证完成后再考虑建立统一的依赖锁定文件。
+| 分区 | 需求 |
+| --- | --- |
+| 基础契约 | [R01 公共类型](docs/requirements.md#r01)、[R02 配置校验](docs/requirements.md#r02) |
+| 数据适配 | [R03 UCI](docs/requirements.md#r03)、[R04 力量](docs/requirements.md#r04)、[R05 疲劳](docs/requirements.md#r05) |
+| 公共处理 | [R06 分组划分](docs/requirements.md#r06)、[R07 分窗](docs/requirements.md#r07)、[R08 特征](docs/requirements.md#r08)、[R09 标准化](docs/requirements.md#r09) |
+| 算法 | [R10 基线与 kNN](docs/requirements.md#r10)、[R11 逻辑回归](docs/requirements.md#r11)、[R12 岭回归](docs/requirements.md#r12) |
+| 评估与集成 | [R13 指标图表](docs/requirements.md#r13)、[R14 保存恢复](docs/requirements.md#r14)、[R15 统一流程](docs/requirements.md#r15) |
+| 三任务研究 | [R16 手势](docs/requirements.md#r16)、[R17 力量](docs/requirements.md#r17)、[R18 疲劳](docs/requirements.md#r18) |
+| 比较与交付 | [R19 通道研究](docs/requirements.md#r19)、[R20 离线演示](docs/requirements.md#r20)、[R21 环境与 CI](docs/requirements.md#r21)、[R22 最终报告](docs/requirements.md#r22) |
 
-## 下一阶段
+状态统一为 **待认领 → 进行中 → 待审阅 → 已完成**，遇到依赖问题标记**受阻**。通过 Issue 标题、负责人和关联分支/PR 告知大家正在做哪一需求。现有实现任务尚未完成，不预先分配人员。
 
-- 从各数据来源抽取少量样本，确认许可、标签可用性及任务可行性。
-- 约定数据适配器与分组划分，实现预处理和特征提取。
-- 实现并测试自定义模型，建立各任务的基线结果。
-- 比较通道与模型，准备离线演示并完成最终报告。
+原来的实验复现内容已纳入 R02、R06、R14、R16-R18、R21 和 R22 的验收要求，包括配置、精确划分、数据校验值、环境、随机种子与其他成员复跑。所有结果必须可追溯。
 
 数据集权利归各原始提供方所有。目前尚未选定整个项目的代码许可证。

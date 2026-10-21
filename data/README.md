@@ -16,6 +16,7 @@
 - `interim/<dataset_id>/`：清洗和时间对齐后的记录。
 - `processed/<dataset_id>/`：窗口特征、预测目标、分组与划分信息。
 - `manifests/`：经检查的来源、校验值与样本排除记录，不含敏感参与者信息。
+- `splits/`：经检查的用户、会话与记录划分，标识训练、验证和测试集；不放信号数据。
 
 前三类目录由 Git 忽略，不要使用 `git add -f` 强行添加数据。来源清单会纳入版本管理，提交前需检查。PowerShell 可使用 `Get-FileHash -Algorithm SHA256 path/to/file` 计算校验值，其他平台使用对应工具。
 

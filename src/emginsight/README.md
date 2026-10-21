@@ -1,11 +1,17 @@
 # 公共 Python 包
 
-以可编辑方式安装后，通过 `emginsight` 导入可复用代码。计划中的子包：
+模块实现与边界以[架构约定](../../docs/architecture.md)为准，任务以[需求清单](../../docs/requirements.md)为准。
 
-- `datasets/`：UCI、putEMG-Force 与 Zenodo 的独立适配器。
-- `preprocessing/`：按记录滤波、分窗及仅在训练集上拟合的变换。
-- `features/`：RMS、MAV、WL 及有文档说明的扩展特征。
-- `models/`：使用 NumPy 自行实现分类与回归算法。
-- `evaluation/`：分组划分、任务指标及对比工具。
+| 模块 | 需求 | 职责 |
+| --- | --- | --- |
+| core | R01、R02 | 公共类型、配置与异常 |
+| datasets | R03-R05 | 三个独立数据适配器 |
+| splitting | R06 | 分窗前按用户/会话划分 |
+| preprocessing | R07、R09 | 记录处理、分窗、训练集标准化 |
+| features | R08 | 确定性时域特征 |
+| models | R10-R12 | 自定义基线、kNN、逻辑回归、岭回归 |
+| evaluation | R13、R19 | 指标、图表与公平对比 |
+| artifacts | R14 | 运行记录、状态保存恢复 |
+| pipelines | R15 | 调用模块完成训练、评估与推理 |
 
-参见[公共接口](../../docs/research_protocol.md)。这些目录目前仅包含包占位文件，尚无可运行算法。
+当前只有包占位与文档，不能运行训练。Notebook 和 demo 后续通过已安装的包调用函数，不复制实现。公共模块不依赖 pipelines、demo 或 Notebook。

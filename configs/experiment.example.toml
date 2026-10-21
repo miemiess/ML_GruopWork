@@ -1,23 +1,39 @@
-# 实验规划模板，尚不能直接运行。
+# 字段规格模板，尚不能运行；TODO、空数组和非正参数必须由 R02 拒绝。
+schema_version = 1
 status = "template"
 task = "gesture_classification" # 也可选 force_regression / fatigue_classification
 dataset_id = "uci_gestures"
 seed = 42
-raw_dir = "data/raw/uci_gestures"
-output_dir = "results/runs/example"
+run_id = "TODO"
 
 [data]
+raw_dir = "data/raw/uci_gestures"
 manifest = "data/manifests/manifest.example.toml"
-target = "TODO"
-channels = [] # 填写明确的源数据通道编号。
+targets = ["TODO"]
+target_units = ["TODO"]
+channels = [] # 填写源数据中的通道名称，不混用编号与数组下标。
+alignment = "TODO" # 根据审计选择已注册策略，原生对齐也须注明。
+unmarked_policy = "TODO"
 
 [split]
 strategy = "subject_holdout"
-assignments_file = "TODO"
+mode = "load" # load 读取固定划分；generate 按组生成并保存划分。
+assignments_file = "TODO" # load 必填；正式文件放 data/splits/。
+train_fraction = 0.0 # generate 时三项须为正且和为 1，按组分配。
+validation_fraction = 0.0
+test_fraction = 0.0
 
 [window]
-duration_ms = 0 # 检查采样率与采集流程后再设置。
+duration_ms = 0
 stride_ms = 0
+rounding = "floor"
+drop_incomplete = true
+invalid_policy = "drop"
+label_rule = "constant" # 分类不跨标签变化；回归选 mean。
+
+[preprocessing]
+filter_kind = "none" # 启用滤波时另填经审计的频率/阶数。
+standardize = true # 仅训练集 fit，验证/测试只 transform。
 
 [features]
 names = ["rms", "mav", "waveform_length"]
@@ -25,3 +41,16 @@ names = ["rms", "mav", "waveform_length"]
 [model]
 name = "TODO"
 implementation = "custom_numpy"
+
+[model.params]
+# 按选定模型填写并校验：k 或 learning_rate/max_iter/l2 或 alpha 等。
+
+[evaluation]
+primary_metric = "macro_f1" # 回归选择 rmse，并同时报告 mae。
+class_labels = [] # 分类必须填写完整整数类别列表，回归保持为空。
+zero_division = 0
+per_subject = true
+
+[output]
+root = "results/runs"
+save_predictions = true
