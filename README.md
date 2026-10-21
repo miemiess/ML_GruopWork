@@ -1,67 +1,142 @@
 # EMGInsight
+### Decoding muscle signals with traditional machine learning
 
-61.501 Production Machine Learning · Group 12 · 仓库：`ML_GruopWork`
+**61.501 Production Machine Learning · Group 12 · PML 2026**
 
-使用传统机器学习分析公开表面肌电（sEMG）数据，研究动作识别、手指力量估计与肌肉疲劳分类。
+EMGInsight studies how public surface electromyography (sEMG) recordings can support hand-gesture recognition, finger-force estimation, and muscle-fatigue classification. We are building a shared, reproducible framework to compare traditional machine learning models, investigate channel reduction, and measure generalization to unseen users.
 
-## 项目任务
+**Status:** project scaffold. Data adapters, feature extraction, models, training pipelines, and the offline demo are planned; no experiment results or trained models are included yet. The [project proposal](Group_12_EMGInsight_Visual_Proposal_Revised.pdf) remains the project reference. All three studies are subject to data feasibility.
 
-| 任务 | 计划使用的数据集 | 预测目标 |
-| --- | --- | --- |
-| 手势识别 | UCI EMG Gestures | 手势类别 |
-| 手指力量估计 | putEMG-Force | 力量信号 |
-| 肌肉疲劳分类 | Zenodo sEMG Fatigue | 主观疲劳等级（0/1/2） |
+[Dataset guide](data/README.md) · [Research protocol](docs/research_protocol.md) · [Contributing](CONTRIBUTING.md) · [Experiment record](docs/experiment_template.md)
 
-## 方法
+## Project requirements
 
-- 统一流程：数据预处理 → 滑动窗口 → RMS / MAV / WL 特征 → 模型训练 → 评估。
-- 使用 Python / NumPy 实现核心传统机器学习算法，并比较基线模型；不使用深度学习。
-- 比较各数据集内的通道子集，按用户或采集会话划分数据以避免泄漏，并评估未见用户上的泛化表现。
-- 分类使用 F1，回归使用 MAE / RMSE。项目仅用于离线研究。
+- **No deep learning.** Use traditional classification and regression methods.
+- **Implement core ML algorithms ourselves in Python/NumPy.** Library models may provide reference comparisons, but must be clearly labeled and must not replace the custom implementations.
+- **Address three dataset-specific tasks.** Share reusable utilities while keeping dataset adapters, labels, and evaluation protocols separate.
+- **Evaluate prediction quality, channel subsets, and unseen-user generalization.** Compare simple baselines and custom models using the same splits.
+- **Make experiments reproducible.** Record dataset versions, file checksums, split identities, configurations, random seeds, environments, and commands.
+- **Explain social benefit and limitations.** Deliver evidence appropriate to offline research.
 
-## 当前阶段
+Planned deliverables: reproducible code, custom ML implementations, three feasibility-dependent studies, model/channel comparisons, evaluation plots, an offline demonstration, and a final report.
 
-项目初始化，尚未实现训练代码。下一步确认数据集可用性与组员分工，建立预处理流程并完成首个基线。三个任务的最终范围按数据可行性确定。
+## Three datasets, three tasks
 
-计划交付：可复现代码、模型与通道对比、评估图表、离线演示和最终报告。环境安装与运行说明随实现补充。
+| Study | Public source and input | Target | Key limits |
+| --- | --- | --- | --- |
+| Gesture recognition | [UCI EMG Data for Gestures](https://archive.ics.uci.edu/dataset/481/emg+data): 8 forearm channels, 36 participants | Hand-gesture class | Label 0 means unmarked data; class 7 was not performed by everyone. Specify inclusion rules and avoid treating adjacent windows as independent users. |
+| Finger-force estimation | [putEMG-Force](https://biolab.put.poznan.pl/putemg-dataset/): 24 EMG channels with measured force | Selected measured force signal(s) | Use `emg_force` trials. Measured `FORCE_*` columns differ from requested `TRAJ_*` trajectories. Audit target mapping, units, calibration, and available participants/sessions before modeling. |
+| Muscle-fatigue classification | [Zenodo sEMG and Self-Perceived Fatigue v2](https://zenodo.org/records/14182446): 8 muscles, 13 healthy adults | Self-perceived fatigue level 0/1/2 | EMG and ratings have different sampling rates and require timestamp alignment. Labels are subjective; the small healthy cohort limits broader claims. |
 
-## 小组协作
+These datasets differ in devices, anatomy, protocols, and labels. Compare channel subsets **within each dataset**; channel counts across datasets do not establish sensor superiority. Keep separate models and results for each task. See the [data guide](data/README.md) for acquisition, provenance, and redistribution rules.
 
-成员：Ma Mingyang、Han Yuchen、Zhou Yin、Wei Xin、Gao Ruiyan、Li Ji（分工待定）。
-
-采用 **Collaborative Development（协同开发）**：所有成员在同一个公共 GitHub 仓库共同构建完整的 EMG 机器学习系统。成员可参与不同模块，共同维护和优化整个项目。
-
-- 统一项目结构、数据处理流程和模型接口，方便复用与集成。
-- 使用 Issues 记录任务、负责人及验收条件；跨模块修改先沟通接口。
-- 从最新 `main` 创建功能分支，例如 `feature/gesture-baseline`。
-- 通过 Pull Request 说明修改内容和验证结果，由另一位组员检查后合并到 `main`。
-- 不直接向 `main` 提交日常开发修改；此为协作约定，尚未配置强制分支保护。
-
-## 计划结构与接口
-
-以下为起步约定，目录和接口将在开发时逐步实现：
+## Research and evaluation
 
 ```text
-data/          数据说明与本地数据（原始数据不提交到 Git）
-notebooks/     数据探索与实验
-src/           数据读取、预处理、特征、模型与评估
-tests/         核心算法及接口测试
-reports/       评估图表与报告
+Public digitized sEMG + metadata
+  -> user/session split
+  -> preprocessing and windowing
+  -> RMS / MAV / waveform length features
+  -> custom traditional ML + reference baselines
+  -> held-out evaluation and channel comparisons
 ```
 
-- 数据读取统一返回信号、标签及用户/会话标识；各数据集保留独立适配器。
-- 特征矩阵统一为 `X: (n_samples, n_features)`，标签为 `y`，并保留样本分组信息。
-- 模型统一提供 `fit(X, y)` 和 `predict(X)`，分类与回归分别评估。
-- 先按用户或会话划分训练/测试集，再分窗与拟合预处理参数；测试数据不参与训练或调参。
+Start with simple baselines (majority class for classification; training-target mean for regression). Candidate custom models include k-nearest neighbors, logistic regression, and ridge regression; final choices will be recorded per experiment.
 
-## 开始协作
+Use macro-F1, per-class scores, and confusion matrices for classification; use MAE and RMSE for regression, with target units and per-output scores. Report per-user results and variability where feasible. Hold out users for the primary generalization study, with session-based studies clearly labeled. Split recordings before windowing; fit scalers, feature selection, and other learned transforms on training data only. Tune on grouped validation data and evaluate the test set after choices are fixed. See the [research protocol](docs/research_protocol.md).
+
+## AI for social good
+
+Potential applications include accessible prosthetic-hand interfaces, rehabilitation research, athlete/workplace muscle monitoring, and alternative VR interaction. Channel-reduction studies may inform simpler sensing setups. These are research motivations, not demonstrated outcomes. This project is an offline study and makes no clinical diagnostic or device-control claims. Discuss participant coverage, failure cases, and accessibility limits in the final report.
+
+## Team and collaboration
+
+**Members:** Ma Mingyang · Han Yuchen · Zhou Yin · Wei Xin · Gao Ruiyan · Li Ji
+
+We collaboratively build one system in one repository. There are **no fixed role allocations**. Members choose work through Issues and can contribute across modules. Available work includes the three task studies, preprocessing/features, custom algorithms/testing, evaluation, integration, documentation, and the demo.
+
+1. Agree on an Issue with scope, interfaces, and acceptance criteria.
+2. Create a feature branch from the latest `main`, such as `feature/gesture-baseline`.
+3. Make a focused change, document it, and run relevant checks.
+4. Open a PR into `main`, including validation evidence and any data assumptions.
+5. Ask another member to review; address feedback before merging.
+
+The shared `main` should stay usable. Avoid routine direct pushes to it. This is a team convention; this scaffold does not configure enforced branch protection. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Workspace
+
+```text
+.
+├── docs/                       # Protocol, decisions, experiment-record template
+├── data/                       # Acquisition/provenance guide; local data stays ignored
+│   ├── raw/                    # Immutable source files
+│   ├── interim/                # Cleaned/aligned intermediate files
+│   ├── processed/              # Features, labels, group/split metadata
+│   └── manifests/              # Reviewed provenance and checksum records
+├── src/emginsight/              # Shared Python package
+│   ├── datasets/               # One adapter per dataset
+│   ├── preprocessing/          # Windowing, filtering, training-only transforms
+│   ├── features/               # Shared feature extraction
+│   ├── models/                 # Custom traditional ML implementations
+│   └── evaluation/             # Grouped splits, metrics, comparison helpers
+├── notebooks/experiments/       # Exploratory notebooks; reuse package functions
+├── configs/                    # Versioned experiment specifications
+├── tests/                      # Future algorithm, leakage, and adapter tests
+├── results/                    # Reviewed summaries/figures; large artifacts ignored
+├── demo/                       # Planned offline inference demonstration
+├── CONTRIBUTING.md
+├── pyproject.toml              # Package metadata and tool settings
+└── requirements.txt            # Starter development installation
+```
+
+The proposal PDF remains at the repository root to preserve the existing reference. Package folders contain planning notes rather than model implementations.
+
+## Setup
+
+Use **Python 3.11 or newer**. From a terminal:
 
 ```bash
 git clone https://github.com/miemiess/ML_GruopWork.git
 cd ML_GruopWork
-git switch -c feature/your-task
+python -m venv .venv
 ```
 
-完成修改后提交并推送个人分支，在 GitHub 创建面向 `main` 的 Pull Request。运行环境和依赖清单将在首个可运行模块完成时补充。
+Activate the environment:
 
-项目依据：[项目提案](Group_12_EMGInsight_Visual_Proposal_Revised.pdf)。
+| Terminal | Command |
+| --- | --- |
+| Windows PowerShell | `.venv\Scripts\Activate.ps1` |
+| Windows Command Prompt | `.venv\Scripts\activate.bat` |
+| macOS/Linux | `source .venv/bin/activate` |
+
+If PowerShell blocks activation, use `.venv\Scripts\python.exe` instead of `python` in the following commands.
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -c "import emginsight; print(emginsight.__version__)"
+python -m pip check
+```
+
+This installs the editable package and starter tools for data analysis, notebooks, reference models, and testing. Dataset-specific readers may need extra dependencies after file-format inspection. To explore locally, run `python -m jupyterlab` and use `notebooks/experiments/`.
+
+There is no training or demo command yet. `python -m pytest` becomes the test command once tests are added; at scaffold stage it reports no tests collected (exit code 5). See [tests/README.md](tests/README.md).
+
+## Reproducing an experiment
+
+1. Obtain data from the original sources using [data/README.md](data/README.md); keep raw files local and unchanged.
+2. Copy [configs/experiment.example.toml](configs/experiment.example.toml), fill dataset-specific choices, and record provenance.
+3. Save exact subject/session split IDs, label rules, window settings, channel IDs, preprocessing, model settings, and seeds.
+4. Record the Git commit and environment with `python --version` and `python -m pip freeze` in a local run folder.
+5. When a pipeline exists, record its exact command and metrics using the [experiment template](docs/experiment_template.md). Commit only reviewed summaries and figures.
+
+Dependency ranges in the starter configuration are not an exact environment lock. Archive exact resolved versions for each reported run; a shared lock can be adopted when the first pipeline is validated.
+
+## Next milestones
+
+- Audit a small sample from each source, confirm licenses and label availability, and document feasibility.
+- Agree on adapters and grouped splits; implement preprocessing and feature extraction.
+- Implement and test custom models, then establish task-specific baselines.
+- Compare channels/models, prepare the offline demo, and write the final report.
+
+Dataset rights remain with their original providers. No project-wide code license has been chosen yet.

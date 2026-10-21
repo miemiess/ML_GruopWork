@@ -1,0 +1,13 @@
+# Template only. Fill before reporting an experiment.
+dataset_id = "TODO"
+source_url = "TODO"
+release = "TODO"
+retrieved_on = "YYYY-MM-DD"
+license = "TODO"
+license_evidence_url = "TODO"
+audit_status = "pending"
+notes = "Record units, channel map, label rules, groups, and exclusions."
+
+[[files]]
+path = "data/raw/TODO/source-file"
+sha256 = "TODO"

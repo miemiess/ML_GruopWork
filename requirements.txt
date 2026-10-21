@@ -1,0 +1,3 @@
+# Editable package plus notebook, testing, and reference-model tools.
+# Dependency declarations live in pyproject.toml; this is not a lock file.
+-e .[dev]
