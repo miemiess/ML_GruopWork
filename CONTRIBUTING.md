@@ -64,3 +64,8 @@ git merge origin/main
 ```
 
 没有冲突就重新检查并推送。有冲突时，和修改该文件的同学一起确认内容，解决后 `git add`、`git commit`、`git push`。暂时不会解决可用 `git merge --abort` 取消这次合并，不要直接覆盖别人的代码。
+
+## 6. 提交要求
+
+提交时一定要写Message,简单注明提交内容
+请维护 docs/开发日志.md ，格式为:修改者-时间-开发内容
