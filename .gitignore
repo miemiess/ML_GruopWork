@@ -1,17 +1,53 @@
-# Python
+# Python and local environments
 __pycache__/
 *.py[cod]
 .venv/
 venv/
+*.egg-info/
+build/
+dist/
 .ipynb_checkpoints/
 .pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
 
 # Local secrets
 .env
 .env.*
 !.env.example
 
-# OS files
+# Data payloads: retain only guidance/placeholders in local storage folders
+/data/raw/*
+!/data/raw/.gitkeep
+/data/interim/*
+!/data/interim/.gitkeep
+/data/processed/*
+!/data/processed/.gitkeep
+
+# Local runs and model binaries
+/results/runs/*
+!/results/runs/.gitkeep
+*.pkl
+*.pickle
+*.joblib
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.parquet
+*.zip
+*.tar
+*.gz
+
+# Local configuration and notebooks
+/configs/*.local.toml
+.ipython/
+.jupyter/
+
+# Editors and OS
+.vscode/
+.idea/
 .DS_Store
 Thumbs.db
 Desktop.ini

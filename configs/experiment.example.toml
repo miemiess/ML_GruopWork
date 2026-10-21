@@ -1,0 +1,27 @@
+# Planning template, not a runnable experiment.
+status = "template"
+task = "gesture_classification" # or force_regression / fatigue_classification
+dataset_id = "uci_gestures"
+seed = 42
+raw_dir = "data/raw/uci_gestures"
+output_dir = "results/runs/example"
+
+[data]
+manifest = "data/manifests/manifest.example.toml"
+target = "TODO"
+channels = [] # Fill explicit source channel IDs.
+
+[split]
+strategy = "subject_holdout"
+assignments_file = "TODO"
+
+[window]
+duration_ms = 0 # Must be selected after sampling-rate/protocol audit.
+stride_ms = 0
+
+[features]
+names = ["rms", "mav", "waveform_length"]
+
+[model]
+name = "TODO"
+implementation = "custom_numpy"
