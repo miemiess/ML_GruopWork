@@ -1,9 +1,10 @@
-# Team decisions
+# 小组决策记录
 
-| Date | Decision | Rationale / follow-up |
+| 日期 | 决策 | 理由与后续工作 |
 | --- | --- | --- |
-| 2026-10-21 | Shared repository, feature branches, PR review, shared main | Members choose work through Issues; no fixed roles. |
-| 2026-10-21 | Use `data/` as the single local dataset root | Avoid duplicate `datasets/` payload folders. |
-| 2026-10-21 | Keep the existing proposal PDF at the root | Preserve the existing reference and link. |
+| 2026-10-21 | 共用仓库，以功能分支、PR 审阅及共享 main 为主要协作方式 | 成员通过 Issues 选择工作，不固定分工。 |
+| 2026-10-21 | 使用 `data/` 作为唯一的本地数据根目录 | 避免另建重复的 `datasets/` 数据目录。 |
+| 2026-10-21 | 提案 PDF 保留在根目录并提供中文版 | 保留原有路径和引用，英文原稿可从 Git 历史查看。 |
+| 2026-10-21 | 本次文档中文化直接提交 main | 按用户明确要求执行；常规功能开发仍建议通过 PR。 |
 
-Pending decisions: audited dataset scope/licenses, target mappings, window settings, split IDs, custom model choices, environment lock, code license, and demo interface. Record agreements here with supporting Issue/PR links.
+待决定：数据范围与许可、目标映射、窗口设置、划分标识、模型选择、环境锁定、代码许可及演示接口。后续约定应附相关 Issue、PR 或提交链接。

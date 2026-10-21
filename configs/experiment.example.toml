@@ -1,6 +1,6 @@
-# Planning template, not a runnable experiment.
+# 实验规划模板，尚不能直接运行。
 status = "template"
-task = "gesture_classification" # or force_regression / fatigue_classification
+task = "gesture_classification" # 也可选 force_regression / fatigue_classification
 dataset_id = "uci_gestures"
 seed = 42
 raw_dir = "data/raw/uci_gestures"
@@ -9,14 +9,14 @@ output_dir = "results/runs/example"
 [data]
 manifest = "data/manifests/manifest.example.toml"
 target = "TODO"
-channels = [] # Fill explicit source channel IDs.
+channels = [] # 填写明确的源数据通道编号。
 
 [split]
 strategy = "subject_holdout"
 assignments_file = "TODO"
 
 [window]
-duration_ms = 0 # Must be selected after sampling-rate/protocol audit.
+duration_ms = 0 # 检查采样率与采集流程后再设置。
 stride_ms = 0
 
 [features]

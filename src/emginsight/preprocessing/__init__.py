@@ -1,1 +1,1 @@
-"""Planned preprocessing components; implementations will be added through reviewed PRs."""
+"""预处理模块占位，后续通过审阅后的 PR 添加实现。"""

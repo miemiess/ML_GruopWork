@@ -1,6 +1,6 @@
-"""EMGInsight: traditional machine learning for public sEMG datasets.
+"""EMGInsight：使用传统机器学习研究公开表面肌电数据。
 
-The package currently provides a workspace scaffold; study pipelines are planned.
+目前仅提供基础工作区，具体研究流程尚待实现。
 """
 
 __version__ = "0.1.0"

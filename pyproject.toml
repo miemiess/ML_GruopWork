@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "emginsight"
 version = "0.1.0"
-description = "Group 12 traditional machine learning studies of public sEMG data"
+description = "第 12 组：使用传统机器学习研究公开表面肌电数据"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

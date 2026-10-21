@@ -1,1 +1,1 @@
-"""Planned datasets components; implementations will be added through reviewed PRs."""
+"""数据适配模块占位，后续通过审阅后的 PR 添加实现。"""

@@ -1,7 +1,7 @@
-# Experiment configurations
+# 实验配置
 
-Copy `experiment.example.toml` to a named versioned config after auditing a dataset. The example is a specification template; no configuration loader or training runner exists yet.
+完成数据检查后，复制 `experiment.example.toml` 为有明确名称的版本化配置。示例仅为规格模板，目前没有配置加载器或训练程序。
 
-Use paths relative to the repository root. Keep machine-specific overrides in `*.local.toml` (ignored). Never put credentials or private absolute paths in a tracked configuration.
+使用相对于仓库根目录的路径。机器专用设置放在被忽略的 `*.local.toml` 中，不要在纳入版本管理的配置中保存凭据或私人绝对路径。
 
-Record exact split identities separately and link their file from the completed config. A seed alone is insufficient to recreate a split after the dataset changes.
+单独保存准确的数据划分标识，并在完成的配置中引用该文件。数据变化后，仅靠随机种子无法重建同一划分。

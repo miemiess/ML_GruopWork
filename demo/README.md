@@ -1,7 +1,7 @@
-# Offline demo (planned)
+# 离线演示（计划中）
 
-The future demo should load an approved dataset example and saved preprocessing/model artifacts, then show a gesture class, measured-force prediction, or self-perceived-fatigue class with a clear task label.
+后续演示应读取经确认的数据样例、预处理参数与模型文件，展示手势类别、实测力量预测或自感疲劳类别，并明确注明任务类型。
 
-Document the entry command, expected inputs/outputs, artifact source, and limitations when implemented. Keep the demo offline and reproducible; do not imply clinical diagnosis or live device control.
+实现后补充启动命令、输入输出、模型文件来源与局限。演示保持离线且可复现，不暗示临床诊断或实时设备控制能力。
 
-No demo application or inference command exists yet.
+目前尚无演示应用或推理命令。

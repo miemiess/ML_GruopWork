@@ -1,20 +1,20 @@
-## Purpose
+## 修改目的
 
-Describe the problem and resulting behavior. Link the Issue.
+说明需要解决的问题和修改后的行为，并关联 Issue。
 
-## Changes
+## 修改内容
 
-- 
+请列出主要变更。
 
-## Validation
+## 验证结果
 
-State exact commands and outcomes, or explain why execution is not applicable.
-For experiments, link the config, data manifest, split IDs, and experiment record.
+记录准确命令与结果，或解释无需执行验证的原因。
+实验类修改请附配置、数据来源清单、划分标识及实验记录的链接。
 
-## Review checklist
+## 审阅清单
 
-- [ ] Relevant documentation updated
-- [ ] Custom algorithms and library references clearly distinguished
-- [ ] Leakage prevention and dataset assumptions checked where applicable
-- [ ] No secrets, raw datasets, sensitive metadata, or large artifacts included
-- [ ] Another team member requested for review
+- [ ] 已更新相关文档
+- [ ] 已区分自行实现的算法与库参考模型
+- [ ] 已检查适用的数据泄漏问题与数据假设
+- [ ] 未提交密钥、原始数据、敏感元信息或大型文件
+- [ ] 已请求另一位成员审阅

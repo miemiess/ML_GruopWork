@@ -1,4 +1,4 @@
-# Python and local environments
+# Python 与本地环境
 __pycache__/
 *.py[cod]
 .venv/
@@ -12,12 +12,12 @@ dist/
 htmlcov/
 .ruff_cache/
 
-# Local secrets
+# 本地密钥
 .env
 .env.*
 !.env.example
 
-# Data payloads: retain only guidance/placeholders in local storage folders
+# 数据文件：本地存储目录中只保留说明或占位文件
 /data/raw/*
 !/data/raw/.gitkeep
 /data/interim/*
@@ -25,7 +25,7 @@ htmlcov/
 /data/processed/*
 !/data/processed/.gitkeep
 
-# Local runs and model binaries
+# 本地运行结果与模型二进制文件
 /results/runs/*
 !/results/runs/.gitkeep
 *.pkl
@@ -40,12 +40,12 @@ htmlcov/
 *.tar
 *.gz
 
-# Local configuration and notebooks
+# 本地配置与 Notebook
 /configs/*.local.toml
 .ipython/
 .jupyter/
 
-# Editors and OS
+# 编辑器与操作系统文件
 .vscode/
 .idea/
 .DS_Store

@@ -1,1 +1,1 @@
-"""Planned models components; implementations will be added through reviewed PRs."""
+"""模型模块占位，后续通过审阅后的 PR 添加实现。"""

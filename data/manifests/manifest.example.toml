@@ -1,4 +1,4 @@
-# Template only. Fill before reporting an experiment.
+# 仅为模板，请在报告实验前填写。
 dataset_id = "TODO"
 source_url = "TODO"
 release = "TODO"
@@ -6,7 +6,7 @@ retrieved_on = "YYYY-MM-DD"
 license = "TODO"
 license_evidence_url = "TODO"
 audit_status = "pending"
-notes = "Record units, channel map, label rules, groups, and exclusions."
+notes = "记录单位、通道映射、标签规则、分组及排除情况。"
 
 [[files]]
 path = "data/raw/TODO/source-file"

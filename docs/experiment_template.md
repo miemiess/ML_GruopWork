@@ -1,23 +1,23 @@
-# Experiment: <short name>
+# 实验：<简短名称>
 
-- Status: planned / completed / failed
-- Author(s), date:
-- Issue / PR:
-- Git commit:
-- Dataset ID, release, manifest, checksums, license:
-- Actual participants/sessions/trials retained; exclusions:
-- Prediction target, labels/units, class support:
-- Split strategy and exact subject/session/recording assignments:
-- Sampling rate, timestamp alignment, window duration/stride:
-- Channels, preprocessing, feature formulas, training-only fitted transforms:
-- Custom model or library reference; hyperparameters:
-- Seeds and validation/search procedure:
-- Python/platform and exact dependency versions:
-- Exact command(s) from repository root:
-- Metrics per class/output/user, aggregation, uncertainty:
-- Baseline and channel comparisons:
-- Runtime and artifacts:
-- Known limitations / failed runs:
-- Reproduction outcome from another environment/member:
+- 状态：计划中 / 已完成 / 失败
+- 作者与日期：
+- Issue / PR：
+- Git 提交版本：
+- 数据集标识、版本、来源清单、校验值与许可：
+- 实际保留的参与者、采集会话和试验；排除情况：
+- 预测目标、标签或单位、各类别样本数：
+- 划分策略及准确的用户、会话和记录分配：
+- 采样率、时间对齐、窗口时长与步长：
+- 通道、预处理、特征公式及仅在训练集上拟合的变换：
+- 自行实现的模型或库参考模型；超参数：
+- 随机种子与验证、搜索过程：
+- Python、平台及准确的依赖版本：
+- 从仓库根目录执行的完整命令：
+- 各类别、输出和用户的指标；汇总方法及不确定性：
+- 基线与通道对比：
+- 运行时长与产出文件：
+- 已知局限与失败实验：
+- 其他环境或成员的复现结果：
 
-Attach small reviewed tables/figures under `results/`. Keep source data and large run artifacts local.
+经检查的小型表格和图表放在 `results/`；源数据与大型运行文件保存在本地。

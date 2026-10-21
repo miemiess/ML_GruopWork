@@ -1,11 +1,12 @@
-# Test plan
+# 测试计划
 
-There are no executable tests yet because algorithms and adapters are not implemented. `python -m pytest` currently exits with code 5 (no tests collected); this is not a passing test suite.
+算法和适配器尚未实现，因此目前没有可执行测试。`python -m pytest` 会返回退出码 5（未收集到测试），不代表测试已经通过。
 
-Add tests with each implementation:
-- Known-answer RMS/MAV/WL calculations and window boundary cases.
-- Custom model predictions, numerical behavior, edge cases, and reference comparisons.
-- Adapter shapes, labels/units, timestamps, and target alignment using synthetic fixtures.
-- Disjoint subject/session/recording splits and training-only transform fitting.
+随功能实现添加测试：
 
-Keep tests small, deterministic, and independent of downloaded datasets. Mark any future real-data integration checks separately and document how to run them.
+- 使用已知答案验证 RMS、MAV、WL 及窗口边界。
+- 检查自定义模型预测、数值行为、边界情况及与参考模型的对比。
+- 使用合成数据检查适配器形状、标签、单位、时间戳及目标对齐。
+- 检查用户、会话和记录划分互不重叠，以及变换仅在训练集上拟合。
+
+测试应小型、确定且不依赖下载的数据集。后续真实数据集成检查需单独标记并注明运行方法。

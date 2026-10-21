@@ -1,9 +1,9 @@
-# Results and artifacts
+# 结果与产出文件
 
-- `summaries/`: reviewed small metric tables and experiment summaries.
-- `figures/`: reviewed plots with captions and linked experiment records.
-- `runs/`: ignored local output, logs, environment snapshots, and models.
+- `summaries/`：经检查的小型指标表和实验摘要。
+- `figures/`：经检查的图表，附说明及实验记录链接。
+- `runs/`：由 Git 忽略的本地输出、日志、环境快照与模型。
 
-Use one run ID across config, experiment record, tables, and plots. Every reported result needs dataset version/checksums, split IDs, seed, commit, exact environment, command, and limitations. Include units and per-target/per-class metrics.
+配置、实验记录、表格与图表使用统一的运行标识。每个报告结果都需注明数据版本和校验值、划分标识、随机种子、提交版本、准确环境、命令及局限。包含单位及各目标或类别的指标。
 
-No empirical results are included in the scaffold.
+目前基础工作区尚无实测结果。

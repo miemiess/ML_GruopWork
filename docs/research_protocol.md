@@ -1,38 +1,38 @@
-# Research protocol
+# 研究与评估规范
 
-This is a starting agreement. Dataset-specific choices require an audit and a recorded team decision.
+以下是起步约定。各数据集的具体选择应先检查数据，并记录小组决策。
 
-## Shared interfaces
+## 公共接口
 
-Adapters should return signals, timestamps/sampling information, targets, channel names/units, and subject/session/recording IDs. Window outputs should preserve source recording and start/end time.
+数据适配器应返回信号、时间戳或采样信息、预测目标、通道名称与单位，以及用户、采集会话和记录标识。窗口输出保留源记录及起止时间。
 
-Feature datasets use `X: (n_windows, n_features)`, classification `y: (n_windows,)`, or regression `y: (n_windows, n_outputs)`, plus subject/session/recording groups. Models expose `fit(X, y)` and `predict(X)`. Separate training, prediction, and evaluation code.
+特征使用 `X: (n_windows, n_features)`，分类标签使用 `y: (n_windows,)`，回归目标使用 `y: (n_windows, n_outputs)`，同时保留用户、会话和记录分组。模型提供 `fit(X, y)` 与 `predict(X)`。训练、预测与评估代码分开组织。
 
-## Prevent leakage
+## 防止数据泄漏
 
-1. Inventory source recordings and group IDs first.
-2. For unseen-user evaluation, assign whole subjects to train/validation/test. A session-only holdout is a separate, weaker protocol and must be named accordingly.
-3. Split before windowing. Never let overlapping windows or the same recording cross partitions.
-4. Fit normalization, imputation, feature/channel selection, and any learned preprocessing only on each training fold. Process recordings independently so filtering does not cross split boundaries.
-5. Choose hyperparameters and channel subsets using grouped validation only. Keep a frozen test partition, or use nested grouped evaluation when appropriate.
-6. Assert group disjointness and save the exact split IDs.
+1. 先整理源记录及分组标识。
+2. 未见用户评估按完整用户划分训练、验证和测试集。仅留出采集会话是另一种较弱的评估方式，需单独注明。
+3. 先划分记录再分窗，不让重叠窗口或同一记录跨越不同集合。
+4. 标准化、缺失填补、特征或通道选择，以及需要学习参数的预处理，仅在各训练折上拟合。分别处理各记录，避免滤波跨越集合边界。
+5. 仅通过分组验证集选择超参数和通道子集。固定测试集，必要时使用嵌套分组评估。
+6. 检查分组互不重叠，保存准确的数据划分标识。
 
-If a class is absent from a fold, report support and handling explicitly rather than silently dropping failures. Small cohorts may require fewer folds.
+某个数据折缺少类别时，应明确报告类别样本数与处理方式，不能悄悄删除失败情况。样本较少时可能需要减少交叉验证折数。
 
-## Features and models
+## 特征与模型
 
-Start with RMS, mean absolute value (MAV), and waveform length (WL). Record window duration, stride, sampling rate, channel ordering, filtering choices, feature formulas, and target aggregation/alignment. Choose these per dataset; no universal window is assumed.
+首先使用均方根（RMS）、平均绝对值（MAV）和波形长度（WL）。记录窗口时长、步长、采样率、通道顺序、滤波方式、特征公式及目标聚合与对齐规则。根据各数据集分别选择，不假设存在通用窗口参数。
 
-Implement core algorithms in Python/NumPy, including training and prediction. Label scikit-learn comparisons as references. Candidate models are proposals until validated. Include majority-class and training-mean baselines.
+使用 Python/NumPy 实现包括训练和预测在内的核心算法；使用 scikit-learn 的对比需标为参考。验证前，候选模型仅为计划。分类包含多数类基线，回归包含训练目标均值基线。
 
-## Evaluation
+## 评估要求
 
-- Classification: macro-F1 as the main score; per-class precision/recall/F1, class support, and confusion matrices. Accuracy is supplementary.
-- Regression: MAE and RMSE per selected target, target units, plus a stated aggregation rule. Compare predictions and measured signals visually.
-- Generalization: report held-out participant identities and per-user variability where feasible.
-- Channel study: compare full and reduced subsets within the same dataset using identical splits and budgets. Select subsets on training/validation only.
-- Record seeds, runtime, failures, exclusions, and uncertainty; never select a model from test-set performance.
+- 分类：以 macro-F1 为主要指标，报告各类别精确率、召回率、F1、样本数和混淆矩阵，准确率作为补充。
+- 回归：分别报告各目标的 MAE、RMSE 和单位，并说明汇总规则；绘图比较预测与实测信号。
+- 泛化：报告留出参与者标识，在可行时展示不同用户的差异。
+- 通道研究：在同一数据集、相同划分与实验预算下，比较全通道和通道子集；仅在训练与验证阶段选择通道。
+- 记录随机种子、运行时长、失败、排除情况和不确定性，不依据测试集表现选择模型。
 
-## Interpretation
+## 结果解释
 
-Keep all three studies separate. Differences in acquisition and population prevent direct sensor-count conclusions across datasets. Discuss label subjectivity, cohort coverage, domain shift, and failure cases alongside social-good motivations.
+分别报告三个任务。采集方案与人群不同，不能直接根据跨数据集的通道数量得出优劣结论。结合社会价值讨论标签主观性、人群覆盖、数据分布变化及失败案例。

@@ -1,34 +1,34 @@
-# Data acquisition and provenance
+# 数据获取与来源记录
 
-Data is not bundled or downloaded automatically. Start with a small, legally accessible sample from each original source, inspect its schema, and record feasibility before a full download.
+仓库不包含数据，也不会自动下载数据。先从各原始来源获取少量可合法使用的样本，检查格式并记录可行性，再决定是否完整下载。
 
-## Sources
+## 数据来源
 
-| Local dataset ID | Source | Acquisition and constraints |
+| 本地数据集标识 | 来源 | 获取方式与限制 |
 | --- | --- | --- |
-| `uci_gestures` | [UCI EMG Data for Gestures](https://archive.ics.uci.edu/dataset/481/emg+data), DOI 10.24432/C5ZP5C | Download the original archive from UCI. CC BY 4.0; retain attribution. Preserve participant folders and recording files. |
-| `putemg_force` | [Provider page](https://biolab.put.poznan.pl/putemg-dataset/) and [official downloader](https://github.com/biolab-put/putemg-downloader) | Select `emg_force` and CSV or HDF5, initially for a few available participant IDs. Video/depth are unnecessary for this planned EMG-only study. Confirm terms for the exact force release before use or redistribution. |
-| `zenodo_fatigue` | [Zenodo v2, record 14182446](https://zenodo.org/records/14182446), DOI 10.5281/zenodo.14182446 | Obtain EMG, self-perceived-fatigue ratings, and protocol files; the EMG archive is about 3.3 GB. Check the release license/terms before use and record them. Keep anthropometric metadata local. |
+| `uci_gestures` | [UCI EMG Data for Gestures](https://archive.ics.uci.edu/dataset/481/emg+data)，DOI 10.24432/C5ZP5C | 从 UCI 下载原始压缩包。许可为 CC BY 4.0，使用时保留署名；保留参与者目录和原始记录文件。 |
+| `putemg_force` | [提供方页面](https://biolab.put.poznan.pl/putemg-dataset/)与[官方下载工具](https://github.com/biolab-put/putemg-downloader) | 选择 `emg_force` 及 CSV 或 HDF5 格式，先下载少量可用参与者的数据。当前肌电研究不需要视频和深度数据。使用或再分发前，确认具体力量数据版本的条款。 |
+| `zenodo_fatigue` | [Zenodo v2，记录 14182446](https://zenodo.org/records/14182446)，DOI 10.5281/zenodo.14182446 | 获取肌电、自感疲劳评分及采集流程文件；肌电压缩包约 3.3 GB。使用前检查并记录该版本许可，人体测量元信息仅保存在本地。 |
 
-## Layout
+## 存放约定
 
-- `raw/<dataset_id>/`: original archives/extracted source files, unchanged.
-- `interim/<dataset_id>/`: cleaned and time-aligned recordings.
-- `processed/<dataset_id>/`: window features, targets, and grouping/split metadata.
-- `manifests/`: reviewed provenance records, checksums, and exclusion decisions without sensitive participant details.
+- `raw/<dataset_id>/`：原始压缩包或解压后的源文件，保持不变。
+- `interim/<dataset_id>/`：清洗和时间对齐后的记录。
+- `processed/<dataset_id>/`：窗口特征、预测目标、分组与划分信息。
+- `manifests/`：经检查的来源、校验值与样本排除记录，不含敏感参与者信息。
 
-The first three folders are ignored by Git. Do not add payloads with `git add -f`. Manifests are tracked intentionally; review them before commit. Compute a source checksum with PowerShell `Get-FileHash -Algorithm SHA256 path/to/file` or the equivalent on your platform.
+前三类目录由 Git 忽略，不要使用 `git add -f` 强行添加数据。来源清单会纳入版本管理，提交前需检查。PowerShell 可使用 `Get-FileHash -Algorithm SHA256 path/to/file` 计算校验值，其他平台使用对应工具。
 
-## Dataset-specific audit
+## 各数据集检查重点
 
-**UCI:** eight channels plus time and class columns. Label 0 is unmarked, not the rest class; rest is label 1. Choose and document whether to exclude unmarked samples and incomplete-class recordings. Class 7 is not present for every participant. Preserve recording and participant IDs.
+**UCI：** 包含 8 个通道、时间和类别列。标签 0 表示未标注，静息状态为标签 1。明确记录是否排除未标注样本及类别不完整的记录；并非所有参与者都有第 7 类。保留记录与参与者标识。
 
-**putEMG-Force:** use measured `FORCE_1 ... FORCE_10` as candidate regression targets, never the requested `TRAJ_*` trajectory as a substitute. Choose outputs explicitly and confirm physical meaning, units, calibration/MVC handling, synchronization, and missing trials. The provider describes the combined collection as 44 participants across two acquisitions; audit the force subset rather than assuming every participant has complete force recordings.
+**putEMG-Force：** 将实测 `FORCE_1 ... FORCE_10` 作为候选回归目标，不用要求参与者跟随的 `TRAJ_*` 轨迹代替。明确选用的输出，并确认物理含义、单位、校准与最大自主收缩（MVC）处理、同步方式及缺失试验。提供方描述的合并采集包含 44 名参与者和两次采集，但需要检查力量子集，不能假设每人都有完整力量记录。
 
-**Zenodo fatigue:** eight muscles from 13 healthy adults. The release describes EMG at 1259 Hz and ratings at 50 Hz, with levels 0/1/2. Align by timestamps, define the label assigned to each window, and inspect missing/ambiguous intervals. These are self-perceived labels, not clinical ground truth.
+**Zenodo 疲劳：** 数据来自 13 名健康成年人的 8 块肌肉。版本说明中的肌电采样率为 1259 Hz，评分为 50 Hz，等级为 0/1/2。按时间戳对齐，定义各窗口的标签赋值规则，检查缺失或有歧义的区间。这些标签表示自感疲劳，并非临床真值。
 
-Do not pool tasks or equate channel indices across datasets. Validate file-level facts against downloaded data. Report actual retained participants/trials/classes and exclusions after auditing.
+不要混合三个任务，也不要把不同数据集的同编号通道视作相同位置。以实际下载文件核对信息，检查后报告保留的参与者、试验、类别及排除情况。
 
-## Manifest checklist
+## 来源清单
 
-Copy `manifests/manifest.example.toml` per dataset and record source URL/version, retrieval date, license evidence, relative file paths, SHA-256 hashes, formats, units, channel maps, group IDs, label definitions, and exclusions. Keep split assignments versioned alongside the experiment. Until these checks are complete, data availability and task scope remain provisional.
+为每个数据集复制 `manifests/manifest.example.toml`，记录来源链接与版本、获取日期、许可依据、相对文件路径、SHA-256 校验值、格式、单位、通道映射、分组标识、标签定义及排除规则。数据划分应与实验一起纳入版本管理。上述检查完成前，数据可用性和任务范围均为暂定。
