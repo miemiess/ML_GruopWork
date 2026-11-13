@@ -1,0 +1,6035 @@
+{
+  "parameters": {
+    "data_dir": "data\\raw\\EMG_data_for_ZenodoTired",
+    "window_size": 5036,
+    "step_size": 2518,
+    "max_label_age": 0.04,
+    "max_gap_seconds": 0.01,
+    "channel_mode": "agonist",
+    "seed": 42,
+    "no_terminal_repair": false,
+    "strict": false,
+    "json": true
+  },
+  "groups": {
+    "train": {
+      "subjects": [
+        "1",
+        "9",
+        "4",
+        "7",
+        "6",
+        "12",
+        "3",
+        "2"
+      ],
+      "subjects_with_windows": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "6",
+        "7",
+        "9",
+        "12"
+      ],
+      "records": 96,
+      "windows": 13732,
+      "label_counts": {
+        "0": 5335,
+        "1": 4442,
+        "2": 3955
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 94,
+        "mixed_labels": 374
+      }
+    },
+    "validation": {
+      "subjects": [
+        "11",
+        "13",
+        "8"
+      ],
+      "subjects_with_windows": [
+        "8",
+        "11",
+        "13"
+      ],
+      "records": 36,
+      "windows": 6738,
+      "label_counts": {
+        "0": 1825,
+        "1": 2621,
+        "2": 2292
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 36,
+        "mixed_labels": 138
+      }
+    },
+    "test": {
+      "subjects": [
+        "10",
+        "5"
+      ],
+      "subjects_with_windows": [
+        "5",
+        "10"
+      ],
+      "records": 24,
+      "windows": 2540,
+      "label_counts": {
+        "0": 527,
+        "1": 903,
+        "2": 1110
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 24,
+        "mixed_labels": 96
+      }
+    }
+  },
+  "discovered_pairs": 156,
+  "records": [
+    {
+      "record_id": "subject_1/trial_1",
+      "subject_id": "1",
+      "trial_id": 1,
+      "group": "train",
+      "signal_shape": [
+        120450,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        95.65062020551753
+      ],
+      "rating_time_range": [
+        0.0,
+        105.8
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 0,
+      "windows": 42,
+      "label_counts": {
+        "0": 23,
+        "1": 10,
+        "2": 9
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 0,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_1/trial_2",
+      "subject_id": "1",
+      "trial_id": 2,
+      "group": "train",
+      "signal_shape": [
+        141029,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        111.99275765131902
+      ],
+      "rating_time_range": [
+        0.0,
+        115.04
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 0,
+      "windows": 51,
+      "label_counts": {
+        "0": 25,
+        "1": 8,
+        "2": 18
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 0,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_1/trial_3",
+      "subject_id": "1",
+      "trial_id": 3,
+      "group": "train",
+      "signal_shape": [
+        1023730,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        812.960786493655
+      ],
+      "rating_time_range": [
+        0.019,
+        817.53997
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 400,
+      "label_counts": {
+        "0": 52,
+        "1": 322,
+        "2": 26
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_1/trial_4",
+      "subject_id": "1",
+      "trial_id": 4,
+      "group": "train",
+      "signal_shape": [
+        881387,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        699.9237647507266
+      ],
+      "rating_time_range": [
+        0.02,
+        702.52001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 344,
+      "label_counts": {
+        "0": 95,
+        "1": 221,
+        "2": 28
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_1/trial_5",
+      "subject_id": "1",
+      "trial_id": 5,
+      "group": "train",
+      "signal_shape": [
+        225225,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        178.85424773279544
+      ],
+      "rating_time_range": [
+        0.02,
+        181.94
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 83,
+      "label_counts": {
+        "0": 29,
+        "1": 27,
+        "2": 27
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_1/trial_6",
+      "subject_id": "1",
+      "trial_id": 6,
+      "group": "train",
+      "signal_shape": [
+        266126,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        211.33443450915613
+      ],
+      "rating_time_range": [
+        0.019,
+        214.22
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 99,
+      "label_counts": {
+        "0": 53,
+        "1": 25,
+        "2": 21
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_1/trial_7",
+      "subject_id": "1",
+      "trial_id": 7,
+      "group": "train",
+      "signal_shape": [
+        143263,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        113.76681543128504
+      ],
+      "rating_time_range": [
+        0.021,
+        116.6
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 50,
+      "label_counts": {
+        "0": 31,
+        "1": 8,
+        "2": 11
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_1/trial_8",
+      "subject_id": "1",
+      "trial_id": 8,
+      "group": "train",
+      "signal_shape": [
+        150407,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        119.4399885647126
+      ],
+      "rating_time_range": [
+        0.021,
+        122.221
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 53,
+      "label_counts": {
+        "0": 33,
+        "1": 6,
+        "2": 14
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_1/trial_9",
+      "subject_id": "1",
+      "trial_id": 9,
+      "group": "train",
+      "signal_shape": [
+        443179,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        351.935263567492
+      ],
+      "rating_time_range": [
+        0.019,
+        354.57901
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 170,
+      "label_counts": {
+        "0": 59,
+        "1": 42,
+        "2": 69
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_1/trial_10",
+      "subject_id": "1",
+      "trial_id": 10,
+      "group": "train",
+      "signal_shape": [
+        718853,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        570.8527230278099
+      ],
+      "rating_time_range": [
+        0.019,
+        573.75897
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 279,
+      "label_counts": {
+        "0": 142,
+        "1": 78,
+        "2": 59
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_1/trial_11",
+      "subject_id": "1",
+      "trial_id": 11,
+      "group": "train",
+      "signal_shape": [
+        508791,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        404.0388799771294
+      ],
+      "rating_time_range": [
+        0.021,
+        407.061
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 1
+      },
+      "uncovered_samples": 27,
+      "windows": 196,
+      "label_counts": {
+        "0": 115,
+        "1": 49,
+        "2": 32
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_1/trial_12",
+      "subject_id": "1",
+      "trial_id": 12,
+      "group": "train",
+      "signal_shape": [
+        375120,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        297.8884424185633
+      ],
+      "rating_time_range": [
+        0.02,
+        300.27999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 142,
+      "label_counts": {
+        "0": 80,
+        "1": 25,
+        "2": 37
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_1",
+      "subject_id": "2",
+      "trial_id": 1,
+      "group": "train",
+      "signal_shape": [
+        207620,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        164.87381478010894
+      ],
+      "rating_time_range": [
+        0.019,
+        172.33
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 76,
+      "label_counts": {
+        "0": 39,
+        "1": 17,
+        "2": 20
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_2",
+      "subject_id": "2",
+      "trial_id": 2,
+      "group": "train",
+      "signal_shape": [
+        154048,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        122.33136921684164
+      ],
+      "rating_time_range": [
+        0.019,
+        125.74
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 2,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 55,
+      "label_counts": {
+        "0": 32,
+        "1": 13,
+        "2": 10
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_3",
+      "subject_id": "2",
+      "trial_id": 3,
+      "group": "train",
+      "signal_shape": [
+        523411,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        415.6488731477216
+      ],
+      "rating_time_range": [
+        0.021,
+        418.51998
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 201,
+      "label_counts": {
+        "0": 52,
+        "1": 75,
+        "2": 74
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_4",
+      "subject_id": "2",
+      "trial_id": 4,
+      "group": "train",
+      "signal_shape": [
+        376366,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        298.87791242475737
+      ],
+      "rating_time_range": [
+        0.021,
+        300.04
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 143,
+      "label_counts": {
+        "0": 42,
+        "1": 53,
+        "2": 48
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_5",
+      "subject_id": "2",
+      "trial_id": 5,
+      "group": "train",
+      "signal_shape": [
+        223128,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        177.18898400647998
+      ],
+      "rating_time_range": [
+        0.021,
+        179.1399
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 82,
+      "label_counts": {
+        "0": 35,
+        "1": 7,
+        "2": 40
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_6",
+      "subject_id": "2",
+      "trial_id": 6,
+      "group": "train",
+      "signal_shape": [
+        255781,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        203.11929228276924
+      ],
+      "rating_time_range": [
+        0.021,
+        204.36
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 2,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 95,
+      "label_counts": {
+        "0": 30,
+        "1": 14,
+        "2": 51
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_7",
+      "subject_id": "2",
+      "trial_id": 7,
+      "group": "train",
+      "signal_shape": [
+        102610,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        81.48356971554722
+      ],
+      "rating_time_range": [
+        0.021,
+        83.621
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 34,
+      "label_counts": {
+        "0": 20,
+        "1": 7,
+        "2": 7
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_8",
+      "subject_id": "2",
+      "trial_id": 8,
+      "group": "train",
+      "signal_shape": [
+        104554,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        83.02733351333322
+      ],
+      "rating_time_range": [
+        0.02,
+        89.261
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 1
+      },
+      "uncovered_samples": 26,
+      "windows": 35,
+      "label_counts": {
+        "0": 24,
+        "1": 4,
+        "2": 7
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_9",
+      "subject_id": "2",
+      "trial_id": 9,
+      "group": "train",
+      "signal_shape": [
+        714367,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        567.2903133586392
+      ],
+      "rating_time_range": [
+        0.019,
+        568.32
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 277,
+      "label_counts": {
+        "0": 140,
+        "1": 59,
+        "2": 78
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_10",
+      "subject_id": "2",
+      "trial_id": 10,
+      "group": "train",
+      "signal_shape": [
+        481722,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        382.5429220335753
+      ],
+      "rating_time_range": [
+        0.02,
+        386.88
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 1
+      },
+      "uncovered_samples": 26,
+      "windows": 185,
+      "label_counts": {
+        "0": 125,
+        "1": 40,
+        "2": 20
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_11",
+      "subject_id": "2",
+      "trial_id": 11,
+      "group": "train",
+      "signal_shape": [
+        419048,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        332.7724218985753
+      ],
+      "rating_time_range": [
+        0.02,
+        333.561
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 160,
+      "label_counts": {
+        "0": 58,
+        "1": 71,
+        "2": 31
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_2/trial_12",
+      "subject_id": "2",
+      "trial_id": 12,
+      "group": "train",
+      "signal_shape": [
+        788654,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        626.2828963041786
+      ],
+      "rating_time_range": [
+        0.019,
+        626.919
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 307,
+      "label_counts": {
+        "0": 93,
+        "1": 109,
+        "2": 105
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_1",
+      "subject_id": "3",
+      "trial_id": 1,
+      "group": "train",
+      "signal_shape": [
+        258732,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        205.46273208074584
+      ],
+      "rating_time_range": [
+        0.021,
+        207.36
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 96,
+      "label_counts": {
+        "0": 52,
+        "1": 15,
+        "2": 29
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_2",
+      "subject_id": "3",
+      "trial_id": 2,
+      "group": "train",
+      "signal_shape": [
+        151906,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        120.63037021742927
+      ],
+      "rating_time_range": [
+        0.019,
+        122.36
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 2,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 54,
+      "label_counts": {
+        "0": 21,
+        "1": 18,
+        "2": 15
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_3",
+      "subject_id": "3",
+      "trial_id": 3,
+      "group": "train",
+      "signal_shape": [
+        352986,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        280.31145275796894
+      ],
+      "rating_time_range": [
+        0.02,
+        282.29998
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 134,
+      "label_counts": {
+        "0": 52,
+        "1": 48,
+        "2": 34
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_4",
+      "subject_id": "3",
+      "trial_id": 4,
+      "group": "train",
+      "signal_shape": [
+        272963,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        216.76381366834488
+      ],
+      "rating_time_range": [
+        0.02,
+        218.53999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 1
+      },
+      "uncovered_samples": 26,
+      "windows": 102,
+      "label_counts": {
+        "0": 54,
+        "1": 26,
+        "2": 22
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_5",
+      "subject_id": "3",
+      "trial_id": 5,
+      "group": "train",
+      "signal_shape": [
+        357258,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        283.70392135063446
+      ],
+      "rating_time_range": [
+        0.019,
+        285.83999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 135,
+      "label_counts": {
+        "0": 76,
+        "1": 39,
+        "2": 20
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_6",
+      "subject_id": "3",
+      "trial_id": 6,
+      "group": "train",
+      "signal_shape": [
+        343650,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        272.8975747661325
+      ],
+      "rating_time_range": [
+        0.021,
+        275.26
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 130,
+      "label_counts": {
+        "0": 40,
+        "1": 46,
+        "2": 44
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_7",
+      "subject_id": "3",
+      "trial_id": 7,
+      "group": "train",
+      "signal_shape": [
+        257527,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        204.5058208789289
+      ],
+      "rating_time_range": [
+        0.019,
+        206.55999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 96,
+      "label_counts": {
+        "0": 30,
+        "1": 31,
+        "2": 35
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_8",
+      "subject_id": "3",
+      "trial_id": 8,
+      "group": "train",
+      "signal_shape": [
+        166030,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        131.84648126677573
+      ],
+      "rating_time_range": [
+        0.021,
+        135.17999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 59,
+      "label_counts": {
+        "0": 36,
+        "1": 12,
+        "2": 11
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_9",
+      "subject_id": "3",
+      "trial_id": 9,
+      "group": "train",
+      "signal_shape": [
+        1702079,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        1351.649381382717
+      ],
+      "rating_time_range": [
+        0.019,
+        1353.01904
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 669,
+      "label_counts": {
+        "0": 500,
+        "1": 47,
+        "2": 122
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_10",
+      "subject_id": "3",
+      "trial_id": 10,
+      "group": "train",
+      "signal_shape": [
+        669031,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        531.2882168892842
+      ],
+      "rating_time_range": [
+        0.019,
+        532.75897
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 259,
+      "label_counts": {
+        "0": 82,
+        "1": 99,
+        "2": 78
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_11",
+      "subject_id": "3",
+      "trial_id": 11,
+      "group": "train",
+      "signal_shape": [
+        502803,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        399.28370630370216
+      ],
+      "rating_time_range": [
+        0.021,
+        490.0
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 193,
+      "label_counts": {
+        "0": 83,
+        "1": 89,
+        "2": 21
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_3/trial_12",
+      "subject_id": "3",
+      "trial_id": 12,
+      "group": "train",
+      "signal_shape": [
+        790553,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        627.7909248288677
+      ],
+      "rating_time_range": [
+        0.019,
+        628.979
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 307,
+      "label_counts": {
+        "0": 85,
+        "1": 61,
+        "2": 161
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_1",
+      "subject_id": "4",
+      "trial_id": 1,
+      "group": "train",
+      "signal_shape": [
+        212985,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        169.13425345043913
+      ],
+      "rating_time_range": [
+        0.021,
+        170.82099
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 1
+      },
+      "uncovered_samples": 27,
+      "windows": 78,
+      "label_counts": {
+        "0": 29,
+        "1": 13,
+        "2": 36
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_2",
+      "subject_id": "4",
+      "trial_id": 2,
+      "group": "train",
+      "signal_shape": [
+        167106,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        132.70095135238154
+      ],
+      "rating_time_range": [
+        0.02,
+        133.8
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 60,
+      "label_counts": {
+        "0": 24,
+        "1": 8,
+        "2": 28
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_3",
+      "subject_id": "4",
+      "trial_id": 3,
+      "group": "train",
+      "signal_shape": [
+        87005,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        69.09137112272286
+      ],
+      "rating_time_range": [
+        0.02,
+        70.4
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 28,
+      "label_counts": {
+        "0": 14,
+        "1": 11,
+        "2": 3
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_4",
+      "subject_id": "4",
+      "trial_id": 4,
+      "group": "train",
+      "signal_shape": [
+        110103,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        87.43388974477074
+      ],
+      "rating_time_range": [
+        0.019,
+        88.75901
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 37,
+      "label_counts": {
+        "0": 21,
+        "1": 6,
+        "2": 10
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_5",
+      "subject_id": "4",
+      "trial_id": 5,
+      "group": "train",
+      "signal_shape": [
+        322068,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        255.75893778886007
+      ],
+      "rating_time_range": [
+        0.02,
+        257.061
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 121,
+      "label_counts": {
+        "0": 61,
+        "1": 23,
+        "2": 37
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_6",
+      "subject_id": "4",
+      "trial_id": 6,
+      "group": "train",
+      "signal_shape": [
+        417819,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        331.79645188444005
+      ],
+      "rating_time_range": [
+        0.019,
+        332.76
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 159,
+      "label_counts": {
+        "0": 42,
+        "1": 37,
+        "2": 80
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_7",
+      "subject_id": "4",
+      "trial_id": 7,
+      "group": "train",
+      "signal_shape": [
+        114286,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        90.7556819084224
+      ],
+      "rating_time_range": [
+        0.02,
+        92.02101
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 39,
+      "label_counts": {
+        "0": 23,
+        "1": 7,
+        "2": 9
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_8",
+      "subject_id": "4",
+      "trial_id": 8,
+      "group": "train",
+      "signal_shape": [
+        111508,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        88.54962438257388
+      ],
+      "rating_time_range": [
+        0.02,
+        90.5
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 1
+      },
+      "uncovered_samples": 26,
+      "windows": 38,
+      "label_counts": {
+        "0": 21,
+        "1": 6,
+        "2": 11
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_9",
+      "subject_id": "4",
+      "trial_id": 9,
+      "group": "train",
+      "signal_shape": [
+        534877,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        424.7542207328113
+      ],
+      "rating_time_range": [
+        0.02,
+        425.83999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 206,
+      "label_counts": {
+        "0": 145,
+        "1": 43,
+        "2": 18
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_10",
+      "subject_id": "4",
+      "trial_id": 10,
+      "group": "train",
+      "signal_shape": [
+        305091,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        242.27721042517032
+      ],
+      "rating_time_range": [
+        0.02,
+        243.35899
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 115,
+      "label_counts": {
+        "0": 75,
+        "1": 18,
+        "2": 22
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_11",
+      "subject_id": "4",
+      "trial_id": 11,
+      "group": "train",
+      "signal_shape": [
+        294874,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        234.16371519781453
+      ],
+      "rating_time_range": [
+        0.019,
+        235.17999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 111,
+      "label_counts": {
+        "0": 58,
+        "1": 36,
+        "2": 17
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_4/trial_12",
+      "subject_id": "4",
+      "trial_id": 12,
+      "group": "train",
+      "signal_shape": [
+        279064,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        221.6087225831044
+      ],
+      "rating_time_range": [
+        0.019,
+        222.779
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 104,
+      "label_counts": {
+        "0": 53,
+        "1": 21,
+        "2": 30
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_1",
+      "subject_id": "5",
+      "trial_id": 1,
+      "group": "test",
+      "signal_shape": [
+        275338,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        218.6498419706812
+      ],
+      "rating_time_range": [
+        0.02,
+        219.641
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 103,
+      "label_counts": {
+        "0": 29,
+        "1": 45,
+        "2": 29
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_2",
+      "subject_id": "5",
+      "trial_id": 2,
+      "group": "test",
+      "signal_shape": [
+        176214,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        139.93377062719375
+      ],
+      "rating_time_range": [
+        0.019,
+        140.72
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 63,
+      "label_counts": {
+        "0": 21,
+        "1": 25,
+        "2": 17
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_3",
+      "subject_id": "5",
+      "trial_id": 3,
+      "group": "test",
+      "signal_shape": [
+        167786,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        133.24095103473468
+      ],
+      "rating_time_range": [
+        0.019,
+        134.17999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 60,
+      "label_counts": {
+        "0": 27,
+        "1": 13,
+        "2": 20
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_4",
+      "subject_id": "5",
+      "trial_id": 4,
+      "group": "test",
+      "signal_shape": [
+        218044,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        173.15169226371043
+      ],
+      "rating_time_range": [
+        0.019,
+        174.41999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 80,
+      "label_counts": {
+        "0": 18,
+        "1": 26,
+        "2": 36
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_5",
+      "subject_id": "5",
+      "trial_id": 5,
+      "group": "test",
+      "signal_shape": [
+        240646,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        191.10032876451248
+      ],
+      "rating_time_range": [
+        0.02,
+        192.16
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 89,
+      "label_counts": {
+        "0": 14,
+        "1": 36,
+        "2": 39
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_6",
+      "subject_id": "5",
+      "trial_id": 6,
+      "group": "test",
+      "signal_shape": [
+        253351,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        201.1895875355368
+      ],
+      "rating_time_range": [
+        0.021,
+        202.08
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 94,
+      "label_counts": {
+        "0": 27,
+        "1": 27,
+        "2": 40
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_7",
+      "subject_id": "5",
+      "trial_id": 7,
+      "group": "test",
+      "signal_shape": [
+        125541,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        99.6934707685466
+      ],
+      "rating_time_range": [
+        0.019,
+        100.75901
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 1
+      },
+      "uncovered_samples": 24,
+      "windows": 43,
+      "label_counts": {
+        "0": 23,
+        "1": 10,
+        "2": 10
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_8",
+      "subject_id": "5",
+      "trial_id": 8,
+      "group": "test",
+      "signal_shape": [
+        158538,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        125.89695535473214
+      ],
+      "rating_time_range": [
+        0.019,
+        126.779
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 56,
+      "label_counts": {
+        "0": 24,
+        "1": 20,
+        "2": 12
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_9",
+      "subject_id": "5",
+      "trial_id": 9,
+      "group": "test",
+      "signal_shape": [
+        392937,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        312.0372282133952
+      ],
+      "rating_time_range": [
+        0.02,
+        313.221
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 1
+      },
+      "uncovered_samples": 26,
+      "windows": 150,
+      "label_counts": {
+        "0": 15,
+        "1": 92,
+        "2": 43
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_10",
+      "subject_id": "5",
+      "trial_id": 10,
+      "group": "test",
+      "signal_shape": [
+        373394,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        296.51779616600226
+      ],
+      "rating_time_range": [
+        0.021,
+        298.0
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 142,
+      "label_counts": {
+        "0": 29,
+        "1": 86,
+        "2": 27
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_11",
+      "subject_id": "5",
+      "trial_id": 11,
+      "group": "test",
+      "signal_shape": [
+        326342,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        259.1529946158855
+      ],
+      "rating_time_range": [
+        0.021,
+        260.44
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 123,
+      "label_counts": {
+        "0": 29,
+        "1": 63,
+        "2": 31
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_5/trial_12",
+      "subject_id": "5",
+      "trial_id": 12,
+      "group": "test",
+      "signal_shape": [
+        778088,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        617.8922541810269
+      ],
+      "rating_time_range": [
+        0.02,
+        619.46002
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 303,
+      "label_counts": {
+        "0": 39,
+        "1": 225,
+        "2": 39
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_6/trial_1",
+      "subject_id": "6",
+      "trial_id": 1,
+      "group": "train",
+      "signal_shape": [
+        321323,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        255.16732048981143
+      ],
+      "rating_time_range": [
+        0.02,
+        256.22
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 121,
+      "label_counts": {
+        "0": 45,
+        "1": 43,
+        "2": 33
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_6/trial_2",
+      "subject_id": "6",
+      "trial_id": 2,
+      "group": "train",
+      "signal_shape": [
+        157858,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        125.35695567237902
+      ],
+      "rating_time_range": [
+        0.02,
+        126.44001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 56,
+      "label_counts": {
+        "0": 29,
+        "1": 16,
+        "2": 11
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_6/trial_3",
+      "subject_id": "6",
+      "trial_id": 3,
+      "group": "train",
+      "signal_shape": [
+        357159,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        283.6253037498213
+      ],
+      "rating_time_range": [
+        0.019,
+        318.26
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 135,
+      "label_counts": {
+        "0": 53,
+        "1": 52,
+        "2": 30
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_6/trial_4",
+      "subject_id": "6",
+      "trial_id": 4,
+      "group": "train",
+      "signal_shape": [
+        358803,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        284.930832393628
+      ],
+      "rating_time_range": [
+        0.02,
+        308.42001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 136,
+      "label_counts": {
+        "0": 55,
+        "1": 45,
+        "2": 36
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_6/trial_5",
+      "subject_id": "6",
+      "trial_id": 5,
+      "group": "train",
+      "signal_shape": [
+        30884,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        24.52472086781125
+      ],
+      "rating_time_range": [
+        0.021,
+        377.401
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 10,
+      "label_counts": {
+        "0": 10,
+        "1": 0,
+        "2": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 0
+      }
+    },
+    {
+      "record_id": "subject_6/trial_6",
+      "subject_id": "6",
+      "trial_id": 6,
+      "group": "train",
+      "signal_shape": [
+        379617,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        301.4595873767133
+      ],
+      "rating_time_range": [
+        0.02,
+        310.26098
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 144,
+      "label_counts": {
+        "0": 52,
+        "1": 35,
+        "2": 57
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_6/trial_7",
+      "subject_id": "6",
+      "trial_id": 7,
+      "group": "train",
+      "signal_shape": [
+        205199,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        162.95125708749583
+      ],
+      "rating_time_range": [
+        0.021,
+        164.6
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 75,
+      "label_counts": {
+        "0": 44,
+        "1": 13,
+        "2": 18
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_6/trial_8",
+      "subject_id": "6",
+      "trial_id": 8,
+      "group": "train",
+      "signal_shape": [
+        233461,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        185.39459682670773
+      ],
+      "rating_time_range": [
+        0.02,
+        210.03999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 86,
+      "label_counts": {
+        "0": 54,
+        "1": 7,
+        "2": 25
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_6/trial_9",
+      "subject_id": "6",
+      "trial_id": 9,
+      "group": "train",
+      "signal_shape": [
+        404121,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        320.91863475374424
+      ],
+      "rating_time_range": [
+        0.019,
+        326.21899
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 154,
+      "label_counts": {
+        "0": 70,
+        "1": 49,
+        "2": 35
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_6/trial_10",
+      "subject_id": "6",
+      "trial_id": 10,
+      "group": "train",
+      "signal_shape": [
+        307518,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        244.20453282086305
+      ],
+      "rating_time_range": [
+        0.019,
+        245.4
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 116,
+      "label_counts": {
+        "0": 91,
+        "1": 10,
+        "2": 15
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_6/trial_11",
+      "subject_id": "6",
+      "trial_id": 11,
+      "group": "train",
+      "signal_shape": [
+        811068,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        644.0822387751537
+      ],
+      "rating_time_range": [
+        0.02,
+        645.46
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 316,
+      "label_counts": {
+        "0": 67,
+        "1": 109,
+        "2": 140
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_6/trial_12",
+      "subject_id": "6",
+      "trial_id": 12,
+      "group": "train",
+      "signal_shape": [
+        367776,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        292.0564458491495
+      ],
+      "rating_time_range": [
+        0.019,
+        293.38
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 140,
+      "label_counts": {
+        "0": 76,
+        "1": 41,
+        "2": 23
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_1",
+      "subject_id": "7",
+      "trial_id": 1,
+      "group": "train",
+      "signal_shape": [
+        148756,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        118.1289011006464
+      ],
+      "rating_time_range": [
+        0.02,
+        119.46
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 53,
+      "label_counts": {
+        "0": 19,
+        "1": 7,
+        "2": 27
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_2",
+      "subject_id": "7",
+      "trial_id": 2,
+      "group": "train",
+      "signal_shape": [
+        135051,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        107.24552514969108
+      ],
+      "rating_time_range": [
+        0.019,
+        108.559
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 47,
+      "label_counts": {
+        "0": 14,
+        "1": 17,
+        "2": 16
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_3",
+      "subject_id": "7",
+      "trial_id": 3,
+      "group": "train",
+      "signal_shape": [
+        171722,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        136.36659625494335
+      ],
+      "rating_time_range": [
+        0.02,
+        137.47999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 62,
+      "label_counts": {
+        "0": 25,
+        "1": 20,
+        "2": 17
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_4",
+      "subject_id": "7",
+      "trial_id": 4,
+      "group": "train",
+      "signal_shape": [
+        173163,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        137.51091911122404
+      ],
+      "rating_time_range": [
+        0.019,
+        138.59899
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 62,
+      "label_counts": {
+        "0": 16,
+        "1": 25,
+        "2": 21
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_5",
+      "subject_id": "7",
+      "trial_id": 5,
+      "group": "train",
+      "signal_shape": [
+        409119,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        324.88763241903973
+      ],
+      "rating_time_range": [
+        0.02,
+        326.16101
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 156,
+      "label_counts": {
+        "0": 37,
+        "1": 70,
+        "2": 49
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_6",
+      "subject_id": "7",
+      "trial_id": 6,
+      "group": "train",
+      "signal_shape": [
+        356634,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        283.2083922303575
+      ],
+      "rating_time_range": [
+        0.02,
+        284.44
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 135,
+      "label_counts": {
+        "0": 46,
+        "1": 50,
+        "2": 39
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_7",
+      "subject_id": "7",
+      "trial_id": 7,
+      "group": "train",
+      "signal_shape": [
+        140934,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        111.91731651922557
+      ],
+      "rating_time_range": [
+        0.02,
+        112.92
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 49,
+      "label_counts": {
+        "0": 21,
+        "1": 13,
+        "2": 15
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_8",
+      "subject_id": "7",
+      "trial_id": 8,
+      "group": "train",
+      "signal_shape": [
+        215818,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        171.38398742118386
+      ],
+      "rating_time_range": [
+        0.021,
+        172.481
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 79,
+      "label_counts": {
+        "0": 33,
+        "1": 24,
+        "2": 22
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_9",
+      "subject_id": "7",
+      "trial_id": 9,
+      "group": "train",
+      "signal_shape": [
+        505544,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        401.4603814938933
+      ],
+      "rating_time_range": [
+        0.019,
+        402.27899
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 194,
+      "label_counts": {
+        "0": 43,
+        "1": 48,
+        "2": 103
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_10",
+      "subject_id": "7",
+      "trial_id": 10,
+      "group": "train",
+      "signal_shape": [
+        514569,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        408.6272890427711
+      ],
+      "rating_time_range": [
+        0.02,
+        409.73999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 2,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 198,
+      "label_counts": {
+        "0": 21,
+        "1": 74,
+        "2": 103
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_11",
+      "subject_id": "7",
+      "trial_id": 11,
+      "group": "train",
+      "signal_shape": [
+        145085,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        115.21369693311944
+      ],
+      "rating_time_range": [
+        0.02,
+        116.14
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 51,
+      "label_counts": {
+        "0": 7,
+        "1": 23,
+        "2": 21
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_7/trial_12",
+      "subject_id": "7",
+      "trial_id": 12,
+      "group": "train",
+      "signal_shape": [
+        196669,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        156.17743754268378
+      ],
+      "rating_time_range": [
+        0.019,
+        157.199
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 72,
+      "label_counts": {
+        "0": 22,
+        "1": 18,
+        "2": 32
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_8/trial_1",
+      "subject_id": "8",
+      "trial_id": 1,
+      "group": "validation",
+      "signal_shape": [
+        285840,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        226.9896605943173
+      ],
+      "rating_time_range": [
+        0.019,
+        227.91
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 107,
+      "label_counts": {
+        "0": 33,
+        "1": 18,
+        "2": 56
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_8/trial_2",
+      "subject_id": "8",
+      "trial_id": 2,
+      "group": "validation",
+      "signal_shape": [
+        202541,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        160.84049362323904
+      ],
+      "rating_time_range": [
+        0.021,
+        162.10099
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 74,
+      "label_counts": {
+        "0": 41,
+        "1": 8,
+        "2": 25
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_8/trial_3",
+      "subject_id": "8",
+      "trial_id": 3,
+      "group": "validation",
+      "signal_shape": [
+        232349,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        184.5115385226244
+      ],
+      "rating_time_range": [
+        0.02,
+        185.67999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 86,
+      "label_counts": {
+        "0": 33,
+        "1": 17,
+        "2": 36
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_8/trial_4",
+      "subject_id": "8",
+      "trial_id": 4,
+      "group": "validation",
+      "signal_shape": [
+        70118,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        55.68111430522688
+      ],
+      "rating_time_range": [
+        0.021,
+        126.02
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 23,
+      "label_counts": {
+        "0": 14,
+        "1": 9,
+        "2": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 2
+      }
+    },
+    {
+      "record_id": "subject_8/trial_5",
+      "subject_id": "8",
+      "trial_id": 5,
+      "group": "validation",
+      "signal_shape": [
+        438982,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        348.6023537633213
+      ],
+      "rating_time_range": [
+        0.021,
+        431.92098
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 168,
+      "label_counts": {
+        "0": 16,
+        "1": 53,
+        "2": 99
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_8/trial_6",
+      "subject_id": "8",
+      "trial_id": 6,
+      "group": "validation",
+      "signal_shape": [
+        278817,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        221.41257563966136
+      ],
+      "rating_time_range": [
+        0.019,
+        222.8
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 104,
+      "label_counts": {
+        "0": 52,
+        "1": 26,
+        "2": 26
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_8/trial_7",
+      "subject_id": "8",
+      "trial_id": 7,
+      "group": "validation",
+      "signal_shape": [
+        94873,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        75.33948509442052
+      ],
+      "rating_time_range": [
+        0.02,
+        78.16001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 31,
+      "label_counts": {
+        "0": 19,
+        "1": 5,
+        "2": 7
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_8/trial_8",
+      "subject_id": "8",
+      "trial_id": 8,
+      "group": "validation",
+      "signal_shape": [
+        79478,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        63.1140511093817
+      ],
+      "rating_time_range": [
+        0.019,
+        64.099
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 25,
+      "label_counts": {
+        "0": 17,
+        "1": 1,
+        "2": 7
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_8/trial_9",
+      "subject_id": "8",
+      "trial_id": 9,
+      "group": "validation",
+      "signal_shape": [
+        1409956,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        1119.6694884297126
+      ],
+      "rating_time_range": [
+        0.021,
+        1121.08105
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 553,
+      "label_counts": {
+        "0": 220,
+        "1": 83,
+        "2": 250
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_8/trial_10",
+      "subject_id": "8",
+      "trial_id": 10,
+      "group": "validation",
+      "signal_shape": [
+        1247791,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        990.8914759461906
+      ],
+      "rating_time_range": [
+        0.019,
+        991.7399
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 489,
+      "label_counts": {
+        "0": 146,
+        "1": 145,
+        "2": 198
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_8/trial_11",
+      "subject_id": "8",
+      "trial_id": 11,
+      "group": "validation",
+      "signal_shape": [
+        1259257,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        999.9968235312804
+      ],
+      "rating_time_range": [
+        0.02,
+        1014.29998
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 494,
+      "label_counts": {
+        "0": 70,
+        "1": 349,
+        "2": 75
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_8/trial_12",
+      "subject_id": "8",
+      "trial_id": 12,
+      "group": "validation",
+      "signal_shape": [
+        768750,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        610.4767879548306
+      ],
+      "rating_time_range": [
+        0.02,
+        880.52001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 301,
+      "label_counts": {
+        "0": 49,
+        "1": 252,
+        "2": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 2
+      }
+    },
+    {
+      "record_id": "subject_9/trial_1",
+      "subject_id": "9",
+      "trial_id": 1,
+      "group": "train",
+      "signal_shape": [
+        134032,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        106.43631974334131
+      ],
+      "rating_time_range": [
+        0.02,
+        107.219
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 47,
+      "label_counts": {
+        "0": 18,
+        "1": 15,
+        "2": 14
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_9/trial_2",
+      "subject_id": "9",
+      "trial_id": 2,
+      "group": "train",
+      "signal_shape": [
+        138033,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        109.61358258024552
+      ],
+      "rating_time_range": [
+        0.02,
+        110.66001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 3,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 48,
+      "label_counts": {
+        "0": 19,
+        "1": 10,
+        "2": 19
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_9/trial_3",
+      "subject_id": "9",
+      "trial_id": 3,
+      "group": "train",
+      "signal_shape": [
+        232838,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        184.89986182361068
+      ],
+      "rating_time_range": [
+        0.02,
+        186.36
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 86,
+      "label_counts": {
+        "0": 26,
+        "1": 46,
+        "2": 14
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_9/trial_4",
+      "subject_id": "9",
+      "trial_id": 4,
+      "group": "train",
+      "signal_shape": [
+        318052,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        252.5697631942569
+      ],
+      "rating_time_range": [
+        0.021,
+        253.89999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 120,
+      "label_counts": {
+        "0": 27,
+        "1": 49,
+        "2": 44
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_9/trial_5",
+      "subject_id": "9",
+      "trial_id": 5,
+      "group": "train",
+      "signal_shape": [
+        327804,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        260.31399393294475
+      ],
+      "rating_time_range": [
+        0.019,
+        261.29998
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 124,
+      "label_counts": {
+        "0": 40,
+        "1": 54,
+        "2": 30
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_9/trial_6",
+      "subject_id": "9",
+      "trial_id": 6,
+      "group": "train",
+      "signal_shape": [
+        322943,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        256.4537903212998
+      ],
+      "rating_time_range": [
+        0.02,
+        257.70001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 122,
+      "label_counts": {
+        "0": 34,
+        "1": 47,
+        "2": 41
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_9/trial_7",
+      "subject_id": "9",
+      "trial_id": 7,
+      "group": "train",
+      "signal_shape": [
+        154430,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        122.6347219795753
+      ],
+      "rating_time_range": [
+        0.021,
+        123.541
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 55,
+      "label_counts": {
+        "0": 17,
+        "1": 20,
+        "2": 18
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_9/trial_8",
+      "subject_id": "9",
+      "trial_id": 8,
+      "group": "train",
+      "signal_shape": [
+        164943,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        130.98327589219065
+      ],
+      "rating_time_range": [
+        0.021,
+        131.91999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 2,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 59,
+      "label_counts": {
+        "0": 22,
+        "1": 21,
+        "2": 16
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_9/trial_9",
+      "subject_id": "9",
+      "trial_id": 9,
+      "group": "train",
+      "signal_shape": [
+        1694801,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        1345.8697965471783
+      ],
+      "rating_time_range": [
+        0.02,
+        1347.07995
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 667,
+      "label_counts": {
+        "0": 21,
+        "1": 530,
+        "2": 116
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_9/trial_10",
+      "subject_id": "9",
+      "trial_id": 10,
+      "group": "train",
+      "signal_shape": [
+        1163297,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        923.7933389450948
+      ],
+      "rating_time_range": [
+        0.02,
+        925.11999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 455,
+      "label_counts": {
+        "0": 40,
+        "1": 265,
+        "2": 150
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_9/trial_11",
+      "subject_id": "9",
+      "trial_id": 11,
+      "group": "train",
+      "signal_shape": [
+        741688,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        588.9863888315359
+      ],
+      "rating_time_range": [
+        0.019,
+        860.11999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 290,
+      "label_counts": {
+        "0": 222,
+        "1": 68,
+        "2": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 2
+      }
+    },
+    {
+      "record_id": "subject_9/trial_12",
+      "subject_id": "9",
+      "trial_id": 12,
+      "group": "train",
+      "signal_shape": [
+        427517,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        339.4978002954116
+      ],
+      "rating_time_range": [
+        0.019,
+        340.73901
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 163,
+      "label_counts": {
+        "0": 27,
+        "1": 34,
+        "2": 102
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_1",
+      "subject_id": "10",
+      "trial_id": 1,
+      "group": "test",
+      "signal_shape": [
+        152633,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        121.20769340723916
+      ],
+      "rating_time_range": [
+        0.02,
+        122.24
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 54,
+      "label_counts": {
+        "0": 10,
+        "1": 18,
+        "2": 26
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_2",
+      "subject_id": "10",
+      "trial_id": 2,
+      "group": "test",
+      "signal_shape": [
+        149890,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        119.02942998268824
+      ],
+      "rating_time_range": [
+        0.021,
+        120.48001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 53,
+      "label_counts": {
+        "0": 14,
+        "1": 16,
+        "2": 23
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_3",
+      "subject_id": "10",
+      "trial_id": 3,
+      "group": "test",
+      "signal_shape": [
+        177687,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        141.1035052332322
+      ],
+      "rating_time_range": [
+        0.021,
+        142.36099
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 64,
+      "label_counts": {
+        "0": 10,
+        "1": 14,
+        "2": 40
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_4",
+      "subject_id": "10",
+      "trial_id": 4,
+      "group": "test",
+      "signal_shape": [
+        380521,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        302.177469307371
+      ],
+      "rating_time_range": [
+        0.019,
+        303.20001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 145,
+      "label_counts": {
+        "0": 19,
+        "1": 19,
+        "2": 107
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_5",
+      "subject_id": "10",
+      "trial_id": 5,
+      "group": "test",
+      "signal_shape": [
+        323687,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        257.04461350316853
+      ],
+      "rating_time_range": [
+        0.02,
+        259.14001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 122,
+      "label_counts": {
+        "0": 30,
+        "1": 11,
+        "2": 81
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_6",
+      "subject_id": "10",
+      "trial_id": 6,
+      "group": "test",
+      "signal_shape": [
+        549778,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        436.5873608309642
+      ],
+      "rating_time_range": [
+        0.02,
+        437.82
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 212,
+      "label_counts": {
+        "0": 37,
+        "1": 21,
+        "2": 154
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_7",
+      "subject_id": "10",
+      "trial_id": 7,
+      "group": "test",
+      "signal_shape": [
+        141551,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        112.40728681924304
+      ],
+      "rating_time_range": [
+        0.019,
+        113.639
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 50,
+      "label_counts": {
+        "0": 7,
+        "1": 17,
+        "2": 26
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_8",
+      "subject_id": "10",
+      "trial_id": 8,
+      "group": "test",
+      "signal_shape": [
+        202862,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        161.0954052379969
+      ],
+      "rating_time_range": [
+        0.02,
+        162.13999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 2,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 74,
+      "label_counts": {
+        "0": 18,
+        "1": 16,
+        "2": 40
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_9",
+      "subject_id": "10",
+      "trial_id": 9,
+      "group": "test",
+      "signal_shape": [
+        209160,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        166.0967552372028
+      ],
+      "rating_time_range": [
+        0.021,
+        167.16
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 77,
+      "label_counts": {
+        "0": 10,
+        "1": 20,
+        "2": 47
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_10",
+      "subject_id": "10",
+      "trial_id": 10,
+      "group": "test",
+      "signal_shape": [
+        378479,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        300.55588202595175
+      ],
+      "rating_time_range": [
+        0.02,
+        301.61898
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 144,
+      "label_counts": {
+        "0": 29,
+        "1": 26,
+        "2": 89
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_11",
+      "subject_id": "10",
+      "trial_id": 11,
+      "group": "test",
+      "signal_shape": [
+        215012,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        170.74392897415942
+      ],
+      "rating_time_range": [
+        0.021,
+        171.66
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 79,
+      "label_counts": {
+        "0": 25,
+        "1": 14,
+        "2": 40
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_10/trial_12",
+      "subject_id": "10",
+      "trial_id": 12,
+      "group": "test",
+      "signal_shape": [
+        420090,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        333.5998920000635
+      ],
+      "rating_time_range": [
+        0.019,
+        334.64001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 160,
+      "label_counts": {
+        "0": 23,
+        "1": 43,
+        "2": 94
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_1",
+      "subject_id": "11",
+      "trial_id": 1,
+      "group": "validation",
+      "signal_shape": [
+        318961,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        253.29161571081428
+      ],
+      "rating_time_range": [
+        0.02,
+        254.45899
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 120,
+      "label_counts": {
+        "0": 12,
+        "1": 53,
+        "2": 55
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_2",
+      "subject_id": "11",
+      "trial_id": 2,
+      "group": "validation",
+      "signal_shape": [
+        395573,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        314.13052109969345
+      ],
+      "rating_time_range": [
+        0.02,
+        315.33999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 151,
+      "label_counts": {
+        "0": 23,
+        "1": 95,
+        "2": 33
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_3",
+      "subject_id": "11",
+      "trial_id": 3,
+      "group": "validation",
+      "signal_shape": [
+        282175,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        224.07922112986992
+      ],
+      "rating_time_range": [
+        0.02,
+        225.23899
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 106,
+      "label_counts": {
+        "0": 35,
+        "1": 13,
+        "2": 58
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_4",
+      "subject_id": "11",
+      "trial_id": 4,
+      "group": "validation",
+      "signal_shape": [
+        542104,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        430.4933055921732
+      ],
+      "rating_time_range": [
+        0.02,
+        431.57998
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 209,
+      "label_counts": {
+        "0": 25,
+        "1": 42,
+        "2": 142
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_5",
+      "subject_id": "11",
+      "trial_id": 5,
+      "group": "validation",
+      "signal_shape": [
+        618332,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        491.0272699839588
+      ],
+      "rating_time_range": [
+        0.019,
+        492.29901
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 239,
+      "label_counts": {
+        "0": 31,
+        "1": 41,
+        "2": 167
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_6",
+      "subject_id": "11",
+      "trial_id": 6,
+      "group": "validation",
+      "signal_shape": [
+        417623,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        331.6408049171736
+      ],
+      "rating_time_range": [
+        0.019,
+        333.26
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 159,
+      "label_counts": {
+        "0": 31,
+        "1": 32,
+        "2": 96
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_7",
+      "subject_id": "11",
+      "trial_id": 7,
+      "group": "validation",
+      "signal_shape": [
+        218618,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        173.60751552499084
+      ],
+      "rating_time_range": [
+        0.02,
+        175.08
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 80,
+      "label_counts": {
+        "0": 17,
+        "1": 19,
+        "2": 44
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_8",
+      "subject_id": "11",
+      "trial_id": 8,
+      "group": "validation",
+      "signal_shape": [
+        282079,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        224.00298588059653
+      ],
+      "rating_time_range": [
+        0.02,
+        224.97999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 106,
+      "label_counts": {
+        "0": 21,
+        "1": 19,
+        "2": 66
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_9",
+      "subject_id": "11",
+      "trial_id": 9,
+      "group": "validation",
+      "signal_shape": [
+        331472,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        263.2268157489319
+      ],
+      "rating_time_range": [
+        0.021,
+        264.04
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 125,
+      "label_counts": {
+        "0": 52,
+        "1": 20,
+        "2": 53
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_10",
+      "subject_id": "11",
+      "trial_id": 10,
+      "group": "validation",
+      "signal_shape": [
+        372833,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        296.0722964280609
+      ],
+      "rating_time_range": [
+        0.019,
+        297.39898
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 2,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 142,
+      "label_counts": {
+        "0": 19,
+        "1": 42,
+        "2": 81
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_11",
+      "subject_id": "11",
+      "trial_id": 11,
+      "group": "validation",
+      "signal_shape": [
+        200881,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        159.52225910455346
+      ],
+      "rating_time_range": [
+        0.02,
+        160.61999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 73,
+      "label_counts": {
+        "0": 19,
+        "1": 28,
+        "2": 26
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_11/trial_12",
+      "subject_id": "11",
+      "trial_id": 12,
+      "group": "validation",
+      "signal_shape": [
+        261231,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        207.4472309133936
+      ],
+      "rating_time_range": [
+        0.02,
+        208.39999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 2,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 97,
+      "label_counts": {
+        "0": 31,
+        "1": 34,
+        "2": 32
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_12/trial_1",
+      "subject_id": "12",
+      "trial_id": 1,
+      "group": "train",
+      "signal_shape": [
+        287535,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        228.3356892143005
+      ],
+      "rating_time_range": [
+        0.02,
+        230.44
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 108,
+      "label_counts": {
+        "0": 35,
+        "1": 23,
+        "2": 50
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_12/trial_2",
+      "subject_id": "12",
+      "trial_id": 2,
+      "group": "train",
+      "signal_shape": [
+        367339,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        291.7094166415196
+      ],
+      "rating_time_range": [
+        0.019,
+        293.16
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 139,
+      "label_counts": {
+        "0": 67,
+        "1": 20,
+        "2": 52
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_12/trial_3",
+      "subject_id": "12",
+      "trial_id": 3,
+      "group": "train",
+      "signal_shape": [
+        139315,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        110.63164080491715
+      ],
+      "rating_time_range": [
+        0.021,
+        585.96099
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 53,
+      "label_counts": {
+        "0": 53,
+        "1": 0,
+        "2": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 0
+      }
+    },
+    {
+      "record_id": "subject_12/trial_4",
+      "subject_id": "12",
+      "trial_id": 4,
+      "group": "train",
+      "signal_shape": [
+        876801,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        696.2819433635627
+      ],
+      "rating_time_range": [
+        0.021,
+        697.90002
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 342,
+      "label_counts": {
+        "0": 103,
+        "1": 63,
+        "2": 176
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_12/trial_5",
+      "subject_id": "12",
+      "trial_id": 5,
+      "group": "train",
+      "signal_shape": [
+        432623,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        343.5525626161396
+      ],
+      "rating_time_range": [
+        0.02,
+        345.35998
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 165,
+      "label_counts": {
+        "0": 48,
+        "1": 45,
+        "2": 72
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_12/trial_6",
+      "subject_id": "12",
+      "trial_id": 6,
+      "group": "train",
+      "signal_shape": [
+        413394,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        328.28248336324503
+      ],
+      "rating_time_range": [
+        0.019,
+        329.819
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 158,
+      "label_counts": {
+        "0": 70,
+        "1": 26,
+        "2": 62
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_12/trial_7",
+      "subject_id": "12",
+      "trial_id": 7,
+      "group": "train",
+      "signal_shape": [
+        134924,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        107.14467226783984
+      ],
+      "rating_time_range": [
+        0.021,
+        108.66001
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 47,
+      "label_counts": {
+        "0": 17,
+        "1": 13,
+        "2": 17
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_12/trial_8",
+      "subject_id": "12",
+      "trial_id": 8,
+      "group": "train",
+      "signal_shape": [
+        133005,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        105.62076139955212
+      ],
+      "rating_time_range": [
+        0.019,
+        106.92
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 46,
+      "label_counts": {
+        "0": 19,
+        "1": 10,
+        "2": 17
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_12/trial_9",
+      "subject_id": "12",
+      "trial_id": 9,
+      "group": "train",
+      "signal_shape": [
+        886081,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        703.651350793323
+      ],
+      "rating_time_range": [
+        0.019,
+        705.07897
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 345,
+      "label_counts": {
+        "0": 105,
+        "1": 85,
+        "2": 155
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_12/trial_10",
+      "subject_id": "12",
+      "trial_id": 10,
+      "group": "train",
+      "signal_shape": [
+        508512,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        403.8173212839286
+      ],
+      "rating_time_range": [
+        0.021,
+        405.221
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 195,
+      "label_counts": {
+        "0": 74,
+        "1": 59,
+        "2": 62
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_12/trial_11",
+      "subject_id": "12",
+      "trial_id": 11,
+      "group": "train",
+      "signal_shape": [
+        563577,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        447.54538379683305
+      ],
+      "rating_time_range": [
+        0.019,
+        449.09899
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 217,
+      "label_counts": {
+        "0": 134,
+        "1": 31,
+        "2": 52
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_12/trial_12",
+      "subject_id": "12",
+      "trial_id": 12,
+      "group": "train",
+      "signal_shape": [
+        381895,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        303.26858631259626
+      ],
+      "rating_time_range": [
+        0.021,
+        304.58099
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 145,
+      "label_counts": {
+        "0": 43,
+        "1": 49,
+        "2": 53
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_1",
+      "subject_id": "13",
+      "trial_id": 1,
+      "group": "validation",
+      "signal_shape": [
+        281814,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        223.7925448279148
+      ],
+      "rating_time_range": [
+        0.02,
+        225.8999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 105,
+      "label_counts": {
+        "0": 42,
+        "1": 32,
+        "2": 31
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_2",
+      "subject_id": "13",
+      "trial_id": 2,
+      "group": "validation",
+      "signal_shape": [
+        144143,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        114.46563854962436
+      ],
+      "rating_time_range": [
+        0.019,
+        115.859
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 51,
+      "label_counts": {
+        "0": 27,
+        "1": 18,
+        "2": 6
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_3",
+      "subject_id": "13",
+      "trial_id": 3,
+      "group": "validation",
+      "signal_shape": [
+        1063534,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        844.5698267236313
+      ],
+      "rating_time_range": [
+        0.02,
+        846.03997
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 416,
+      "label_counts": {
+        "0": 82,
+        "1": 224,
+        "2": 110
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_4",
+      "subject_id": "13",
+      "trial_id": 4,
+      "group": "validation",
+      "signal_shape": [
+        311477,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        247.34844273621013
+      ],
+      "rating_time_range": [
+        0.021,
+        248.561
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 117,
+      "label_counts": {
+        "0": 53,
+        "1": 26,
+        "2": 38
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_5",
+      "subject_id": "13",
+      "trial_id": 5,
+      "group": "validation",
+      "signal_shape": [
+        274644,
+        1
+      ],
+      "channel_names": [
+        "R BICEPS BRACHII"
+      ],
+      "main_muscle": "R BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        218.098724647809
+      ],
+      "rating_time_range": [
+        0.021,
+        219.67999
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 103,
+      "label_counts": {
+        "0": 42,
+        "1": 21,
+        "2": 40
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_6",
+      "subject_id": "13",
+      "trial_id": 6,
+      "group": "validation",
+      "signal_shape": [
+        402883,
+        1
+      ],
+      "channel_names": [
+        "L BICEPS BRACHII"
+      ],
+      "main_muscle": "L BICEPS BRACHII",
+      "time_range": [
+        0.0,
+        319.9355176849896
+      ],
+      "rating_time_range": [
+        0.021,
+        321.20098
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 154,
+      "label_counts": {
+        "0": 19,
+        "1": 45,
+        "2": 90
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_7",
+      "subject_id": "13",
+      "trial_id": 7,
+      "group": "validation",
+      "signal_shape": [
+        123739,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID MEDIUS"
+      ],
+      "main_muscle": "R DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        98.2624716103108
+      ],
+      "rating_time_range": [
+        0.019,
+        99.519
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 43,
+      "label_counts": {
+        "0": 7,
+        "1": 27,
+        "2": 9
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_8",
+      "subject_id": "13",
+      "trial_id": 8,
+      "group": "validation",
+      "signal_shape": [
+        129504,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID MEDIUS"
+      ],
+      "main_muscle": "L DELTOID MEDIUS",
+      "time_range": [
+        0.0,
+        102.84055715261344
+      ],
+      "rating_time_range": [
+        0.02,
+        104.4
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 45,
+      "label_counts": {
+        "0": 26,
+        "1": 4,
+        "2": 15
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_9",
+      "subject_id": "13",
+      "trial_id": 9,
+      "group": "validation",
+      "signal_shape": [
+        1010403,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID ANTERIOR"
+      ],
+      "main_muscle": "R DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        802.3775868367136
+      ],
+      "rating_time_range": [
+        0.02,
+        803.85998
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 395,
+      "label_counts": {
+        "0": 57,
+        "1": 294,
+        "2": 44
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_10",
+      "subject_id": "13",
+      "trial_id": 10,
+      "group": "validation",
+      "signal_shape": [
+        965284,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID ANTERIOR"
+      ],
+      "main_muscle": "L DELTOID ANTERIOR",
+      "time_range": [
+        0.0,
+        766.5478137954036
+      ],
+      "rating_time_range": [
+        0.02,
+        767.96002
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 1,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 26,
+      "windows": 377,
+      "label_counts": {
+        "0": 155,
+        "1": 105,
+        "2": 117
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_11",
+      "subject_id": "13",
+      "trial_id": 11,
+      "group": "validation",
+      "signal_shape": [
+        1873842,
+        1
+      ],
+      "channel_names": [
+        "R DELTOID POSTERIOR"
+      ],
+      "main_muscle": "R DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        1488.0493305592172
+      ],
+      "rating_time_range": [
+        0.019,
+        1489.40002
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 24,
+      "windows": 738,
+      "label_counts": {
+        "0": 207,
+        "1": 371,
+        "2": 160
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      }
+    },
+    {
+      "record_id": "subject_13/trial_12",
+      "subject_id": "13",
+      "trial_id": 12,
+      "group": "validation",
+      "signal_shape": [
+        344107,
+        1
+      ],
+      "channel_names": [
+        "L DELTOID POSTERIOR"
+      ],
+      "main_muscle": "L DELTOID POSTERIOR",
+      "time_range": [
+        0.0,
+        273.26048631736097
+      ],
+      "rating_time_range": [
+        0.021,
+        399.76
+      ],
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "uncovered_samples": 27,
+      "windows": 132,
+      "label_counts": {
+        "0": 82,
+        "1": 50,
+        "2": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 2
+      }
+    }
+  ],
+  "rejected_records": [],
+  "total_windows": 23010,
+  "repaired_records": 44,
+  "repair_counts": {
+    "emg_zero_tail_rows": 46,
+    "rating_reversed_tail_rows": 8
+  },
+  "subject_overlap": false
+}

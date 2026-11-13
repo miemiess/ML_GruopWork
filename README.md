@@ -28,6 +28,8 @@ UCI 手势数据的读取、用户划分和分窗第一版已完成，模型和�
 ```text
 src/emginsight/
   uci_gesture/     UCI 读取、用户划分及调用说明
+  putemg_force/    力量 CSV 读取、用户划分、分批分窗及调用说明
+  zenodo_fatigue/  疲劳肌电与评分配对、时间对齐、用户划分及分窗
   features/        RMS、MAV、WL 等特征
   models/          自己实现的分类和回归模型
 

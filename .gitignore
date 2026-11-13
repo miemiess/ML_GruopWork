@@ -20,6 +20,16 @@ htmlcov/
 # 数据文件：本地存储目录中只保留说明或占位文件
 /data/raw/*
 !/data/raw/.gitkeep
+# 保留三个数据集目录，仅跟踪各目录的占位文件。
+!/data/raw/EMG_data_for_gestures-master/
+/data/raw/EMG_data_for_gestures-master/*
+!/data/raw/EMG_data_for_gestures-master/.gitkeep
+!/data/raw/EMG_data_for_ZenodoTired/
+/data/raw/EMG_data_for_ZenodoTired/*
+!/data/raw/EMG_data_for_ZenodoTired/.gitkeep
+!/data/raw/EMG_data_for_putemgforce/
+/data/raw/EMG_data_for_putemgforce/*
+!/data/raw/EMG_data_for_putemgforce/.gitkeep
 /data/interim/*
 !/data/interim/.gitkeep
 /data/processed/*
