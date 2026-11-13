@@ -1,0 +1,1773 @@
+{
+  "parameters": {
+    "data_dir": "data\\raw\\EMG_data_for_putemgforce",
+    "window_size": 1024,
+    "step_size": 512,
+    "batch_size": 128,
+    "max_gap_seconds": 0.01,
+    "seed": 42,
+    "ratios": null,
+    "json": true,
+    "strict": false
+  },
+  "force_unit": "原始数值（物理单位待确认）",
+  "subject_groups": {
+    "train": [
+      "05"
+    ],
+    "validation": [
+      "04"
+    ],
+    "test": [
+      "03"
+    ]
+  },
+  "split_unavailable_reason": "",
+  "records": [
+    {
+      "subject_id": "03",
+      "session_id": "2018-05-11",
+      "record_id": "emg_force-03-bias-2018-05-11-11-20-41-581",
+      "trial_type": "bias",
+      "samples": 20480,
+      "signal_shape": [
+        20480,
+        24
+      ],
+      "force_shape": [
+        20480,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5120.883301266941,
+      "force_ranges": {
+        "FORCE_1": [
+          1378.33,
+          1430.39
+        ],
+        "FORCE_2": [
+          1250.04,
+          1319.06
+        ],
+        "FORCE_3": [
+          1275.05,
+          1299.99
+        ],
+        "FORCE_4": [
+          1239.01,
+          1258.99
+        ],
+        "FORCE_5": [
+          1279.28,
+          1315.93
+        ],
+        "FORCE_6": [
+          1318.13,
+          1340.83
+        ],
+        "FORCE_7": [
+          1382.12,
+          1403.87
+        ],
+        "FORCE_8": [
+          1320.21,
+          1381.56
+        ],
+        "FORCE_9": [
+          1268.03,
+          1324.92
+        ],
+        "FORCE_10": [
+          1311.14,
+          1335.72
+        ]
+      },
+      "group": "calibration",
+      "windows": 0,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "03",
+      "session_id": "2018-05-11",
+      "record_id": "emg_force-03-mvc-2018-05-11-11-20-54-280",
+      "trial_type": "mvc",
+      "samples": 61440,
+      "signal_shape": [
+        61440,
+        24
+      ],
+      "force_shape": [
+        61440,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.159117880168,
+      "force_ranges": {
+        "FORCE_1": [
+          -27.5,
+          259.28
+        ],
+        "FORCE_2": [
+          -32.17,
+          476.87
+        ],
+        "FORCE_3": [
+          -35.34,
+          447.39
+        ],
+        "FORCE_4": [
+          -11.18,
+          409.71
+        ],
+        "FORCE_5": [
+          -34.77,
+          381.94
+        ],
+        "FORCE_6": [
+          -59.83,
+          278.99
+        ],
+        "FORCE_7": [
+          -15.24,
+          274.6
+        ],
+        "FORCE_8": [
+          -55.77,
+          208.17
+        ],
+        "FORCE_9": [
+          -25.56,
+          424.08
+        ],
+        "FORCE_10": [
+          -9.33,
+          237.42
+        ]
+      },
+      "group": "calibration",
+      "windows": 0,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "03",
+      "session_id": "2018-05-11",
+      "record_id": "emg_force-03-repeats_long-2018-05-11-11-22-53-467",
+      "trial_type": "repeats_long",
+      "samples": 1819136,
+      "signal_shape": [
+        1819136,
+        24
+      ],
+      "force_shape": [
+        1819136,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.0946349212645,
+      "force_ranges": {
+        "FORCE_1": [
+          -160.57,
+          240.4
+        ],
+        "FORCE_2": [
+          -50.18,
+          367.55
+        ],
+        "FORCE_3": [
+          -56.44,
+          383.41
+        ],
+        "FORCE_4": [
+          -11.2,
+          327.59
+        ],
+        "FORCE_5": [
+          -67.54,
+          355.12
+        ],
+        "FORCE_6": [
+          -51.73,
+          165.97
+        ],
+        "FORCE_7": [
+          -151.22,
+          244.75
+        ],
+        "FORCE_8": [
+          -83.54,
+          154.77
+        ],
+        "FORCE_9": [
+          -53.42,
+          348.35
+        ],
+        "FORCE_10": [
+          -53.43,
+          150.48
+        ]
+      },
+      "group": "test",
+      "windows": 3552,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "04",
+      "session_id": "2018-03-28",
+      "record_id": "emg_force-04-bias-2018-03-28-13-01-58-468",
+      "trial_type": "bias",
+      "samples": 20480,
+      "signal_shape": [
+        20480,
+        24
+      ],
+      "force_shape": [
+        20480,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5123.854615482998,
+      "force_ranges": {
+        "FORCE_1": [
+          1427.21,
+          1481.83
+        ],
+        "FORCE_2": [
+          1347.23,
+          1416.88
+        ],
+        "FORCE_3": [
+          1245.12,
+          1269.87
+        ],
+        "FORCE_4": [
+          1247.01,
+          1263.92
+        ],
+        "FORCE_5": [
+          1243.04,
+          1279.67
+        ],
+        "FORCE_6": [
+          1343.04,
+          1363.91
+        ],
+        "FORCE_7": [
+          1245.07,
+          1263.9
+        ],
+        "FORCE_8": [
+          1308.21,
+          1370.65
+        ],
+        "FORCE_9": [
+          1269.01,
+          1291.99
+        ],
+        "FORCE_10": [
+          1283.14,
+          1307.97
+        ]
+      },
+      "group": "calibration",
+      "windows": 0,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "04",
+      "session_id": "2018-06-18",
+      "record_id": "emg_force-04-bias-2018-06-18-15-19-34-816",
+      "trial_type": "bias",
+      "samples": 20992,
+      "signal_shape": [
+        20992,
+        24
+      ],
+      "force_shape": [
+        20992,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5121.774682234194,
+      "force_ranges": {
+        "FORCE_1": [
+          1475.06,
+          1519.66
+        ],
+        "FORCE_2": [
+          1307.0,
+          1351.73
+        ],
+        "FORCE_3": [
+          1275.11,
+          1299.95
+        ],
+        "FORCE_4": [
+          1239.06,
+          1255.92
+        ],
+        "FORCE_5": [
+          1279.0,
+          1313.67
+        ],
+        "FORCE_6": [
+          1322.03,
+          1340.89
+        ],
+        "FORCE_7": [
+          1339.04,
+          1360.96
+        ],
+        "FORCE_8": [
+          1331.02,
+          1401.38
+        ],
+        "FORCE_9": [
+          1259.02,
+          1290.67
+        ],
+        "FORCE_10": [
+          1315.23,
+          1341.92
+        ]
+      },
+      "group": "calibration",
+      "windows": 0,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "04",
+      "session_id": "2018-03-28",
+      "record_id": "emg_force-04-mvc-2018-03-28-13-02-23-928",
+      "trial_type": "mvc",
+      "samples": 61440,
+      "signal_shape": [
+        61440,
+        24
+      ],
+      "force_shape": [
+        61440,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5123.03250150113,
+      "force_ranges": {
+        "FORCE_1": [
+          -114.11,
+          365.43
+        ],
+        "FORCE_2": [
+          -134.66,
+          286.02
+        ],
+        "FORCE_3": [
+          -12.14,
+          413.78
+        ],
+        "FORCE_4": [
+          -9.4,
+          551.49
+        ],
+        "FORCE_5": [
+          -13.63,
+          613.08
+        ],
+        "FORCE_6": [
+          -48.58,
+          941.4
+        ],
+        "FORCE_7": [
+          -9.69,
+          354.25
+        ],
+        "FORCE_8": [
+          -36.76,
+          360.91
+        ],
+        "FORCE_9": [
+          -34.65,
+          435.18
+        ],
+        "FORCE_10": [
+          -43.34,
+          285.58
+        ]
+      },
+      "group": "calibration",
+      "windows": 0,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "04",
+      "session_id": "2018-06-18",
+      "record_id": "emg_force-04-mvc-2018-06-18-15-19-49-848",
+      "trial_type": "mvc",
+      "samples": 61440,
+      "signal_shape": [
+        61440,
+        24
+      ],
+      "force_shape": [
+        61440,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.519902408608,
+      "force_ranges": {
+        "FORCE_1": [
+          -257.75,
+          319.23
+        ],
+        "FORCE_2": [
+          -96.65,
+          381.73
+        ],
+        "FORCE_3": [
+          -34.73,
+          347.24
+        ],
+        "FORCE_4": [
+          -7.44,
+          361.51
+        ],
+        "FORCE_5": [
+          -53.93,
+          456.98
+        ],
+        "FORCE_6": [
+          -48.77,
+          398.14
+        ],
+        "FORCE_7": [
+          -107.77,
+          305.22
+        ],
+        "FORCE_8": [
+          -91.0,
+          161.45
+        ],
+        "FORCE_9": [
+          -32.99,
+          375.72
+        ],
+        "FORCE_10": [
+          -69.14,
+          162.76
+        ]
+      },
+      "group": "calibration",
+      "windows": 0,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "04",
+      "session_id": "2018-03-28",
+      "record_id": "emg_force-04-repeats_long-2018-03-28-13-07-11-950",
+      "trial_type": "repeats_long",
+      "samples": 1814528,
+      "signal_shape": [
+        1814528,
+        24
+      ],
+      "force_shape": [
+        1814528,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5127.848532358819,
+      "force_ranges": {
+        "FORCE_1": [
+          -199.09,
+          460.78
+        ],
+        "FORCE_2": [
+          -138.56,
+          413.9
+        ],
+        "FORCE_3": [
+          -15.89,
+          473.84
+        ],
+        "FORCE_4": [
+          -13.48,
+          530.48
+        ],
+        "FORCE_5": [
+          -14.73,
+          536.16
+        ],
+        "FORCE_6": [
+          -109.51,
+          523.41
+        ],
+        "FORCE_7": [
+          -11.72,
+          389.16
+        ],
+        "FORCE_8": [
+          -63.68,
+          322.64
+        ],
+        "FORCE_9": [
+          -42.57,
+          513.14
+        ],
+        "FORCE_10": [
+          -48.33,
+          318.61
+        ]
+      },
+      "group": "validation",
+      "windows": 3543,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "04",
+      "session_id": "2018-06-18",
+      "record_id": "emg_force-04-repeats_long-2018-06-18-15-22-01-896",
+      "trial_type": "repeats_long",
+      "samples": 1819648,
+      "signal_shape": [
+        1819648,
+        24
+      ],
+      "force_shape": [
+        1819648,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.107082212975,
+      "force_ranges": {
+        "FORCE_1": [
+          -253.66,
+          321.07
+        ],
+        "FORCE_2": [
+          -99.51,
+          408.28
+        ],
+        "FORCE_3": [
+          -56.72,
+          308.23
+        ],
+        "FORCE_4": [
+          -11.45,
+          305.37
+        ],
+        "FORCE_5": [
+          -61.69,
+          372.96
+        ],
+        "FORCE_6": [
+          -95.71,
+          179.11
+        ],
+        "FORCE_7": [
+          -115.5,
+          293.07
+        ],
+        "FORCE_8": [
+          -100.76,
+          191.63
+        ],
+        "FORCE_9": [
+          -37.15,
+          293.75
+        ],
+        "FORCE_10": [
+          -89.13,
+          186.66
+        ]
+      },
+      "group": "validation",
+      "windows": 3553,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "04",
+      "session_id": "2018-03-28",
+      "record_id": "emg_force-04-repeats_short-2018-03-28-13-22-36-660",
+      "trial_type": "repeats_short",
+      "samples": 1045504,
+      "signal_shape": [
+        1045504,
+        24
+      ],
+      "force_shape": [
+        1045504,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.112850388658,
+      "force_ranges": {
+        "FORCE_1": [
+          -203.01,
+          484.47
+        ],
+        "FORCE_2": [
+          -138.64,
+          468.13
+        ],
+        "FORCE_3": [
+          -15.04,
+          486.8
+        ],
+        "FORCE_4": [
+          -13.45,
+          555.48
+        ],
+        "FORCE_5": [
+          -13.65,
+          555.2
+        ],
+        "FORCE_6": [
+          -98.59,
+          457.35
+        ],
+        "FORCE_7": [
+          -10.73,
+          378.24
+        ],
+        "FORCE_8": [
+          -59.82,
+          325.9
+        ],
+        "FORCE_9": [
+          -42.47,
+          481.24
+        ],
+        "FORCE_10": [
+          -36.36,
+          314.5
+        ]
+      },
+      "group": "validation",
+      "windows": 2041,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "04",
+      "session_id": "2018-06-18",
+      "record_id": "emg_force-04-repeats_short-2018-06-18-15-33-51-705",
+      "trial_type": "repeats_short",
+      "samples": 1050624,
+      "signal_shape": [
+        1050624,
+        24
+      ],
+      "force_shape": [
+        1050624,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.113515115865,
+      "force_ranges": {
+        "FORCE_1": [
+          -253.64,
+          278.14
+        ],
+        "FORCE_2": [
+          -99.39,
+          324.28
+        ],
+        "FORCE_3": [
+          -57.71,
+          278.21
+        ],
+        "FORCE_4": [
+          -11.42,
+          286.33
+        ],
+        "FORCE_5": [
+          -61.94,
+          394.91
+        ],
+        "FORCE_6": [
+          -96.59,
+          154.98
+        ],
+        "FORCE_7": [
+          -111.76,
+          293.23
+        ],
+        "FORCE_8": [
+          -108.85,
+          174.62
+        ],
+        "FORCE_9": [
+          -37.15,
+          301.62
+        ],
+        "FORCE_10": [
+          -92.05,
+          193.76
+        ]
+      },
+      "group": "validation",
+      "windows": 2051,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "04",
+      "session_id": "2018-03-28",
+      "record_id": "emg_force-04-sequential-2018-03-28-13-16-54-102",
+      "trial_type": "sequential",
+      "samples": 1670144,
+      "signal_shape": [
+        1670144,
+        24
+      ],
+      "force_shape": [
+        1670144,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.1078280938145,
+      "force_ranges": {
+        "FORCE_1": [
+          -199.11,
+          500.87
+        ],
+        "FORCE_2": [
+          -138.82,
+          466.95
+        ],
+        "FORCE_3": [
+          -14.92,
+          507.82
+        ],
+        "FORCE_4": [
+          -13.41,
+          555.42
+        ],
+        "FORCE_5": [
+          -14.77,
+          600.13
+        ],
+        "FORCE_6": [
+          -97.59,
+          536.39
+        ],
+        "FORCE_7": [
+          -10.74,
+          398.19
+        ],
+        "FORCE_8": [
+          -79.5,
+          324.11
+        ],
+        "FORCE_9": [
+          -42.58,
+          536.22
+        ],
+        "FORCE_10": [
+          -48.37,
+          340.61
+        ]
+      },
+      "group": "validation",
+      "windows": 3261,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "04",
+      "session_id": "2018-06-18",
+      "record_id": "emg_force-04-sequential-2018-06-18-15-28-06-616",
+      "trial_type": "sequential",
+      "samples": 1675264,
+      "signal_shape": [
+        1675264,
+        24
+      ],
+      "force_shape": [
+        1675264,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.107863587524,
+      "force_ranges": {
+        "FORCE_1": [
+          -253.69,
+          295.23
+        ],
+        "FORCE_2": [
+          -104.32,
+          396.01
+        ],
+        "FORCE_3": [
+          -57.73,
+          310.23
+        ],
+        "FORCE_4": [
+          -11.46,
+          361.51
+        ],
+        "FORCE_5": [
+          -61.92,
+          396.99
+        ],
+        "FORCE_6": [
+          -97.67,
+          177.16
+        ],
+        "FORCE_7": [
+          -111.76,
+          349.13
+        ],
+        "FORCE_8": [
+          -97.1,
+          146.87
+        ],
+        "FORCE_9": [
+          -36.18,
+          309.4
+        ],
+        "FORCE_10": [
+          -87.17,
+          138.77
+        ]
+      },
+      "group": "validation",
+      "windows": 3271,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "05",
+      "session_id": "2018-04-04",
+      "record_id": "emg_force-05-bias-2018-04-04-08-50-58-775",
+      "trial_type": "bias",
+      "samples": 20992,
+      "signal_shape": [
+        20992,
+        24
+      ],
+      "force_shape": [
+        20992,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5127.731735673677,
+      "force_ranges": {
+        "FORCE_1": [
+          1484.12,
+          1538.61
+        ],
+        "FORCE_2": [
+          1227.19,
+          1292.77
+        ],
+        "FORCE_3": [
+          1259.13,
+          1274.96
+        ],
+        "FORCE_4": [
+          1319.14,
+          1343.92
+        ],
+        "FORCE_5": [
+          1312.13,
+          1339.97
+        ],
+        "FORCE_6": [
+          1343.13,
+          1359.95
+        ],
+        "FORCE_7": [
+          1237.14,
+          1260.87
+        ],
+        "FORCE_8": [
+          1283.17,
+          1351.81
+        ],
+        "FORCE_9": [
+          1251.25,
+          1281.98
+        ],
+        "FORCE_10": [
+          1321.19,
+          1343.93
+        ]
+      },
+      "group": "calibration",
+      "windows": 0,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "05",
+      "session_id": "2018-04-23",
+      "record_id": "emg_force-05-bias-2018-04-23-08-43-49-023",
+      "trial_type": "bias",
+      "samples": 20992,
+      "signal_shape": [
+        20992,
+        24
+      ],
+      "force_shape": [
+        20992,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5120.178257078949,
+      "force_ranges": {
+        "FORCE_1": [
+          1391.3,
+          1442.67
+        ],
+        "FORCE_2": [
+          1223.04,
+          1293.73
+        ],
+        "FORCE_3": [
+          1258.02,
+          1274.93
+        ],
+        "FORCE_4": [
+          1239.0,
+          1257.94
+        ],
+        "FORCE_5": [
+          1234.23,
+          1267.61
+        ],
+        "FORCE_6": [
+          1299.01,
+          1317.88
+        ],
+        "FORCE_7": [
+          1267.01,
+          1282.88
+        ],
+        "FORCE_8": [
+          1274.39,
+          1323.68
+        ],
+        "FORCE_9": [
+          1232.05,
+          1276.88
+        ],
+        "FORCE_10": [
+          1303.02,
+          1325.83
+        ]
+      },
+      "group": "calibration",
+      "windows": 0,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "05",
+      "session_id": "2018-04-04",
+      "record_id": "emg_force-05-mvc-2018-04-04-08-51-27-493",
+      "trial_type": "mvc",
+      "samples": 61440,
+      "signal_shape": [
+        61440,
+        24
+      ],
+      "force_shape": [
+        61440,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.6025187006635,
+      "force_ranges": {
+        "FORCE_1": [
+          -259.1,
+          401.41
+        ],
+        "FORCE_2": [
+          -27.27,
+          433.81
+        ],
+        "FORCE_3": [
+          -34.95,
+          531.83
+        ],
+        "FORCE_4": [
+          -57.46,
+          417.43
+        ],
+        "FORCE_5": [
+          -88.48,
+          370.36
+        ],
+        "FORCE_6": [
+          -73.04,
+          422.93
+        ],
+        "FORCE_7": [
+          -7.69,
+          350.23
+        ],
+        "FORCE_8": [
+          -43.02,
+          309.67
+        ],
+        "FORCE_9": [
+          -34.08,
+          280.48
+        ],
+        "FORCE_10": [
+          -78.55,
+          126.28
+        ]
+      },
+      "group": "calibration",
+      "windows": 0,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "05",
+      "session_id": "2018-04-23",
+      "record_id": "emg_force-05-mvc-2018-04-23-08-44-35-001",
+      "trial_type": "mvc",
+      "samples": 61440,
+      "signal_shape": [
+        61440,
+        24
+      ],
+      "force_shape": [
+        61440,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.555181224749,
+      "force_ranges": {
+        "FORCE_1": [
+          -170.34,
+          503.0
+        ],
+        "FORCE_2": [
+          -19.73,
+          319.98
+        ],
+        "FORCE_3": [
+          -31.3,
+          548.51
+        ],
+        "FORCE_4": [
+          33.02,
+          456.0
+        ],
+        "FORCE_5": [
+          -6.54,
+          544.07
+        ],
+        "FORCE_6": [
+          -12.6,
+          426.34
+        ],
+        "FORCE_7": [
+          -36.36,
+          392.46
+        ],
+        "FORCE_8": [
+          -19.52,
+          383.93
+        ],
+        "FORCE_9": [
+          -10.89,
+          418.71
+        ],
+        "FORCE_10": [
+          -28.51,
+          269.44
+        ]
+      },
+      "group": "calibration",
+      "windows": 0,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "05",
+      "session_id": "2018-04-04",
+      "record_id": "emg_force-05-repeats_long-2018-04-04-08-53-45-252",
+      "trial_type": "repeats_long",
+      "samples": 1819136,
+      "signal_shape": [
+        1819136,
+        24
+      ],
+      "force_shape": [
+        1819136,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.113348141151,
+      "force_ranges": {
+        "FORCE_1": [
+          -268.95,
+          282.62
+        ],
+        "FORCE_2": [
+          -27.92,
+          316.39
+        ],
+        "FORCE_3": [
+          -38.15,
+          327.69
+        ],
+        "FORCE_4": [
+          -95.37,
+          242.35
+        ],
+        "FORCE_5": [
+          -96.57,
+          347.23
+        ],
+        "FORCE_6": [
+          -76.04,
+          242.94
+        ],
+        "FORCE_7": [
+          -11.71,
+          385.18
+        ],
+        "FORCE_8": [
+          -45.89,
+          272.51
+        ],
+        "FORCE_9": [
+          -33.23,
+          304.59
+        ],
+        "FORCE_10": [
+          -57.46,
+          201.36
+        ]
+      },
+      "group": "train",
+      "windows": 3552,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "05",
+      "session_id": "2018-04-23",
+      "record_id": "emg_force-05-repeats_long-2018-04-23-08-47-03-778",
+      "trial_type": "repeats_long",
+      "samples": 1818624,
+      "signal_shape": [
+        1818624,
+        24
+      ],
+      "force_shape": [
+        1818624,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.075736384578,
+      "force_ranges": {
+        "FORCE_1": [
+          -183.15,
+          428.6
+        ],
+        "FORCE_2": [
+          -28.92,
+          297.96
+        ],
+        "FORCE_3": [
+          -34.32,
+          416.53
+        ],
+        "FORCE_4": [
+          -11.92,
+          305.82
+        ],
+        "FORCE_5": [
+          -10.53,
+          412.42
+        ],
+        "FORCE_6": [
+          -39.44,
+          244.31
+        ],
+        "FORCE_7": [
+          -40.25,
+          372.59
+        ],
+        "FORCE_8": [
+          -26.6,
+          282.32
+        ],
+        "FORCE_9": [
+          -16.1,
+          213.88
+        ],
+        "FORCE_10": [
+          -76.33,
+          171.46
+        ]
+      },
+      "group": "train",
+      "windows": 3551,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "05",
+      "session_id": "2018-04-04",
+      "record_id": "emg_force-05-repeats_short-2018-04-04-09-05-35-212",
+      "trial_type": "repeats_short",
+      "samples": 1050624,
+      "signal_shape": [
+        1050624,
+        24
+      ],
+      "force_shape": [
+        1050624,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.114983561,
+      "force_ranges": {
+        "FORCE_1": [
+          -263.02,
+          257.63
+        ],
+        "FORCE_2": [
+          -28.35,
+          342.53
+        ],
+        "FORCE_3": [
+          -30.99,
+          392.74
+        ],
+        "FORCE_4": [
+          -93.45,
+          277.33
+        ],
+        "FORCE_5": [
+          -48.5,
+          369.22
+        ],
+        "FORCE_6": [
+          -59.93,
+          252.87
+        ],
+        "FORCE_7": [
+          -11.53,
+          374.24
+        ],
+        "FORCE_8": [
+          -35.02,
+          222.02
+        ],
+        "FORCE_9": [
+          -29.23,
+          261.19
+        ],
+        "FORCE_10": [
+          -35.59,
+          102.24
+        ]
+      },
+      "group": "train",
+      "windows": 2051,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "05",
+      "session_id": "2018-04-23",
+      "record_id": "emg_force-05-repeats_short-2018-04-23-08-58-58-660",
+      "trial_type": "repeats_short",
+      "samples": 1050624,
+      "signal_shape": [
+        1050624,
+        24
+      ],
+      "force_shape": [
+        1050624,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.043353019457,
+      "force_ranges": {
+        "FORCE_1": [
+          -186.17,
+          326.64
+        ],
+        "FORCE_2": [
+          -28.44,
+          325.53
+        ],
+        "FORCE_3": [
+          -32.35,
+          388.56
+        ],
+        "FORCE_4": [
+          -11.85,
+          280.94
+        ],
+        "FORCE_5": [
+          -11.39,
+          382.36
+        ],
+        "FORCE_6": [
+          -35.57,
+          202.28
+        ],
+        "FORCE_7": [
+          -37.36,
+          364.57
+        ],
+        "FORCE_8": [
+          -48.39,
+          253.94
+        ],
+        "FORCE_9": [
+          -12.02,
+          274.85
+        ],
+        "FORCE_10": [
+          -24.43,
+          173.41
+        ]
+      },
+      "group": "train",
+      "windows": 2051,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "05",
+      "session_id": "2018-04-04",
+      "record_id": "emg_force-05-sequential-2018-04-04-08-59-59-414",
+      "trial_type": "sequential",
+      "samples": 1675776,
+      "signal_shape": [
+        1675776,
+        24
+      ],
+      "force_shape": [
+        1675776,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.11202372422,
+      "force_ranges": {
+        "FORCE_1": [
+          -273.96,
+          267.61
+        ],
+        "FORCE_2": [
+          -28.25,
+          347.48
+        ],
+        "FORCE_3": [
+          -40.87,
+          403.82
+        ],
+        "FORCE_4": [
+          -93.47,
+          274.34
+        ],
+        "FORCE_5": [
+          -91.52,
+          349.34
+        ],
+        "FORCE_6": [
+          -84.03,
+          281.94
+        ],
+        "FORCE_7": [
+          -11.62,
+          381.11
+        ],
+        "FORCE_8": [
+          -43.99,
+          240.65
+        ],
+        "FORCE_9": [
+          -36.23,
+          293.38
+        ],
+        "FORCE_10": [
+          -62.57,
+          197.36
+        ]
+      },
+      "group": "train",
+      "windows": 3272,
+      "skipped_windows": 0
+    },
+    {
+      "subject_id": "05",
+      "session_id": "2018-04-23",
+      "record_id": "emg_force-05-sequential-2018-04-23-08-53-16-890",
+      "trial_type": "sequential",
+      "samples": 1675264,
+      "signal_shape": [
+        1675264,
+        24
+      ],
+      "force_shape": [
+        1675264,
+        10
+      ],
+      "target_names": [
+        "FORCE_1",
+        "FORCE_2",
+        "FORCE_3",
+        "FORCE_4",
+        "FORCE_5",
+        "FORCE_6",
+        "FORCE_7",
+        "FORCE_8",
+        "FORCE_9",
+        "FORCE_10"
+      ],
+      "timestamp_rate_hz": 5124.074168991288,
+      "force_ranges": {
+        "FORCE_1": [
+          -185.05,
+          340.54
+        ],
+        "FORCE_2": [
+          -28.83,
+          335.56
+        ],
+        "FORCE_3": [
+          -35.43,
+          331.55
+        ],
+        "FORCE_4": [
+          -11.93,
+          320.93
+        ],
+        "FORCE_5": [
+          -11.55,
+          396.23
+        ],
+        "FORCE_6": [
+          -31.63,
+          201.23
+        ],
+        "FORCE_7": [
+          -40.29,
+          384.58
+        ],
+        "FORCE_8": [
+          -16.72,
+          243.33
+        ],
+        "FORCE_9": [
+          -12.0,
+          246.47
+        ],
+        "FORCE_10": [
+          -23.52,
+          158.45
+        ]
+      },
+      "group": "train",
+      "windows": 3271,
+      "skipped_windows": 0
+    }
+  ],
+  "rejected_records": [],
+  "split_ratios": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+  ],
+  "split_policy": "三名用户各一组",
+  "total_windows": 39020,
+  "summary": {
+    "users": 3,
+    "experimental_records": 13,
+    "calibration_records": 10,
+    "total_windows": 39020
+  },
+  "group_summary": {
+    "train": {
+      "subjects": [
+        "05"
+      ],
+      "subjects_with_windows": [
+        "05"
+      ],
+      "records": 6,
+      "windows": 17748,
+      "trial_counts": {
+        "repeats_long": 2,
+        "repeats_short": 2,
+        "sequential": 2
+      }
+    },
+    "validation": {
+      "subjects": [
+        "04"
+      ],
+      "subjects_with_windows": [
+        "04"
+      ],
+      "records": 6,
+      "windows": 17720,
+      "trial_counts": {
+        "repeats_long": 2,
+        "repeats_short": 2,
+        "sequential": 2
+      }
+    },
+    "test": {
+      "subjects": [
+        "03"
+      ],
+      "subjects_with_windows": [
+        "03"
+      ],
+      "records": 1,
+      "windows": 3552,
+      "trial_counts": {
+        "repeats_long": 1
+      }
+    }
+  },
+  "subject_overlap": false,
+  "groups_with_windows": [
+    "test",
+    "train",
+    "validation"
+  ],
+  "trial_coverage_consistent": false
+}
