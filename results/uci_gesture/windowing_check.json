@@ -1,0 +1,159 @@
+{
+  "parameters": {
+    "data_dir": "data\\raw\\EMG_data_for_gestures-master",
+    "window_size": 200,
+    "step_size": 100,
+    "max_gap_ms": 20.0,
+    "seed": 42,
+    "json": true,
+    "strict": false,
+    "skip_invalid": false
+  },
+  "groups": {
+    "train": {
+      "subjects": [
+        "28",
+        "19",
+        "27",
+        "06",
+        "05",
+        "24",
+        "36",
+        "08",
+        "26",
+        "33",
+        "11",
+        "23",
+        "21",
+        "34",
+        "17",
+        "07",
+        "25",
+        "30",
+        "29",
+        "10",
+        "31",
+        "20"
+      ],
+      "subjects_with_windows": [
+        "05",
+        "06",
+        "07",
+        "08",
+        "10",
+        "11",
+        "17",
+        "19",
+        "20",
+        "21",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "33",
+        "34",
+        "36"
+      ],
+      "records": 43,
+      "windows": 7890,
+      "label_counts": {
+        "1": 1324,
+        "2": 1263,
+        "3": 1279,
+        "4": 1312,
+        "5": 1301,
+        "6": 1290,
+        "7": 121
+      },
+      "dropped": {
+        "time_gap": 4,
+        "unmarked": 16918,
+        "mixed_labels": 0
+      }
+    },
+    "validation": {
+      "subjects": [
+        "04",
+        "01",
+        "16",
+        "18",
+        "32",
+        "13",
+        "22"
+      ],
+      "subjects_with_windows": [
+        "01",
+        "04",
+        "13",
+        "16",
+        "18",
+        "22",
+        "32"
+      ],
+      "records": 14,
+      "windows": 2860,
+      "label_counts": {
+        "1": 441,
+        "2": 446,
+        "3": 498,
+        "4": 480,
+        "5": 492,
+        "6": 503
+      },
+      "dropped": {
+        "time_gap": 2,
+        "unmarked": 5776,
+        "mixed_labels": 0
+      }
+    },
+    "test": {
+      "subjects": [
+        "12",
+        "15",
+        "35",
+        "03",
+        "02",
+        "14",
+        "09"
+      ],
+      "subjects_with_windows": [
+        "02",
+        "03",
+        "09",
+        "12",
+        "14",
+        "15",
+        "35"
+      ],
+      "records": 14,
+      "windows": 2457,
+      "label_counts": {
+        "1": 420,
+        "2": 396,
+        "3": 400,
+        "4": 407,
+        "5": 415,
+        "6": 419
+      },
+      "dropped": {
+        "time_gap": 1,
+        "unmarked": 5565,
+        "mixed_labels": 0
+      }
+    }
+  },
+  "rejected_records": [
+    {
+      "subject_id": "34",
+      "record_id": "1_raw_data_10-51_07.04.16",
+      "path": "data\\raw\\EMG_data_for_gestures-master\\34\\1_raw_data_10-51_07.04.16.txt",
+      "reason": "1_raw_data_10-51_07.04.16.txt: 第 79766 行应有 10 列，实际 9 列。"
+    }
+  ],
+  "subject_overlap": false
+}

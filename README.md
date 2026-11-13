@@ -6,7 +6,7 @@
 
 成员：Ma Mingyang、Han Yuchen、Zhou Yin、Wei Xin、Gao Ruiyan、Li Ji。**不固定分工，大家按兴趣和进度选择任务，也可以合作完成。**
 
-目前已搭好目录，算法和实验尚未完成。先在下面选工作，实际提交步骤看[贡献指南](CONTRIBUTING.md)。
+UCI 手势数据的读取、用户划分和分窗第一版已完成，模型和实验尚未完成。先在下面选工作，实际提交步骤看[贡献指南](CONTRIBUTING.md)。
 
 ## 我可以做什么？
 
@@ -27,16 +27,14 @@
 
 ```text
 src/emginsight/
-  datasets/        读取各数据集，保留用户、记录和标签信息
-  preprocessing/   数据划分、滤波、分窗与标准化
+  uci_gesture/     UCI 读取、用户划分及调用说明
   features/        RMS、MAV、WL 等特征
   models/          自己实现的分类和回归模型
-  evaluation/      指标计算与绘图
 
-data/              本地数据与数据说明，原始数据不上传
+data/              仅存储本地数据，原始数据不上传
 notebooks/experiments/  各任务的数据探索与实验
 configs/           各实验的少量参数
-tests/             算法和数据处理的简单测试
+tests/             按工程组织测试，例如 uci_gesture/test_reading.py
 results/           结果表与图；大型运行文件放 runs/，不上传
 docs/              实验记录与最终报告
 demo/              离线演示
@@ -58,7 +56,7 @@ demo/              离线演示
 | 力量 | [putEMG-Force](https://biolab.put.poznan.pl/putemg-dataset/)，24 通道 | 预测实测 `FORCE_*`，不能把要求跟随的 `TRAJ_*` 轨迹当作真值；先确认单位。 |
 | 疲劳 | [Zenodo 自感疲劳数据](https://zenodo.org/records/14182446)，8 块肌肉 | 肌电与评分采样率不同，要按时间对齐；评分为 0/1/2。 |
 
-负责数据读取的同学可查看[简短数据说明](data/README.md)。三个任务的最终范围根据数据可用性确定。
+负责数据读取的同学可查看[数据说明](docs/datasets.md)和 [UCI 调用说明](src/emginsight/uci_gesture/README.md)。三个任务的最终范围根据数据可用性确定。
 
 ## 所有任务共同注意
 
@@ -86,6 +84,6 @@ python -c "import emginsight; print(emginsight.__version__)"
 python -m jupyterlab
 ```
 
-PowerShell 无法激活时，可用 `.venv\Scripts\python.exe` 替代 `python`。Notebook 选择同一环境。当前没有训练入口和可执行算法测试；测试添加后用 `python -m pytest` 运行。
+PowerShell 无法激活时，可用 `.venv\Scripts\python.exe` 替代 `python`。Notebook 选择同一环境。当前没有训练入口；读取与划分测试可用 `python -m pytest` 运行。
 
 背景资料：[项目提案](Group_12_EMGInsight_Visual_Proposal_Revised.pdf)。
