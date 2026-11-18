@@ -144,3 +144,49 @@ print(batch.channel_names, batch.start_indices, batch.dropped)
 异常拒绝记录 0 份；修正前的问题和规则必须保留在实验说明中。
 疲劳模块新增 22 项测试，与前两个模块合计 **92 项通过**。
 这些统计证明读取、对齐与分窗流程可运行，不代表模型训练或临床有效性。
+
+## 单路肱二头肌机器学习评估（2026-11-18）
+
+已新增 `single_channel.py`，只使用 **trial_5 的右肱二头肌一路信号**，不混用其他肌肉。
+13 位参与者共 1597 个纯评分窗口；固定 seed=42，训练 8 人/876 窗、验证 3 人/510 窗、测试 2 人/211 窗。
+先用固定的因果 20～450 Hz 带通滤波，再提取 log-RMS、log-MAV、log-平均波形长度、MNF、MDF。
+标准化只在训练集拟合，NumPy 实现 kNN 和类别平衡岭分类器；从预先固定的 16 个候选中按验证集 macro-F1 选型。
+没有在测试集上继续调参。测试用户固定为 10、5，窗口重叠不代表独立样本。
+
+```powershell
+# 训练、验证集选型、保留用户测试，生成报告与本地模型
+.venv\Scripts\python.exe -m emginsight.zenodo_fatigue.single_channel
+
+# 用已训练模型预测指定 CSV，不读取该文件的评分标签
+.venv\Scripts\python.exe -m emginsight.zenodo_fatigue.single_channel --predict-file data/raw/EMG_data_for_ZenodoTired/sEMG_data/subject_10/trial_5.csv
+```
+
+预测输出 `start_seconds`、`end_seconds`、`predicted_label` 与 `predicted_name`，表示每个窗口的
+0 无疲劳、1 向疲劳过渡、2 疲劳。不是疲劳百分比，也不是没有采集设备情况下的实时人体测量。
+模型在 `results/runs/single_channel_biceps/model.npz`，被 Git 忽略，其他组员需运行训练命令生成。
+设备输入需匹配肌肉、原始伏特信号、采样率及预处理；预测入口会拒绝明显不符的采样率，不能直接把 2 kHz 数据当作 1259 Hz 输入。
+
+外部调用：
+
+```python
+from emginsight.zenodo_fatigue.single_channel import NumpyFatigueClassifier, predict_fatigue_signal
+
+model = NumpyFatigueClassifier.load("results/runs/single_channel_biceps/model.npz")
+predictions = predict_fatigue_signal(signal, time, model)  # 原始一维信号与秒时间轴，不需要标签
+```
+
+| 方法 | 测试准确率 | 测试 macro-F1 |
+| --- | --- | --- |
+| 单路肌电模型（验证集选择岭分类器） | 48.34% | 0.3909 |
+| 训练集多数类基线 | 20.85% | 0.1150 |
+| 仅使用已运动秒数的 kNN 基线 | 39.81% | 0.4160 |
+
+两位测试用户的准确率分别为 71.31% 和 16.85%，差异很大；过渡等级的召回率仅 4.26%。
+**本次单路模型未超过时间基线的 macro-F1，不能证明它已能可靠识别新用户疲劳。**
+先保留这组基准结果，后续设计按用户交叉验证、跨天佩戴与自采设备验证；不能看着本测试集反复挑参数。
+原论文还指出部分试验存在趋势异常，当前不根据测试结果剔除用户；未来清洗标准应事先约定。
+本次仅对纯评分窗计算成绩，实时信号中跨等级过渡窗的表现未纳入此成绩。
+
+[详细报告](../../../results/zenodo_fatigue/single_channel_biceps/report.md)、
+[逐窗测试预测](../../../results/zenodo_fatigue/single_channel_biceps/test_predictions.csv)、
+[预测曲线](../../../results/zenodo_fatigue/single_channel_biceps/test_predictions.png)。
