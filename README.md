@@ -6,7 +6,7 @@
 
 成员：Ma Mingyang、Han Yuchen、Zhou Yin、Wei Xin、Gao Ruiyan、Li Ji。**不固定分工，大家按兴趣和进度选择任务，也可以合作完成。**
 
-UCI 手势数据的读取、用户划分和分窗第一版已完成，模型和实验尚未完成。先在下面选工作，实际提交步骤看[贡献指南](CONTRIBUTING.md)。
+三个数据集的读取、用户划分和分窗已完成。公共特征、模型和示例见[调用说明](docs/shared_features_models.md)，实际提交步骤见[贡献指南](CONTRIBUTING.md)。
 
 ## 我可以做什么？
 
@@ -86,6 +86,6 @@ python -c "import emginsight; print(emginsight.__version__)"
 python -m jupyterlab
 ```
 
-PowerShell 无法激活时，可用 `.venv\Scripts\python.exe` 替代 `python`。Notebook 选择同一环境。当前没有训练入口；读取与划分测试可用 `python -m pytest` 运行。
+PowerShell 无法激活时，可用 `.venv\Scripts\python.exe` 替代 `python`。Notebook 选择同一环境。用 `python -m pytest` 运行测试，用 `python demo/shared_features_models.py` 运行公共特征与模型示例。
 
 背景资料：[项目提案](Group_12_EMGInsight_Visual_Proposal_Revised.pdf)。
