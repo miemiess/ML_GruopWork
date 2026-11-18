@@ -1,6 +1,7 @@
-"""无需拟合信号特征的参考基线。"""
+"""基于 scikit-learn 的多数类和均值基线。"""
 
 import numpy as np
+from sklearn.dummy import DummyClassifier, DummyRegressor
 
 from ._validation import check_features, check_prediction_input, check_targets, encode_classes
 
@@ -15,7 +16,10 @@ class MajorityClassifier:
     def fit(self, X, y):
         X = check_features(X)
         classes, indices = encode_classes(y, len(X))
-        self.majority_ = classes[np.bincount(indices).argmax()]
+        model = DummyClassifier(strategy="most_frequent").fit(X, indices)
+        self._model = model
+        self.classes_ = classes
+        self.majority_ = classes[model.class_prior_.argmax()]
         self.n_features_in_ = X.shape[1]
         return self
 
@@ -24,7 +28,9 @@ class MajorityClassifier:
     # @return ndarray 一维分类预测。
     def predict(self, X):
         X = check_prediction_input(self, X)
-        return np.repeat(self.majority_, len(X))
+        if not len(X):
+            return self.classes_[:0]
+        return self.classes_[self._model.predict(X)]
 
 
 class MeanRegressor:
@@ -36,7 +42,11 @@ class MeanRegressor:
     # @return self。
     def fit(self, X, y):
         X = check_features(X)
-        self.target_mean_ = check_targets(y, len(X)).mean(axis=0)
+        y = check_targets(y, len(X))
+        model = DummyRegressor(strategy="mean").fit(X, y)
+        self._model = model
+        self._target_shape = y.shape[1:]
+        self.target_mean_ = model.constant_.reshape(self._target_shape)[()]
         self.n_features_in_ = X.shape[1]
         return self
 
@@ -45,4 +55,6 @@ class MeanRegressor:
     # @return ndarray 保留训练目标为一维或二维的约定。
     def predict(self, X):
         X = check_prediction_input(self, X)
-        return np.repeat(np.asarray(self.target_mean_)[None, ...], len(X), axis=0)
+        if not len(X):
+            return np.empty((0, *self._target_shape))
+        return self._model.predict(X).reshape(len(X), *self._target_shape)

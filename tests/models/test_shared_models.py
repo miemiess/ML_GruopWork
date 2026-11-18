@@ -1,4 +1,4 @@
-"""验证协作任务用到的 NumPy 模型与标准化。"""
+"""验证基于 scikit-learn 的公共模型接口。"""
 
 import numpy as np
 import pytest
@@ -42,11 +42,18 @@ def test_logistic_predicts_held_out_clusters(class_count):
     probabilities = model.predict_proba(centers)
     assert model.converged_
     np.testing.assert_array_equal(model.classes_, np.sort(labels))
+    assert model.coef_.shape == (class_count, X.shape[1])
     np.testing.assert_allclose(probabilities.sum(axis=1), np.ones(class_count))
     assert np.all(probabilities >= 0)
     np.testing.assert_array_equal(model.predict(centers), labels)
     assert model.predict_proba(np.empty((0, 2))).shape == (0, class_count)
     assert model.predict(np.empty((0, 2))).shape == (0,)
+
+
+## @brief 检查零正则化仍可拟合，并保留浮点类别编码。
+def test_logistic_allows_no_regularization():
+    model = LogisticRegression(l2=0).fit([[-2], [-1], [1], [2]], [0.5, 0.5, 2.5, 2.5])
+    np.testing.assert_array_equal(model.predict([[-1], [1]]), [0.5, 2.5])
 
 
 ## @brief 验证岭惩罚的解析值和截距，以及一维输出形状。
@@ -60,6 +67,14 @@ def test_ridge_penalizes_weight_and_leaves_intercept_free():
 def test_ridge_least_squares_preserves_multiple_outputs():
     model = RidgeRegressor(alpha=0).fit([[1], [2], [3]], [[7, -1], [9, -4], [11, -7]])
     np.testing.assert_allclose(model.predict([[0], [4]]), [[5, 2], [13, -10]])
+
+
+## @brief 验证二维单列目标在普通预测和空批次中均保留该列。
+@pytest.mark.parametrize("model", [RidgeRegressor(alpha=0), RidgeRegressor(alpha=1), MeanRegressor()])
+def test_regressors_preserve_single_target_column(model):
+    model.fit([[0], [1]], [[3], [5]])
+    np.testing.assert_allclose(model.predict([[0.5]]), [[4]])
+    assert model.predict(np.empty((0, 1))).shape == (0, 1)
 
 
 ## @brief 核对训练多数类、票数并列和单/多输出的训练均值。

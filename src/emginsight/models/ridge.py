@@ -1,6 +1,7 @@
-"""用 NumPy 最小二乘求解岭回归，支持多个力量输出。"""
+"""基于 scikit-learn 的岭回归，支持多个力量输出。"""
 
 import numpy as np
+from sklearn.linear_model import LinearRegression, Ridge
 
 from ._validation import check_features, check_prediction_input, check_targets
 
@@ -23,15 +24,14 @@ class RidgeRegressor:
     def fit(self, X, y):
         X = check_features(X)
         y = check_targets(y, len(X))
-        x_mean, y_mean = X.mean(axis=0), y.mean(axis=0)
-        design, targets = X - x_mean, y - y_mean
-        if self.alpha > 0:
-            design = np.vstack((design, np.sqrt(self.alpha) * np.eye(X.shape[1])))
-            targets = np.concatenate((targets, np.zeros((X.shape[1], *y.shape[1:]))))
+        model = Ridge(alpha=self.alpha) if self.alpha > 0 else LinearRegression()
+        model.fit(X, y)
 
-        self.coef_ = np.linalg.lstsq(design, targets, rcond=None)[0]
-        self.intercept_ = y_mean - x_mean @ self.coef_
-        self.n_features_in_ = X.shape[1]
+        self._model = model
+        self._target_shape = y.shape[1:]
+        self.n_features_in_ = model.n_features_in_
+        self.coef_ = model.coef_.reshape(*self._target_shape, self.n_features_in_).T
+        self.intercept_ = np.asarray(model.intercept_).reshape(self._target_shape)[()]
         return self
 
     ## @brief 返回连续数值预测。
@@ -39,4 +39,6 @@ class RidgeRegressor:
     # @return ndarray 形状为 (样本数,) 或 (样本数, 输出数)，与拟合目标一致。
     def predict(self, X):
         X = check_prediction_input(self, X)
-        return X @ self.coef_ + self.intercept_
+        if not len(X):
+            return np.empty((0, *self._target_shape))
+        return self._model.predict(X).reshape(len(X), *self._target_shape)

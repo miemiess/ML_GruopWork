@@ -27,6 +27,8 @@ X = extract_time_features(batch.signal)
 
 ## 训练和预测
 
+公共接口使用 scikit-learn 进行最近邻搜索、逻辑回归、岭回归、基线预测和标准化。按项目安装说明运行 `python -m pip install -r requirements.txt` 即可安装所需依赖。
+
 以下以分类为例。`X_train`、`X_val`、`X_test` 是对应用户组的特征矩阵，`y_train` 是训练组标签。
 
 ```python
@@ -44,4 +46,4 @@ predictions = model.predict(X_test_scaled)
 baseline_predictions = baseline.predict(X_test_scaled)
 ```
 
-分类预测返回原标签编码。逻辑回归的 `predict_proba` 按 `model.classes_` 排列各类概率，`converged_` 和 `n_iter_` 分别记录是否达到收敛阈值及迭代次数。力量实验使用相同的标准化流程，将模型换成 `RidgeRegressor(alpha=1.0)` 和 `MeanRegressor()`，两者保留目标列数和原单位。
+分类预测返回原标签编码。逻辑回归的 `predict_proba` 按 `model.classes_` 排列各类概率，`n_iter_` 记录求解器的迭代次数，`converged_` 表示求解器是否在迭代上限前结束。力量实验使用相同的标准化流程，将模型换成 `RidgeRegressor(alpha=1.0)` 和 `MeanRegressor()`，两者保留目标列数和原单位。

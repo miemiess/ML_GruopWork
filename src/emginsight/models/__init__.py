@@ -1,4 +1,4 @@
-"""三个肌电任务可共用的 NumPy 模型与标准化。"""
+"""三个肌电任务可共用的 scikit-learn 模型与标准化。"""
 
 from .baselines import MajorityClassifier, MeanRegressor
 from .knn import KNNClassifier

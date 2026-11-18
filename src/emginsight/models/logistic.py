@@ -1,28 +1,20 @@
-"""NumPy 实现的二分类及多分类 Softmax 逻辑回归。"""
+"""基于 scikit-learn 的二分类及多分类逻辑回归。"""
 
 from numbers import Integral
 
 import numpy as np
+from sklearn.linear_model import LogisticRegression as SklearnLogisticRegression
 
 from ._validation import check_features, check_prediction_input, encode_classes
 
 
-## @brief 把各类别分数转换为概率。
-# @param scores 各样本的类别分数。
-# @return ndarray 按行归一化的概率矩阵。
-def _softmax(scores):
-    shifted = scores - scores.max(axis=1, keepdims=True)
-    exp = np.exp(shifted)
-    return exp / exp.sum(axis=1, keepdims=True)
-
-
 class LogisticRegression:
-    """使用全批加速梯度下降最小化交叉熵，L2 正则化仅作用于系数。"""
+    """用 L-BFGS 拟合逻辑回归，保留按类别排列的系数和预测概率。"""
 
     ## @brief 设置正则化与迭代条件。
     # @param l2 非负 L2 正则化系数。
     # @param max_iter 最大迭代次数。
-    # @param tol 梯度范数收敛阈值。
+    # @param tol 求解器停止阈值。
     # @return None。
     def __init__(self, l2=0.01, max_iter=1000, tol=1e-6):
         if not np.isfinite(l2) or l2 < 0:
@@ -43,33 +35,22 @@ class LogisticRegression:
         if len(classes) < 2:
             raise ValueError("逻辑回归至少需要两个类别。")
 
-        design = np.column_stack((X, np.ones(len(X))))
-        weights = np.zeros((design.shape[1], len(classes)))
-        lookahead = weights
-        rows = np.arange(len(X))
-        # Softmax Hessian 的谱范数至多为 1/2。由此选择固定梯度步长。
-        smoothness = np.linalg.norm(design, ord=2) ** 2 / (2 * len(design)) + self.l2
-        converged = False
-        for iteration in range(1, self.max_iter + 1):
-            error = _softmax(design @ lookahead)
-            error[rows, indices] -= 1
-            gradient = design.T @ error / len(X)
-            gradient[:-1] += self.l2 * lookahead[:-1]
-            if np.linalg.norm(gradient) <= self.tol:
-                weights = lookahead
-                converged = True
-                break
-            updated = lookahead - gradient / smoothness
-            # Nesterov 动量加快小正则化系数下的收敛。
-            lookahead = updated + (iteration - 1) / (iteration + 2) * (updated - weights)
-            weights = updated
+        # scikit-learn 用 C 对加总损失定标。二分类用单组系数表示两类分数之差。
+        binary_scale = 2 if len(classes) == 2 else 1
+        C = binary_scale / (len(X) * self.l2) if self.l2 else np.inf
+        model = SklearnLogisticRegression(C=C, max_iter=self.max_iter, tol=self.tol, solver="lbfgs")
+        model.fit(X, indices)
 
+        self._model = model
         self.classes_ = classes
-        self.coef_ = weights[:-1].T
-        self.intercept_ = weights[-1]
-        self.n_features_in_ = X.shape[1]
-        self.converged_ = converged
-        self.n_iter_ = iteration
+        self.coef_ = model.coef_
+        self.intercept_ = model.intercept_
+        if len(classes) == 2:
+            self.coef_ = np.concatenate((-model.coef_, model.coef_)) / 2
+            self.intercept_ = np.concatenate((-model.intercept_, model.intercept_)) / 2
+        self.n_features_in_ = model.n_features_in_
+        self.n_iter_ = int(model.n_iter_.max())
+        self.converged_ = self.n_iter_ < self.max_iter
         return self
 
     ## @brief 按训练时的类别顺序输出预测概率。
@@ -77,7 +58,9 @@ class LogisticRegression:
     # @return ndarray 形状为 (样本数, 类别数)，列顺序为 classes_。
     def predict_proba(self, X):
         X = check_prediction_input(self, X)
-        return _softmax(X @ self.coef_.T + self.intercept_)
+        if not len(X):
+            return np.empty((0, len(self.classes_)))
+        return self._model.predict_proba(X)
 
     ## @brief 选取概率最高的类别。
     # @param X 新数据特征矩阵。
