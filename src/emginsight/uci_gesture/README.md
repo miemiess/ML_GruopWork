@@ -128,7 +128,7 @@ print(batch.dropped)           # 被丢弃的完整候选窗数量，按原因�
 即使部分记录被拒绝，所属用户也不被重新分组。报告中的 `subjects_with_windows` 可用于核对实际覆盖用户。
 可用 `--window-size`、`--step-size`、`--max-gap-ms` 和 `--seed` 调整参数。
 B 可从 `batch.signal` 提取特征，C 使用特征和 `batch.labels`，并保留用户/记录编号追溯来源。
-共享特征函数尚未实现；标准化需在特征提取后仅用训练集拟合。
+可用 `emginsight.features.extract_time_features(batch.signal)` 提取 RMS、MAV 和 WL，再仅用训练集拟合标准化。参见[公共特征与模型调用](../../../docs/shared_features_models.md)。
 
 ### 本地验证记录（2026-11-13）
 

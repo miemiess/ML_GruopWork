@@ -1,1 +1,5 @@
-"""特征提取模块占位，后续通过审阅后的 PR 添加实现。"""
+"""共享肌电特征入口。"""
+
+from .time_domain import TIME_DOMAIN_FEATURES, extract_time_features
+
+__all__ = ["TIME_DOMAIN_FEATURES", "extract_time_features"]
