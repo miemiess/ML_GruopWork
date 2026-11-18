@@ -1,0 +1,621 @@
+{
+  "muscle": "R BICEPS BRACHII",
+  "trial": 5,
+  "channel_count": 1,
+  "seed": 42,
+  "fs_hz": 1259.0,
+  "window_size": 5036,
+  "step_size": 2518,
+  "label_rule": "纯 0/1/2 评分窗口",
+  "filtering": "每条记录固定 20-450Hz 四阶 Butterworth，sosfilt 因果滤波",
+  "feature_names": [
+    "log_rms",
+    "log_mav",
+    "log_mean_waveform_length",
+    "mean_frequency_hz",
+    "median_frequency_hz"
+  ],
+  "subject_groups": {
+    "train": [
+      "1",
+      "9",
+      "4",
+      "7",
+      "6",
+      "12",
+      "3",
+      "2"
+    ],
+    "validation": [
+      "11",
+      "13",
+      "8"
+    ],
+    "test": [
+      "10",
+      "5"
+    ]
+  },
+  "selected_model": {
+    "kind": "ridge",
+    "parameter": 100.0,
+    "subset": "amplitude_and_frequency",
+    "columns": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "validation_macro_f1": 0.4301019090936893,
+    "validation_accuracy": 0.4568627450980392
+  },
+  "split_counts": {
+    "train": {
+      "subjects": [
+        "1",
+        "9",
+        "4",
+        "7",
+        "6",
+        "12",
+        "3",
+        "2"
+      ],
+      "windows": 876,
+      "label_counts": [
+        336,
+        265,
+        275
+      ]
+    },
+    "validation": {
+      "subjects": [
+        "11",
+        "13",
+        "8"
+      ],
+      "windows": 510,
+      "label_counts": [
+        89,
+        115,
+        306
+      ]
+    },
+    "test": {
+      "subjects": [
+        "10",
+        "5"
+      ],
+      "windows": 211,
+      "label_counts": [
+        44,
+        47,
+        120
+      ]
+    }
+  },
+  "validation": {
+    "accuracy": 0.4568627450980392,
+    "macro_f1": 0.4301019090936893,
+    "confusion_matrix": [
+      [
+        44,
+        45,
+        0
+      ],
+      [
+        53,
+        55,
+        7
+      ],
+      [
+        70,
+        102,
+        134
+      ]
+    ],
+    "per_class": [
+      {
+        "label": 0,
+        "name": "无疲劳",
+        "precision": 0.2634730538922156,
+        "recall": 0.4943820224719101,
+        "f1": 0.34375000000000006,
+        "support": 89
+      },
+      {
+        "label": 1,
+        "name": "向疲劳过渡",
+        "precision": 0.2722772277227723,
+        "recall": 0.4782608695652174,
+        "f1": 0.34700315457413256,
+        "support": 115
+      },
+      {
+        "label": 2,
+        "name": "疲劳",
+        "precision": 0.950354609929078,
+        "recall": 0.43790849673202614,
+        "f1": 0.5995525727069352,
+        "support": 306
+      }
+    ]
+  },
+  "test": {
+    "accuracy": 0.4834123222748815,
+    "macro_f1": 0.390904215444878,
+    "confusion_matrix": [
+      [
+        30,
+        13,
+        1
+      ],
+      [
+        45,
+        2,
+        0
+      ],
+      [
+        36,
+        14,
+        70
+      ]
+    ],
+    "per_class": [
+      {
+        "label": 0,
+        "name": "无疲劳",
+        "precision": 0.2702702702702703,
+        "recall": 0.6818181818181818,
+        "f1": 0.3870967741935484,
+        "support": 44
+      },
+      {
+        "label": 1,
+        "name": "向疲劳过渡",
+        "precision": 0.06896551724137931,
+        "recall": 0.0425531914893617,
+        "f1": 0.05263157894736841,
+        "support": 47
+      },
+      {
+        "label": 2,
+        "name": "疲劳",
+        "precision": 0.9859154929577465,
+        "recall": 0.5833333333333334,
+        "f1": 0.7329842931937173,
+        "support": 120
+      }
+    ]
+  },
+  "majority_baseline": {
+    "accuracy": 0.20853080568720378,
+    "macro_f1": 0.11503267973856209,
+    "confusion_matrix": [
+      [
+        44,
+        0,
+        0
+      ],
+      [
+        47,
+        0,
+        0
+      ],
+      [
+        120,
+        0,
+        0
+      ]
+    ],
+    "per_class": [
+      {
+        "label": 0,
+        "name": "无疲劳",
+        "precision": 0.20853080568720378,
+        "recall": 1.0,
+        "f1": 0.34509803921568627,
+        "support": 44
+      },
+      {
+        "label": 1,
+        "name": "向疲劳过渡",
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 47
+      },
+      {
+        "label": 2,
+        "name": "疲劳",
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 120
+      }
+    ]
+  },
+  "elapsed_time_baseline": {
+    "accuracy": 0.3981042654028436,
+    "macro_f1": 0.4160185992444057,
+    "confusion_matrix": [
+      [
+        44,
+        0,
+        0
+      ],
+      [
+        35,
+        12,
+        0
+      ],
+      [
+        1,
+        91,
+        28
+      ]
+    ],
+    "per_class": [
+      {
+        "label": 0,
+        "name": "无疲劳",
+        "precision": 0.55,
+        "recall": 1.0,
+        "f1": 0.7096774193548387,
+        "support": 44
+      },
+      {
+        "label": 1,
+        "name": "向疲劳过渡",
+        "precision": 0.11650485436893204,
+        "recall": 0.2553191489361702,
+        "f1": 0.16,
+        "support": 47
+      },
+      {
+        "label": 2,
+        "name": "疲劳",
+        "precision": 1.0,
+        "recall": 0.23333333333333334,
+        "f1": 0.37837837837837834,
+        "support": 120
+      }
+    ]
+  },
+  "time_baseline_k": 31,
+  "sources": [
+    {
+      "subject_id": "1",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_1\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_1\\Trial_5.csv",
+      "emg_sha256": "ea917f531286d2d8457234025545f6a23e04374c7deb77e35a9de617139031ae",
+      "rating_sha256": "cf86602bed7b662f163543e95d741e1e81e68d4a2e96494c3f9002e2be70e829",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 83
+    },
+    {
+      "subject_id": "2",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_2\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_2\\Trial_5.csv",
+      "emg_sha256": "541b55ec7d7e4f78d7cb858838f0fae6fd0e5377ebfdb0a039f3c070e26d205d",
+      "rating_sha256": "9b1f4b0ab25dd5854cb261612500e6d70558e74234c7e723d75f7d3169c96fe4",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 82
+    },
+    {
+      "subject_id": "3",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_3\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_3\\trial_5.csv",
+      "emg_sha256": "52206fccb83432e4bf6377472388249e55174b284b5c07298137464992d7fccc",
+      "rating_sha256": "a479da53a2e0314b5a2d9e9b9849f3dd65d54876f8b130ad594e5c6b917f7d6d",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 135
+    },
+    {
+      "subject_id": "4",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_4\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_4\\trial_5.csv",
+      "emg_sha256": "ce1a858269e5e1589768abd42f910978c511da085edac6d94126982e7a4c464c",
+      "rating_sha256": "bed718e147539e5f9e8d575dea94c762f6ddddfc1e7beeaf92de7c11b139718e",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 121
+    },
+    {
+      "subject_id": "5",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_5\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_5\\trial_5.csv",
+      "emg_sha256": "53d9646cb60a04c048dd767c82995ab4cb768f411ec3064c498eb0db991941ff",
+      "rating_sha256": "b3e4d28405d5b56641c81febdf5a29b0d9c8884280df31ba7556060c37a4ac56",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 89
+    },
+    {
+      "subject_id": "6",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_6\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_6\\trial_5.csv",
+      "emg_sha256": "5cfbe3908f258cd14f523e37e9e13be3fa6b7a2a7adaf5fda953a8be0a699395",
+      "rating_sha256": "1312fa058c51f588d4623919219e1c8dcf33ebf1e9d2f49fc5a28bfefb4d1ff3",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 0
+      },
+      "windows": 10
+    },
+    {
+      "subject_id": "7",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_7\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_7\\trial_5.csv",
+      "emg_sha256": "d163751147d9f6527fddfdb0ec9f54dd4ce0a2e3ff1822d5d30d1ca2d790d4a2",
+      "rating_sha256": "eded97cb456a7c4ec46db335d87e30d508b6e10a271553319807fa48bf2c7d68",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 156
+    },
+    {
+      "subject_id": "8",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_8\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_8\\trial_5.csv",
+      "emg_sha256": "47f4a0940f9a7e304c5bf257dca34431125a5857daa33950164d8205ace8602f",
+      "rating_sha256": "ad20665bfd7f07c27d650ed8708320ee484f5c00634ac2b95c9d7ef1c3ba8a93",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 168
+    },
+    {
+      "subject_id": "9",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_9\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_9\\trial_5.csv",
+      "emg_sha256": "f6d8e2822e9f64af0254618c4f7929decc3998da4ec6579a9eb825e2eafe377f",
+      "rating_sha256": "2a6f944752384c33d2308aa131b4ac1e6ceffb56f89dd7706c4b0e5cf6e44980",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 124
+    },
+    {
+      "subject_id": "10",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_10\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_10\\trial_5.csv",
+      "emg_sha256": "0436e9f6acb9e11f94ee41badb3e4cbf3d5bd015359b14df877f4db5964880bf",
+      "rating_sha256": "d705720ef522c8e5604aab2a09e4a12bb3a0d4c3082e2f4ebcc4fb5d18907e58",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 122
+    },
+    {
+      "subject_id": "11",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_11\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_11\\trial_5.csv",
+      "emg_sha256": "939c35aa7ac76da7b7948b35d15c83a10d77b05f98c823ebeda2bf5949241931",
+      "rating_sha256": "1317123c133d8adbe8313522971b150e440f1e10dfeb191a71cda4af1a410f32",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 239
+    },
+    {
+      "subject_id": "12",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_12\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_12\\trial_5.csv",
+      "emg_sha256": "14f1afa42c7916817c26004b7656f90f8283400a9f198e51133a41f5d43e4282",
+      "rating_sha256": "4420b33f1ff52d8529f1612a94e120edebbd4830648b5b7e5b10d6e6b40ad667",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 165
+    },
+    {
+      "subject_id": "13",
+      "emg_path": "data\\raw\\EMG_data_for_ZenodoTired\\sEMG_data\\subject_13\\trial_5.csv",
+      "rating_path": "data\\raw\\EMG_data_for_ZenodoTired\\self_perceived_fatigue_index\\subject_13\\trial_5.csv",
+      "emg_sha256": "cbf0ba4535e49161cbf37a214ea588b57b8044f550e8adf516bf27e4adaf3b33",
+      "rating_sha256": "e6ead94816c64101c2f84a1e79e9094d9cfb3d31decb6d899bcf9595814cadc0",
+      "repairs": {
+        "emg_zero_tail_rows": 0,
+        "rating_reversed_tail_rows": 0
+      },
+      "dropped": {
+        "time_gap": 0,
+        "uncovered": 1,
+        "mixed_labels": 4
+      },
+      "windows": 103
+    }
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.18.1"
+  },
+  "model_path": "results\\runs\\single_channel_biceps\\model.npz",
+  "per_test_subject": {
+    "10": {
+      "accuracy": 0.7131147540983607,
+      "macro_f1": 0.4993182189189449,
+      "confusion_matrix": [
+        [
+          16,
+          13,
+          1
+        ],
+        [
+          10,
+          1,
+          0
+        ],
+        [
+          7,
+          4,
+          70
+        ]
+      ],
+      "per_class": [
+        {
+          "label": 0,
+          "name": "无疲劳",
+          "precision": 0.48484848484848486,
+          "recall": 0.5333333333333333,
+          "f1": 0.507936507936508,
+          "support": 30
+        },
+        {
+          "label": 1,
+          "name": "向疲劳过渡",
+          "precision": 0.05555555555555555,
+          "recall": 0.09090909090909091,
+          "f1": 0.06896551724137931,
+          "support": 11
+        },
+        {
+          "label": 2,
+          "name": "疲劳",
+          "precision": 0.9859154929577465,
+          "recall": 0.8641975308641975,
+          "f1": 0.9210526315789475,
+          "support": 81
+        }
+      ]
+    },
+    "5": {
+      "accuracy": 0.16853932584269662,
+      "macro_f1": 0.11563367252543942,
+      "confusion_matrix": [
+        [
+          14,
+          0,
+          0
+        ],
+        [
+          35,
+          1,
+          0
+        ],
+        [
+          29,
+          10,
+          0
+        ]
+      ],
+      "per_class": [
+        {
+          "label": 0,
+          "name": "无疲劳",
+          "precision": 0.1794871794871795,
+          "recall": 1.0,
+          "f1": 0.30434782608695654,
+          "support": 14
+        },
+        {
+          "label": 1,
+          "name": "向疲劳过渡",
+          "precision": 0.09090909090909091,
+          "recall": 0.027777777777777776,
+          "f1": 0.0425531914893617,
+          "support": 36
+        },
+        {
+          "label": 2,
+          "name": "疲劳",
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 39
+        }
+      ]
+    }
+  },
+  "git_revision": "fa04022d08fd6eab4cf2cdc0996cb49731147461",
+  "experiment_date": "2026-11-18",
+  "code_sha256": {
+    "single_channel.py": "e06da47b203c0475aa0090b4716360b0fb4309d8593f13e293489465449ef9f9",
+    "reading.py": "04e56ba61d8331c226bc5a808f2a5ff2ce39d7f4c86fca612191c89450bdc1f7",
+    "alignment.py": "865b272f56bded4502dbd0ae19c6482366fe625088f56bb504b92d44e31d7789",
+    "windowing.py": "23a49b18d464db30a26fcc7bb4680b7b99bef6685053ca9ad65fd8da856003fb"
+  },
+  "note": "代码版本以源码 SHA256 与 Git 修订共同追溯；重叠窗口不独立，测试仅两位用户，非临床验证。"
+}
