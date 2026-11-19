@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import sklearn
 from matplotlib.figure import Figure
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
     ConfusionMatrixDisplay, accuracy_score, confusion_matrix, f1_score,
     precision_recall_fscore_support,
@@ -79,6 +80,9 @@ def select_model(train, validation):
             ("logistic", f"l2={l2}", LogisticRegression(l2=l2)) for l2 in (0.001, 0.01)
         ] + [
             ("knn", f"k={k}", KNNClassifier(k=k)) for k in (5, 15)
+        ] + [
+            ("forest", f"trees={n}", RandomForestClassifier(n_estimators=n, random_state=SEED))
+            for n in (20, 100)
         ]
         for name, parameter, model in candidates:
             model.fit(scaled, train_index.label)

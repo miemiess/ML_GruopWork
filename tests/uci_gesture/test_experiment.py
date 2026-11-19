@@ -24,6 +24,11 @@ def test_gesture_experiment(tmp_path):
     run(root, output)
 
     metrics = json.loads((output / "metrics.json").read_text(encoding="utf8"))
+    candidates = pd.read_csv(output / "validation.csv")
+    forest = candidates[candidates.model == "forest"]
+    assert set(zip(forest.features, forest.parameter)) == {
+        (features, parameter) for features in ("RMS+MAV", "RMS+MAV+WL") for parameter in ("trees=20", "trees=100")
+    }
     users = [user for group in metrics["subjects"].values() for user in group]
     assert len(users) == len(set(users)) == 9
     assert len(metrics["skipped"]) == 1

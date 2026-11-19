@@ -44,7 +44,7 @@
       "09"
     ]
   },
-  "sklearn_version": "1.9.1",
+  "sklearn_version": "1.7.2",
   "windows": {
     "train": 7769,
     "validation": 2860,
@@ -58,15 +58,15 @@
   ],
   "selected": {
     "features": "RMS+MAV+WL",
-    "model": "logistic",
-    "parameter": "l2=0.01",
-    "macro_f1": 0.8143781592597475,
-    "accuracy": 0.8115384615384615
+    "model": "forest",
+    "parameter": "trees=100",
+    "macro_f1": 0.821877905546006,
+    "accuracy": 0.8206293706293706
   },
   "test": {
     "prediction": {
-      "accuracy": 0.7639397639397639,
-      "macro_f1": 0.7610373249767975
+      "accuracy": 0.7761497761497762,
+      "macro_f1": 0.7727918494612241
     },
     "baseline": {
       "accuracy": 0.17094017094017094,
