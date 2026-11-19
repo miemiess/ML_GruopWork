@@ -1,5 +1,5 @@
 .devIntro { padding-bottom: 21px; }
-.devSteps { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 6px; }
+.devSteps { display: grid; grid-template-columns: repeat(8,minmax(0,1fr)); gap: 6px; }
 .devSteps button { display: flex; gap: 8px; align-items: center; text-align: left; min-width: 0; padding: 8px; font-size: 13px; }
 .devSteps button span:first-child { color: var(--muted); font: 12px Consolas,monospace; }
 .devSteps button[aria-current="step"] { color: var(--mint); border-color: #7eac75; background: #263b31; }
@@ -34,7 +34,7 @@
   .devSteps button { flex-direction: column; align-items: flex-start; gap: 3px; }
   .development .devIntro { padding-top: 20px; }
 }
-@media(max-width:480px) { .devSteps { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+@media(max-width:600px) { .devSteps { grid-template-columns: repeat(4,minmax(0,1fr)); } }
 .devFrameBar { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:2px 2px 9px; border-bottom:1px solid #293749; }
 .devFrameBar small { color:var(--lav); }
 #devReplay { padding:5px 9px; font-size:12px; }
@@ -45,4 +45,5 @@
 .devToolRow button[aria-pressed="true"] { background:#2c4639; color:#dcffc9; border-color:#64866b; }
 .devToolRow select { padding:4px 6px; }
 .devExtraction .devRange { flex-basis:100%; margin-inline:0; }
+.devMetricButtons { flex-basis:100%; margin-inline:0; }
 .devLive { min-height:2em; margin:9px 4px 0; padding:6px 9px; border-radius:5px; background:#1e2936; color:var(--mint); font-size:13px; line-height:1.5; }

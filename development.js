@@ -9,7 +9,7 @@ const percent = value => (100 * value).toFixed(1) + "%";
 const gesture = label => gestures[label-1];
 const GROUPS = [["train","训练集","拟合模型"],["validation","验证集","比较候选"],["test","测试集","评估获选模型"]];
 
-if (experiment) startDevelopment(experiment);
+if (experiment?.matrix && experiment.curve.logits) startDevelopment(experiment);
 else el("devMissing").hidden = false;
 
 function startDevelopment(data) {
@@ -25,11 +25,14 @@ function startDevelopment(data) {
      caption:"三组用户互斥。后面的三个模型都观察同一个验证窗口。",
      facts:[["200 点 / 100 点","窗长 / 步长"],["8 路 → 16 或 24 个特征","RMS、MAV，可选 WL"],[example,"当前对比窗口的真实标签"]], draw:drawSplit},
     {tab:"提取特征", title:"把一段波形变成特征", description:"从同一个验证窗口选一条通道。RMS 是波形的有效幅度，更强调尖峰；MAV 是幅值绝对值的平均。可选的 WL 汇总所有相邻采样点的绝对差。",
-     caption:"拖动光标，从第 1 点累积到第 200 点。虚线标出当前 RMS 与 MAV。开启 WL 后，高亮最近加入的一对相邻点。",
+     caption:"点 RMS、MAV 或 WL，重播采样点到特征的计算。拖动波形可检查任意前缀，WL 会连起最新的一对相邻点。",
      facts:[["RMS","平方 → 求均值 → 开方"],["MAV","取绝对值 → 求均值"],["WL（可选）","相邻点作差 → 取绝对值 → 求和"]], draw:drawExtraction},
-    {tab:"逻辑回归", title:"一个特征能把概率推多远？", description:"模型给六个动作分别算分，再用 Softmax 换算概率。拖动滑块，改变一个标准化特征，其余特征固定在同一个验证窗口的实际值。",
-     caption:"概率曲线来自训练后的六分类模型。竖线是滑块位置，实心点标出原窗口该特征的值。",
-     facts:result("logistic",data.curve.prediction), draw:drawLogistic},
+    {tab:"训练矩阵", title:"每个窗口变成一行", description:"对训练组的每个窗口重复提取。每行是一个窗，每列是一条通道的一种特征，旁边的标签组成 y_train。标准化使用各列在训练集上的均值和标准差。",
+     caption:"显示最终 24 维方案的六个真实训练窗口和其中四列。点击「应用标准化」，查看同一矩阵怎样逐列转换。",
+     facts:[[data.matrix.shape[0]+" × "+data.matrix.shape[1],"完整 X_train 的形状"],["16 维 / 24 维","不含 WL / 含 WL 两组候选"],["z = (x − μ) / σ","μ 和 σ 只由训练集拟合"]], draw:drawTrainingMatrix},
+    {tab:"逻辑回归", title:"从特征权重到分类概率", description:"先把标准化特征与每类权重相乘，再加偏置，得到六个分数。Softmax 把这些分数转换成总和为 1 的概率。最后可以单独改变一个特征，观察预测怎么变。",
+     caption:"三种视图都从同一个验证窗出发。线性打分展示拟合后的真实参数，曲线视图固定其余特征。",
+     facts:result("logistic",data.curve.prediction), draw:drawLogisticDetails},
     {tab:"kNN", title:"最近的邻居怎么投票？", description:"每个训练窗口是一条带动作标签的特征向量。按标准化特征空间的欧氏距离排序，从前 k 个训练窗口中取票数最多的动作。",
      caption:"每个圆点是一个真实训练窗口。滑动 k 改变参与投票的邻居数，较暗的点不计票。实验最终比较的是 k = 5 和 k = 15。",
      facts:result("knn",data.neighbors.prediction), draw:drawKnn},
@@ -38,16 +41,24 @@ function startDevelopment(data) {
      facts:result("forest",data.forest.prediction), draw:drawForest},
     {tab:"模型选型", title:"把验证集成绩放在一起", description:"每种模型在同一批验证用户上比较参数及特征组合。验证 macro-F1 最高的方案被选中，再用留出的测试用户评估。",
      caption:"柱长从 0 开始，显示各模型最佳验证 macro-F1。展开表格可检查完整的 12 组配置。",
-     facts:[[data.best.forest.features+" · 100 棵树","最终配置"],[(100*data.test.accuracy).toFixed(2)+"%","留出测试准确率"],[data.test.macro_f1.toFixed(4),"留出测试 macro-F1"]], draw:drawScores}
+     facts:[[data.best.forest.features+" · 100 棵树","最终配置"],[(100*data.test.accuracy).toFixed(2)+"%","留出测试准确率"],[data.test.macro_f1.toFixed(4),"留出测试 macro-F1"]], draw:drawScores},
+    {tab:"产物与参数", title:"训练之后留下了什么？", description:"查看训练集的特征与类别关系、标准化参数，以及三个模型保存的信息。浏览器从训练产物复现分窗后的分类过程。",
+     caption:"热图显示各类别的平均标准化特征。可切到标准化参数、逻辑回归权重或获选森林的第 1 棵树。",
+     facts:[["24 列 μ 与 σ","获选方案的标准化参数"],["权重、邻居与决策树","三种模型各自保留的训练信息"],["100 棵树","随网页导出的获选森林"]], draw:drawArtifacts}
   ];
   const canvas=el("devCanvas"), context=canvas.getContext("2d"), slider=el("devFeature");
   const channel=el("devChannel"), includeWL=el("devIncludeWL");
   const samples=el("devSample"), neighbors=el("devKnn"), compare=el("devCompare");
+  const artifactMetric=el("devArtifactMetric"), artifactClass=el("devArtifactClass");
+  const views={metric:"rms",matrix:"raw",logistic:"scores",artifact:"relation"};
+  const viewButtons=[...document.querySelectorAll("button[data-view]")];
   const groups=[...el("devGroups").querySelectorAll("button")];
   const branches=[...el("devBranches").querySelectorAll("button")];
-  const controls=["devGroups","devExtraction","devSweep","devNeighbors","devBranches","devComparison"];
-  const hints=["点击数据组","拖动波形图，查看计算到哪一点","拖动曲线的竖线","拖动 k，观察投票如何累积","点击判断步骤，跟着窗口走","切换特征组合，比较验证分数"];
+  const controls=["devGroups","devExtraction","devMatrix","devLogic","devNeighbors","devBranches","devComparison","devArtifacts"];
+  const hints=["点击数据组","点 RMS、MAV 或 WL 播放计算","切换组装矩阵与标准化","依次查看打分、概率和单特征曲线","拖动 k，观察投票如何累积","点击判断步骤，跟着窗口走","切换特征组合，比较验证分数","选择要查看的训练产物"];
   data.sample.waveform?.forEach((_,i)=>channel.add(new Option("CH "+(i+1),i)));
+  gestures.forEach((name,i)=>artifactClass.add(new Option(name,i)));
+  artifactClass.value=data.curve.prediction-1;
   neighbors.max=data.neighbors.points.length;
   neighbors.value=neighbors.max;
   const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -59,7 +70,8 @@ function startDevelopment(data) {
       id,data.scores.filter(row=>row.model===id&&row.features===compare.value).reduce((a,b)=>a.macro_f1>=b.macro_f1?a:b)
     ]));
     return {group, depth, channel:Number(channel.value), wl:includeWL.checked, count:Number(samples.value),
-      point:Number(slider.value), k, votes, scores};
+      point:Number(slider.value), k, votes, scores, ...views,
+      artifactMetric:Number(artifactMetric.value), artifactClass:Number(artifactClass.value)};
   }
   function readout(){
     const state=settings();
@@ -70,11 +82,16 @@ function startDevelopment(data) {
     const scoreOrder=Object.entries(state.scores).sort((a,b)=>b[1].macro_f1-a[1].macro_f1);
     const values=[
       currentGroup[1]+" · "+data.users[group]+" 人 · "+data.windows[group]+" 个窗口",
-      "当前已纳入 "+state.count+" 点 · "+(state.wl?"RMS、MAV 与 WL":"RMS 与 MAV"),
-      data.curve.feature+" · "+gesture(row+1)+" 概率最高 "+percent(selectedPoint[row]),
+      "前 "+state.count+" 点 · "+state.metric.toUpperCase()+" 计算 · "+(state.wl?"24 维方案":"16 维方案"),
+      state.matrix==="raw" ? "X_train · 每个窗一行，每个特征一列" : "逐列应用训练集的参数 · z = (x − μ) / σ",
+      state.logistic==="curve" ? data.curve.feature+" · "+gesture(row+1)+" 概率最高 "+percent(selectedPoint[row])
+        : state.logistic==="scores" ? "标准化特征 × 权重 + 偏置 → 六个原始分数"
+        : gesture(data.curve.prediction)+" 概率最高 · "+percent(data.curve.probabilities[data.curve.prediction-1]),
       "当前 k = "+state.k+" · "+gestures[winner]+" 得票最多（"+state.votes[winner]+" 票）",
       ["从第 1 棵树的根节点开始","完成第 1 次阈值判断","完成第 2 次阈值判断","合并 100 棵树的概率"][depth],
-      "当前比较领先 · "+modelNames[scoreOrder[0][0]]+" · "+scoreOrder[0][1].macro_f1.toFixed(4)
+      "当前比较领先 · "+modelNames[scoreOrder[0][0]]+" · "+scoreOrder[0][1].macro_f1.toFixed(4),
+      {relation:"按训练标签聚合 · 显示每类在各通道的标准化均值",scale:"各列的 μ 和 σ 来自训练窗口",
+        weights:"逻辑回归权重 · kNN 的 k · 随机森林树数",tree:"获选森林 · 第 1 棵树的前两层分裂"}[state.artifact]
     ];
     el("devLive").textContent=values[step];
     el("devSampleCount").textContent=state.count;
@@ -119,13 +136,13 @@ function startDevelopment(data) {
     el("devFacts").innerHTML=stage.facts.map(([v,k])=>'<div class="devFact"><strong>'+v+"</strong><small>"+k+"</small></div>").join("");
     controls.forEach((id,n)=>el(id).hidden=n!==step);
     el("devInteraction").textContent=hints[step];
-    canvas.classList.toggle("scrubbable",step===1||step===2);
+    updateViews();
     el("devPrev").disabled=step===0;
     el("devNext").hidden=step===stages.length-1;
-    el("devCandidates").hidden=step!==stages.length-1;
+    el("devCandidates").hidden=stage.draw!==drawScores;
     el("devFinish").hidden=step!==stages.length-1;
     el("devPosition").textContent=(step+1)+" / "+stages.length;
-    if(stage.draw===drawLogistic)slider.value=Math.floor(data.curve.x.length/2);
+    if(stage.draw===drawLogisticDetails)slider.value=Math.floor(data.curve.x.length/2);
     if(stage.draw===drawExtraction)updateCount();
     readout();
     if(!reduced)el("devTitle").animate([{opacity:.35,transform:"translateY(7px)"},{opacity:1,transform:"none"}],{duration:300,easing:"ease-out"});
@@ -140,7 +157,7 @@ function startDevelopment(data) {
     refresh();
   }
   canvas.addEventListener("pointerdown",event=>{
-    if(step===1||step===2){
+    if(isScrubbable()){
       drag=event.pointerId;canvas.setPointerCapture(drag);scrub(event);
     }else if(step===0){
       const y=(event.clientY-canvas.getBoundingClientRect().top)*335/canvas.clientHeight;
@@ -148,7 +165,7 @@ function startDevelopment(data) {
       if(GROUPS[index])selectGroup(GROUPS[index][0]);
     }
   });
-  canvas.addEventListener("pointermove",event=>{if(drag===event.pointerId && (step===1||step===2))scrub(event)});
+  canvas.addEventListener("pointermove",event=>{if(drag===event.pointerId && isScrubbable())scrub(event)});
   canvas.addEventListener("lostpointercapture",()=>drag=null);
   function selectGroup(id){
     group=id;
@@ -167,6 +184,26 @@ function startDevelopment(data) {
   el("devPrev").onclick=()=>show(step-1);
   el("devNext").onclick=()=>show(step+1);
   el("devReplay").onclick=()=>animate();
+  function isScrubbable(){
+    const drawing=stages[step].draw;
+    return drawing===drawExtraction || (drawing===drawLogisticDetails && views.logistic==="curve");
+  }
+  function updateViews(){
+    viewButtons.forEach(b=>b.setAttribute("aria-pressed",views[b.dataset.view]===b.dataset.value));
+    el("devSweep").hidden=views.logistic!=="curve";
+    el("devMetricControl").hidden=views.artifact!=="relation" && views.artifact!=="scale";
+    el("devClassControl").hidden=views.artifact!=="weights";
+    canvas.classList.toggle("scrubbable",isScrubbable());
+  }
+  viewButtons.forEach(button=>button.onclick=()=>{
+    const {view,value}=button.dataset;
+    views[view]=value;
+    if(view==="metric" && value==="wl"){
+      includeWL.checked=true;
+      updateCount();
+    }
+    updateViews();readout();animate(view==="metric" ? 1350 : 780);
+  });
   groups.forEach(b=>{
     b.setAttribute("aria-pressed",b.dataset.group===group);
     b.onclick=()=>selectGroup(b.dataset.group);
@@ -182,7 +219,11 @@ function startDevelopment(data) {
     el("devFeatureCount").textContent=formula;
   }
   channel.onchange=()=>{readout();animate(430)};
-  includeWL.onchange=()=>{updateCount();refresh()};
+  includeWL.onchange=()=>{
+    if(!includeWL.checked && views.metric==="wl")views.metric="rms";
+    updateViews();updateCount();refresh();
+  };
+  artifactMetric.onchange=artifactClass.onchange=()=>{readout();animate(480)};
   document.addEventListener("keydown",event=>{
     if(event.target.closest("input, textarea, select") || !["ArrowLeft","ArrowRight"].includes(event.key))return;
     event.preventDefault();
@@ -219,13 +260,13 @@ function drawSplit(ctx,data,p,{group}){
     text(ctx,718,y+10,data.users[id]+" 人",bright,20,"right");
   });
 }
-function drawExtraction(ctx,data,p,{channel,wl,count:requested}){
+function drawExtraction(ctx,data,p,{channel,metric,count:requested}){
   if (!data.sample.waveform) {
     text(ctx,35,80,"请重新生成演示数据，以加载窗口波形。",muted,19);
     return;
   }
   const signal=data.sample.waveform[channel];
-  const left=58,right=730,center=134,half=95;
+  const left=58,right=730,center=115,half=78;
   const limit=Math.max(...signal.map(Math.abs),1e-8);
   const x=i=>left+(right-left)*i/(signal.length-1);
   const y=v=>center-half*v/limit;
@@ -238,34 +279,36 @@ function drawExtraction(ctx,data,p,{channel,wl,count:requested}){
   text(ctx,left,19,"CH "+(channel+1)+" · 原始肌电",bright,17);
   line(ctx,[[left,center],[right,center]],"#425065");
   ctx.setLineDash([5,5]);
-  line(ctx,[[left,y(rms)],[right,y(rms)]],"#a990e6");
-  line(ctx,[[left,y(-rms)],[right,y(-rms)]],"#a990e6");
-  line(ctx,[[left,y(mav)],[right,y(mav)]],"#d1b679");
-  line(ctx,[[left,y(-mav)],[right,y(-mav)]],"#d1b679");
+  if(metric!=="wl"){
+    const amplitude=metric==="rms"?rms:mav;
+    const color=metric==="rms"?"#a990e6":"#d1b679";
+    line(ctx,[[left,y(amplitude)],[right,y(amplitude)]],color);
+    line(ctx,[[left,y(-amplitude)],[right,y(-amplitude)]],color);
+  }
   ctx.setLineDash([]);
   line(ctx,signal.map((v,i)=>[x(i),y(v)]),"#465966");
   line(ctx,visible.map((v,i)=>[x(i),y(v)]),mint,2);
-  line(ctx,[[x(count-1),34],[x(count-1),233]],"#91b5a6");
+  line(ctx,[[x(count-1),34],[x(count-1),198]],"#91b5a6");
   dot(ctx,x(count-1),y(signal[count-1]),4,mint);
-  text(ctx,left,249,"0",muted,14);
-  text(ctx,right,249,"199 采样点",muted,14,"right");
+  text(ctx,left,213,"0",muted,14);
+  text(ctx,right,213,"199 采样点",muted,14,"right");
 
-  if(wl && count>1){
+  const latest=signal[count-1];
+  const delta=count>1 ? latest-signal[count-2] : 0;
+  if(metric==="wl" && count>1){
     const edge=count-1;
     line(ctx,[[x(edge-1),y(signal[edge-1])],[x(edge),y(signal[edge])]],"#79bdfa",4);
     dot(ctx,x(edge-1),y(signal[edge-1]),4,"#79bdfa");
     dot(ctx,x(edge),y(signal[edge]),4,"#79bdfa");
-    text(ctx,left,271,"已累计 "+(count-1)+" 个相邻差 · 最新一项 Δ = "+Math.abs(signal[edge]-signal[edge-1]).toPrecision(3),muted,14);
   }
-
-  const metrics=[["RMS",rms,"#bda8f0"],["MAV",mav,"#e3c789"]];
-  if(wl)metrics.push(["WL",length,"#79bdfa"]);
-  metrics.forEach(([label,value,color],i)=>{
-    const width=(right-left)/metrics.length;
-    const start=left+width*i;
-    box(ctx,start,287,width-7,36,"#253144");
-    text(ctx,start+10,305,label+"   "+value.toPrecision(4),color,17);
-  });
+  const stages={
+    rms:[["采样值 x",latest],["当前点平方 x²",latest**2],["前缀平方均值",rms**2],["开方 → RMS",rms]],
+    mav:[["采样值 x",latest],["当前绝对值 |x|",Math.abs(latest)],["平均 → MAV",mav]],
+    wl:[["最近相邻差 Δ",delta],["相邻差绝对值 |Δ|",Math.abs(delta)],["累计 → WL",length]]
+  }[metric];
+  const terms=metric==="wl" ? count-1+" 个相邻差" : count+" 个点";
+  text(ctx,left,242,"已纳入 "+terms,muted,15);
+  calculationCards(ctx,stages,p,left,right);
 }
 function drawLogistic(ctx,data,p,{point}){
   const c=data.curve,left=78,right=725,top=31,bottom=222;
