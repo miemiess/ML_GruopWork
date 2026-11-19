@@ -1,0 +1,32 @@
+.devIntro { padding-bottom: 21px; }
+.devSteps { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 6px; }
+.devSteps button { display: flex; gap: 8px; align-items: center; text-align: left; min-width: 0; padding: 8px; font-size: 13px; }
+.devSteps button span:first-child { color: var(--muted); font: 12px Consolas,monospace; }
+.devSteps button[aria-current="step"] { color: var(--mint); border-color: #7eac75; background: #263b31; }
+.devScene { display: grid; grid-template-columns: minmax(220px,.9fr) minmax(0,2.1fr); gap: 22px; margin-top: 12px; padding: clamp(14px,3vw,34px); border: 1px solid var(--line); border-radius: 17px; background: #191e29; }
+.devCopy h2 { font-size: clamp(25px,3vw,40px); line-height: 1.17; margin: 10px 0; }
+#devDescription { font-size: 15px; line-height: 1.75; color: #cbd3e0; }
+.devFacts { display: grid; gap: 10px; margin-top: 18px; }
+.devFact { display: grid; gap: 3px; padding: 9px 11px; background: #222c38; border-radius: 6px; min-width: 0; }
+.devFact strong { color: var(--mint); font-size: 17px; }
+.devVisual { min-width: 0; align-self: start; padding: 12px; border-radius: 10px; background: #111620; border: 1px solid #333d4d; }
+#devCanvas { display: block; width: 100%; aspect-ratio: 760/335; }
+#devCaption { margin: 8px 4px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+#devSweep { display: flex; gap: 8px; align-items: center; margin: 10px 4px 1px; color: var(--lav); font-size: 13px; }
+#devFeature { flex: 1; min-width: 0; accent-color: var(--mint); }
+.devControls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin: 14px 0; }
+.devControls button:disabled { opacity: .4; cursor: default; }
+#devNext,#devFinish { background: var(--mint); color: #172914; font-weight: 700; }
+#devFinish { border-radius: 8px; padding: 9px 12px; text-decoration: none; }
+#devCandidates { border: 1px solid var(--line); padding: 12px; border-radius: 8px; }
+#devCandidates summary { cursor: pointer; }
+#devTable { overflow-x: auto; }
+#devTable table { border-collapse: collapse; margin-top: 10px; width: 100%; font-size: 13px; }
+#devTable th,#devTable td { text-align: left; padding: 6px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+#devTable .bestConfig { color: var(--mint); }
+@media(max-width:800px) {
+  .devScene { grid-template-columns: minmax(0,1fr); gap: 10px; }
+  .devFacts { grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); margin-top: 9px; }
+  .devSteps button { flex-direction: column; align-items: flex-start; gap: 3px; }
+  .development .devIntro { padding-top: 20px; }
+}

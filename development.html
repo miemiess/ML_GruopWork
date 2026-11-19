@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EMGInsight · 手势识别开发过程</title>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="development.css">
+<header><div class="brand"><b>∿</b> EMGInsight</div><span>手势识别开发过程</span><small><a class="projectNav" href="index.html">← 返回手势演示</a></small></header>
+<main class="development">
+  <div class="intro devIntro"><div><p class="eyebrow">UCI GESTURES · C EXPERIMENT</p><h1>怎么选出<span>随机森林</span></h1></div></div>
+  <p id="devMissing" hidden>请先运行 <code>.venv\Scripts\python.exe demo/gesture/prepare.py</code> 生成实验数据。</p>
+  <section id="devPlayer" hidden aria-label="开发过程逐步演示">
+    <nav class="devSteps" id="devSteps" aria-label="开发阶段"></nav>
+    <div class="devScene">
+      <div class="devCopy">
+        <p class="eyebrow" id="devStageLabel"></p>
+        <h2 id="devTitle"></h2>
+        <p id="devDescription"></p>
+        <div id="devFacts" class="devFacts"></div>
+      </div>
+      <div class="devVisual">
+        <canvas id="devCanvas" role="img"></canvas>
+        <p id="devCaption"></p>
+        <label id="devSweep" hidden>移动特征值 <input id="devFeature" aria-label="改变标准化特征值" type="range" min="0" max="80" value="40"></label>
+      </div>
+    </div>
+    <div class="devControls">
+      <button type="button" id="devPrev">← 上一步</button>
+      <span id="devPosition" aria-live="polite"></span>
+      <button type="button" id="devNext">下一步 →</button>
+      <a id="devFinish" href="index.html" hidden>体验随机森林 →</a>
+    </div>
+    <details id="devCandidates" hidden><summary>查看 12 组验证候选与测试结果</summary><div id="devTable"></div></details>
+  </section>
+  <footer>数据来自 UCI EMG Data for Gestures。<a href="https://doi.org/10.24432/C5ZP5C">数据来源 ↗</a></footer>
+</main>
+<script src="development-data.js"></script><script src="development.js"></script>
+</html>

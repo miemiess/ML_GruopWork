@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EMGInsight · 手势信号实验台</title><link rel="stylesheet" href="style.css">
-<header><div class="brand"><b>∿</b> EMGInsight</div><span>手势信号实验台</span><small id="sourceMode">UCI / 离线回放</small></header>
+<header><div class="brand"><b>∿</b> EMGInsight</div><span>手势信号实验台</span><small id="sourceMode">UCI / 离线回放</small><a class="projectNav" href="development.html">开发过程 ↗</a></header>
 <main><div class="intro"><div><p class="eyebrow">UCI GESTURES</p><h1>手势信号<span>实验台</span></h1></div><div class="modeControls"><div class="modes" role="group" aria-label="演示模式"><button id="replayMode" aria-pressed="true">观察案例</button><button id="simMode" aria-pressed="false">模拟</button></div><label id="casePicker">观察案例 <select id="case"></select></label></div></div>
 <div id="missing" hidden>请先在项目根目录运行 <code>.venv\Scripts\python.exe demo/gesture/prepare.py</code>，然后刷新。</div>
 <div id="simMissing" hidden>请运行 <code>.venv\Scripts\python.exe demo/gesture/prepare.py</code> 导出模拟所需的模型，然后刷新。</div>
