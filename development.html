@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EMGInsight · 手势识别开发过程</title>
-<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="development.css">
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="development.css?v=interactive">
 <header><div class="brand"><b>∿</b> EMGInsight</div><span>手势识别开发过程</span><small><a class="projectNav" href="index.html">← 返回手势演示</a></small></header>
 <main class="development">
   <div class="intro devIntro"><div><p class="eyebrow">UCI GESTURES · C EXPERIMENT</p><h1>怎么选出<span>随机森林</span></h1></div></div>
@@ -17,14 +17,27 @@
         <div id="devFacts" class="devFacts"></div>
       </div>
       <div class="devVisual">
+        <div class="devFrameBar"><small id="devInteraction"></small><button id="devReplay" type="button">↻ 重播图形</button></div>
         <canvas id="devCanvas" role="img"></canvas>
         <p id="devCaption"></p>
+        <div id="devGroups" class="devToolRow" role="group" aria-label="选择数据集" hidden>
+          <button type="button" data-group="train">训练集</button><button type="button" data-group="validation">验证集</button><button type="button" data-group="test">测试集</button>
+        </div>
         <div id="devExtraction" class="devExtraction" hidden>
           <label>观察通道 <select id="devChannel" aria-label="观察通道"></select></label>
           <label><input id="devIncludeWL" type="checkbox"> 加入 WL</label>
           <output id="devFeatureCount" aria-live="polite"></output>
+          <label class="devRange">查看前 <output id="devSampleCount"></output> 点 <input id="devSample" aria-label="波形采样点位置" type="range" min="1" max="200" value="200"></label>
         </div>
         <label id="devSweep" hidden>移动特征值 <input id="devFeature" aria-label="改变标准化特征值" type="range" min="0" max="80" value="40"></label>
+        <label id="devNeighbors" class="devRange" hidden>邻居数 k = <output id="devKnnCount"></output> <input id="devKnn" aria-label="参与投票的邻居数量" type="range" min="1" max="15" value="15"></label>
+        <div id="devBranches" class="devToolRow" role="group" aria-label="决策树路径阶段" hidden>
+          <button type="button" data-depth="0">起点</button><button type="button" data-depth="1">第 1 次判断</button><button type="button" data-depth="2">第 2 次判断</button><button type="button" data-depth="3">汇总结果</button>
+        </div>
+        <label id="devComparison" class="devToolRow" hidden>验证配置 <select id="devCompare">
+          <option value="all">各模型最佳配置</option><option>RMS+MAV</option><option>RMS+MAV+WL</option>
+        </select></label>
+        <div id="devLive" class="devLive" aria-live="polite"></div>
       </div>
     </div>
     <div class="devControls">
@@ -37,5 +50,5 @@
   </section>
   <footer>数据来自 UCI EMG Data for Gestures。<a href="https://doi.org/10.24432/C5ZP5C">数据来源 ↗</a></footer>
 </main>
-<script src="development-data.js"></script><script src="development.js"></script>
+<script src="development-data.js"></script><script src="development.js?v=interactive"></script>
 </html>
