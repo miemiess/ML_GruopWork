@@ -1,5 +1,5 @@
 .devIntro { padding-bottom: 21px; }
-.devSteps { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 6px; }
+.devSteps { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 6px; }
 .devSteps button { display: flex; gap: 8px; align-items: center; text-align: left; min-width: 0; padding: 8px; font-size: 13px; }
 .devSteps button span:first-child { color: var(--muted); font: 12px Consolas,monospace; }
 .devSteps button[aria-current="step"] { color: var(--mint); border-color: #7eac75; background: #263b31; }
@@ -14,6 +14,10 @@
 #devCaption { margin: 8px 4px; color: var(--muted); font-size: 13px; line-height: 1.6; }
 #devSweep { display: flex; gap: 8px; align-items: center; margin: 10px 4px 1px; color: var(--lav); font-size: 13px; }
 #devFeature { flex: 1; min-width: 0; accent-color: var(--mint); }
+.devExtraction { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 8px 4px; color: var(--lav); font-size: 13px; }
+.devExtraction select { padding: 3px 6px; }
+.devExtraction input { accent-color: var(--mint); }
+.devExtraction output { color: var(--mint); }
 .devControls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin: 14px 0; }
 .devControls button:disabled { opacity: .4; cursor: default; }
 #devNext,#devFinish { background: var(--mint); color: #172914; font-weight: 700; }
@@ -30,3 +34,4 @@
   .devSteps button { flex-direction: column; align-items: flex-start; gap: 3px; }
   .development .devIntro { padding-top: 20px; }
 }
+@media(max-width:480px) { .devSteps { grid-template-columns: repeat(3,minmax(0,1fr)); } }

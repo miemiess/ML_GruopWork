@@ -24,6 +24,9 @@ function startDevelopment(data) {
     {tab:"准备数据", title:"先按受试者分组", description:"同一受试者只进入一个集合。提取每个窗口的时域特征后，训练集拟合模型，验证集比较方案，测试集评估获选模型。",
      caption:"三组用户互斥。后面的三个模型都观察同一个验证窗口。",
      facts:[["200 点 / 100 点","窗长 / 步长"],["8 路 → 16 或 24 个特征","RMS、MAV，可选 WL"],[example,"当前对比窗口的真实标签"]], draw:drawSplit},
+    {tab:"提取特征", title:"把一段波形变成特征", description:"从同一个验证窗口选一条通道。RMS 是波形的有效幅度，更强调尖峰；MAV 是幅值绝对值的平均。可选的 WL 汇总所有相邻采样点的绝对差。",
+     caption:"曲线是所选通道真实的 200 个采样点。虚线标出 RMS 与 MAV 对应的幅度。开启 WL 后，图中高亮一对变化较大的相邻点。",
+     facts:[["RMS","平方 → 求均值 → 开方"],["MAV","取绝对值 → 求均值"],["WL（可选）","相邻点作差 → 取绝对值 → 求和"]], draw:drawExtraction},
     {tab:"逻辑回归", title:"一个特征能把概率推多远？", description:"模型给六个动作分别算分，再用 Softmax 换算概率。拖动滑块，改变一个标准化特征，其余特征固定在同一个验证窗口的实际值。",
      caption:"概率曲线来自训练后的六分类模型。竖线是滑块位置，实心点标出原窗口该特征的值。",
      facts:result("logistic",data.curve.prediction), draw:drawLogistic},
@@ -38,6 +41,8 @@ function startDevelopment(data) {
      facts:[[data.best.forest.features+" · 100 棵树","最终配置"],[(100*data.test.accuracy).toFixed(2)+"%","留出测试准确率"],[data.test.macro_f1.toFixed(4),"留出测试 macro-F1"]], draw:drawScores}
   ];
   const canvas=el("devCanvas"), context=canvas.getContext("2d"), slider=el("devFeature");
+  const channel=el("devChannel"), includeWL=el("devIncludeWL");
+  data.sample.waveform?.forEach((_,i)=>channel.add(new Option("CH "+(i+1),i)));
   const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
   let step=0, animation=0, progress=1;
   function render(amount){
@@ -49,7 +54,8 @@ function startDevelopment(data) {
     if(canvas.height!==height)canvas.height=height;
     context.setTransform(width/760,0,0,height/335,0,0);
     context.clearRect(0,0,760,335);
-    stages[step].draw(context,data,amount,Number(slider.value),votes);
+    stages[step].draw(context,data,amount,Number(slider.value),votes,
+      {channel:Number(channel.value), wl:includeWL.checked});
   }
   const buttons=stages.map((stage,i)=>{
     const b=document.createElement("button");
@@ -66,13 +72,15 @@ function startDevelopment(data) {
     el("devCaption").textContent=stage.caption;
     canvas.setAttribute("aria-label",stage.title+" · "+stage.caption);
     el("devFacts").innerHTML=stage.facts.map(([v,k])=>'<div class="devFact"><strong>'+v+"</strong><small>"+k+"</small></div>").join("");
-    el("devSweep").hidden=step!==1;
+    el("devSweep").hidden=stage.draw!==drawLogistic;
+    el("devExtraction").hidden=stage.draw!==drawExtraction;
     el("devPrev").disabled=step===0;
     el("devNext").hidden=step===stages.length-1;
     el("devCandidates").hidden=step!==stages.length-1;
     el("devFinish").hidden=step!==stages.length-1;
     el("devPosition").textContent=(step+1)+" / "+stages.length;
-    if(step===1)slider.value=Math.floor(data.curve.x.length/2);
+    if(stage.draw===drawLogistic)slider.value=Math.floor(data.curve.x.length/2);
+    if(stage.draw===drawExtraction)updateCount();
     const start=performance.now();
     function tick(now){
       const t=reduced?1:Math.min(1,Math.max(0,(now-start)/720));
@@ -84,6 +92,12 @@ function startDevelopment(data) {
   el("devPrev").onclick=()=>show(step-1);
   el("devNext").onclick=()=>show(step+1);
   slider.oninput=()=>{cancelAnimationFrame(animation);render(1)};
+  function updateCount() {
+    const formula=includeWL.checked ? "8 通道 × 3 特征 → 24 维" : "8 通道 × 2 特征 → 16 维";
+    el("devFeatureCount").textContent=formula;
+  }
+  channel.onchange=()=>{cancelAnimationFrame(animation);render(1)};
+  includeWL.onchange=()=>{updateCount();cancelAnimationFrame(animation);render(1)};
   document.addEventListener("keydown",event=>{
     if(event.target.closest("input, textarea, select") || !["ArrowLeft","ArrowRight"].includes(event.key))return;
     event.preventDefault();
@@ -118,6 +132,51 @@ function drawSplit(ctx,data,p){
     box(ctx,145,y,475*data.windows[id]/max*p,22,[mint,"#a990e6","#74b8f0"][i]);
     text(ctx,145,y+40,data.windows[id]+" 窗口",muted,15);
     text(ctx,718,y+10,data.users[id]+" 人",bright,20,"right");
+  });
+}
+function drawExtraction(ctx,data,p,_point,_votes,{channel,wl}){
+  if (!data.sample.waveform) {
+    text(ctx,35,80,"请重新生成演示数据，以加载窗口波形。",muted,19);
+    return;
+  }
+  const signal=data.sample.waveform[channel];
+  const [rms,mav,length]=data.sample.features[channel];
+  const left=58,right=730,center=134,half=95;
+  const limit=Math.max(...signal.map(Math.abs),1e-8);
+  const x=i=>left+(right-left)*i/(signal.length-1);
+  const y=v=>center-half*v/limit;
+  const count=Math.max(2,Math.ceil(signal.length*p));
+
+  text(ctx,left,19,"CH "+(channel+1)+" · 原始肌电",bright,17);
+  line(ctx,[[left,center],[right,center]],"#425065");
+  ctx.setLineDash([5,5]);
+  line(ctx,[[left,y(rms)],[right,y(rms)]],"#a990e6");
+  line(ctx,[[left,y(-rms)],[right,y(-rms)]],"#a990e6");
+  line(ctx,[[left,y(mav)],[right,y(mav)]],"#d1b679");
+  line(ctx,[[left,y(-mav)],[right,y(-mav)]],"#d1b679");
+  ctx.setLineDash([]);
+  line(ctx,signal.slice(0,count).map((v,i)=>[x(i),y(v)]),mint,2);
+  text(ctx,left,249,"0",muted,14);
+  text(ctx,right,249,"199 采样点",muted,14,"right");
+
+  if(wl){
+    let edge=1;
+    for(let i=2;i<count;i++){
+      if(Math.abs(signal[i]-signal[i-1])>Math.abs(signal[edge]-signal[edge-1]))edge=i;
+    }
+    line(ctx,[[x(edge-1),y(signal[edge-1])],[x(edge),y(signal[edge])]],"#79bdfa",4);
+    dot(ctx,x(edge-1),y(signal[edge-1]),4,"#79bdfa");
+    dot(ctx,x(edge),y(signal[edge]),4,"#79bdfa");
+    text(ctx,left,271,"WL 累加 199 个相邻差｜高亮一项 Δ = "+Math.abs(signal[edge]-signal[edge-1]).toPrecision(3),muted,14);
+  }
+
+  const metrics=[["RMS",rms,"#bda8f0"],["MAV",mav,"#e3c789"]];
+  if(wl)metrics.push(["WL",length,"#79bdfa"]);
+  metrics.forEach(([label,value,color],i)=>{
+    const width=(right-left)/metrics.length;
+    const start=left+width*i;
+    box(ctx,start,287,width-7,36,"#253144");
+    text(ctx,start+10,305,label+"   "+value.toPrecision(4),color,17);
   });
 }
 function drawLogistic(ctx,data,p,point){

@@ -19,6 +19,11 @@
       <div class="devVisual">
         <canvas id="devCanvas" role="img"></canvas>
         <p id="devCaption"></p>
+        <div id="devExtraction" class="devExtraction" hidden>
+          <label>观察通道 <select id="devChannel" aria-label="观察通道"></select></label>
+          <label><input id="devIncludeWL" type="checkbox"> 加入 WL</label>
+          <output id="devFeatureCount" aria-live="polite"></output>
+        </div>
         <label id="devSweep" hidden>移动特征值 <input id="devFeature" aria-label="改变标准化特征值" type="range" min="0" max="80" value="40"></label>
       </div>
     </div>
