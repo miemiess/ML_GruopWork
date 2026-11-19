@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EMGInsight · 手势信号实验台</title><link rel="stylesheet" href="style.css">
+<header><div class="brand"><b>∿</b> EMGInsight</div><span>手势信号实验台</span><small id="sourceMode">UCI / 离线回放</small></header>
+<main><div class="intro"><div><p class="eyebrow">UCI GESTURES</p><h1>手势信号<span>实验台</span></h1></div><div class="modeControls"><div class="modes" role="group" aria-label="演示模式"><button id="replayMode" aria-pressed="true">观察案例</button><button id="simMode" aria-pressed="false">模拟</button></div><label id="casePicker">观察案例 <select id="case"></select></label></div></div>
+<div id="missing" hidden>请先在项目根目录运行 <code>.venv\Scripts\python.exe demo/gesture/prepare.py</code>，然后刷新。</div>
+<div id="simMissing" hidden>请运行 <code>.venv\Scripts\python.exe demo/gesture/prepare.py</code> 导出模拟所需的模型，然后刷新。</div>
+<section class="deck"><article class="scope"><div class="heading"><div><p class="eyebrow">SIGNAL MONITOR</p><h2 id="waveTitle">前臂肌电波形</h2></div><span id="user"></span></div><canvas id="wave" aria-label="八通道肌电信号与当前窗口"></canvas>
+<div class="transport"><button id="play">▶ 播放</button><label class="slider"><input id="time" type="range" min="0" step="1" aria-label="回放位置"></label><output id="clock"></output><button id="speed" title="切换播放速度">1×</button></div></article>
+<article class="pose">
+  <div class="heading"><h2>动作对照</h2></div>
+  <div class="posePair">
+    <div class="poseView inputView">
+      <small id="inputTitle">INPUT · 真实动作示意</small>
+      <canvas id="truthHand" role="img" aria-label="UCI 真实标签对应的手部姿势示意"></canvas>
+      <h3 id="truth"></h3>
+      <div id="gestureControls" class="gestureControls" role="group" aria-label="操控模拟手" hidden></div>
+    </div>
+    <div class="poseView outputView">
+      <small>OUTPUT · 模型预测</small>
+      <canvas id="hand" role="img" aria-label="模型预测对应的手部姿势示意"></canvas>
+      <h3 id="name"></h3>
+    </div>
+  </div>
+  <p class="comparison" id="comparison"></p>
+  <small class="poseNote" id="poseNote">左侧按 UCI 标签模拟动作，未标注时显示自然姿势。右侧显示肌电窗口的分类结果。</small>
+</article></section>
+<section id="caseFlow" class="caseFlow" aria-labelledby="flowTitle">
+  <div class="heading flowHeading">
+    <div><p class="eyebrow">WINDOW → PREDICTION</p><h2 id="flowTitle">算法运行流程</h2></div>
+    <div class="flowActions"><output id="flowStatus"></output><button id="walkWindow" type="button">▶ 逐步演示</button></div>
+  </div>
+  <div class="flowGrid">
+    <div id="flowSteps" class="flowSteps" role="group" aria-label="查看处理阶段">
+      <button type="button"><span class="flowIndex">01</span><span><strong>读取与分窗</strong><small>8 路原始肌电 → 200 点</small></span></button>
+      <button type="button"><span class="flowIndex">02</span><span><strong>提取特征</strong><small>200 × 8 → 24 个数</small></span></button>
+      <button type="button"><span class="flowIndex">03</span><span><strong>标准化</strong><small>按训练集统计量换算</small></span></button>
+      <button type="button"><span class="flowIndex">04</span><span><strong>随机森林分类</strong><small>100 棵树 → 6 类概率</small></span></button>
+    </div>
+    <div class="flowInspector">
+      <div class="heading flowInspectorHead"><h3 id="flowStageTitle"></h3><label id="flowChannelControl">通道 <span id="caseChannel"></span></label></div>
+      <div id="flowEvidence" class="flowEvidence"></div>
+      <div class="flowExplainers">
+        <div class="flowCode"><div class="flowCaption"><strong>关键代码示意</strong><a id="flowSource" target="_blank" rel="noopener">项目源码 ↗</a></div><pre><code id="flowCode"></code></pre></div>
+        <div class="flowKnowledge"><strong>机器学习原理</strong><p id="flowKnowledge"></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="lower"><article id="compactTrace" hidden><div class="heading"><div><p class="eyebrow">EXECUTION TRACE</p><h2>算法运行流程</h2></div><label>通道 <span id="simChannel"></span></label></div>
+<ol class="trace" id="trace" aria-label="算法关键环节">
+  <li><span class="traceMarker" aria-hidden="true"></span><div><strong>读取与分窗</strong><code>8 路信号 → 200 点窗口，步长 100</code><small id="traceWindow"></small></div></li>
+  <li><span class="traceMarker" aria-hidden="true"></span><div><strong>提取特征</strong><code>每通道算 RMS、MAV、WL → 24 个特征</code><small id="traceFeatures"></small></div></li>
+  <li><span class="traceMarker" aria-hidden="true"></span><div><strong>标准化</strong><code>用训练集的均值和标准差转换特征</code><small id="traceScale"></small></div></li>
+  <li><span class="traceMarker" aria-hidden="true"></span><div><strong>随机森林分类</strong><code>100 棵树的类别概率取平均 → 输出手势</code><small id="traceResult"></small></div></li>
+</ol><small id="traceNote">高亮按回放节奏重现处理顺序，数值来自当前窗口。</small></article>
+<article id="testResults"><p class="eyebrow">TEST SET</p><h2>从误判回到波形</h2><small>行是真实动作，列是预测。点击计数查看片段。</small><div id="matrix"></div></article></section>
+<footer>数据 · Krilova 等，UCI EMG Data for Gestures，CC BY 4.0 <a href="https://doi.org/10.24432/C5ZP5C">数据来源 ↗</a></footer></main>
+<script src="session.js"></script><script src="simulator-data.js"></script><script src="simulation.js"></script><script src="hand.js"></script><script src="walkthrough.js"></script><script src="app.js"></script></html>
