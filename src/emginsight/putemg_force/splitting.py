@@ -2,7 +2,7 @@
 
 from collections.abc import Iterable
 
-from emginsight.uci_gesture import split_subject_ids as _split_subject_ids
+from emginsight.splitting import split_subject_ids as _split_subject_ids
 
 from .reading import ForceRecord
 
