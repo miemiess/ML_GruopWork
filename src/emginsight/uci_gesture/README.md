@@ -11,6 +11,10 @@ uci_gesture/
   splitting.py      按用户划分训练、验证、测试集
   windowing.py      单条记录分窗
   example.py        真实数据检查示例入口
+  experiment.py     C 任务：跨用户六类手势识别实验，保存获选模型
+  model.py          获选模型的保存、读取与窗口推理
+  predict.py        批处理识别入口：原始文件 → 逐窗手势（含未知）与概率
+  rejection.py      “未知”拒识：低置信度窗口输出 0，阈值在验证用户上选择
   README.md         调用说明
 ```
 

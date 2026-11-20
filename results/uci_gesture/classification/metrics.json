@@ -72,5 +72,26 @@
       "accuracy": 0.17094017094017094,
       "macro_f1": 0.048661800486618
     }
+  },
+  "rejection": {
+    "threshold": 0.75,
+    "rule": "最大类别概率低于阈值时输出 0（未知）；阈值按验证用户七类 macro-F1 选择",
+    "unknown_definition": "窗口内全为未标注 0、全为第 7 类手掌伸展，或含多个标签",
+    "test_without_rejection": {
+      "macro_f1_7": 0.335999010692947,
+      "known_coverage": 1.0,
+      "known_accuracy_accepted": 0.7761497761497762,
+      "unknown_rejection": 0.0,
+      "known_windows": 2457,
+      "unknown_windows": 5565
+    },
+    "test_with_rejection": {
+      "macro_f1_7": 0.402156895514271,
+      "known_coverage": 0.5901505901505901,
+      "known_accuracy_accepted": 0.9358620689655173,
+      "unknown_rejection": 0.3376460017969452,
+      "known_windows": 2457,
+      "unknown_windows": 5565
+    }
   }
 }
