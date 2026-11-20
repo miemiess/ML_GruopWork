@@ -76,3 +76,4 @@
 .tvCallout,.tvDirect,.tvGroup{paint-order:stroke;stroke:#141922;stroke-width:5px;stroke-linejoin:round}
 /* 窄屏时图表保持可读的最小宽度，只在图表内部横向滚动 */
 @media(max-width:700px){.tvFigure{overflow-x:auto;-webkit-overflow-scrolling:touch}.tvFigure svg{min-width:620px}.tvFigure .tvTable{min-width:0}}
+#fullTraining{margin-bottom:16px}

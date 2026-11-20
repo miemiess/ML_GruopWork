@@ -47,7 +47,7 @@ def export():
             sources[key]["model_sha256"] = file_sha256(model_path)
         data[key] = item
     report = ROOT/"results/fatigue/full_dataset"
-    files = ("metrics.json","model_card.json","validation.csv","per_subject.csv","test_predictions.csv")
+    files = ("metrics.json","metrics_v1.json","model_card.json","validation.csv","per_subject.csv","test_predictions.csv")
     full = {name.split(".")[0]: (json.loads((report/name).read_text(encoding="utf8")) if name.endswith(".json")
                                  else json.loads(pd.read_csv(report/name).to_json(orient="records"))) for name in files}
     source = {name:file_sha256(report/name) for name in files}

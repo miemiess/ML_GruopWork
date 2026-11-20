@@ -15,7 +15,7 @@ def test_channel_order_and_prefix_invariance():
     swapped = signal_features(x[:, ::-1], t, ["L " + m for m in MUSCLES[::-1]])
     np.testing.assert_allclose(full, swapped)
     np.testing.assert_allclose(full.iloc[:1], signal_features(x[:WINDOW], t[:WINDOW], names))
-    assert full.shape == (4, 40)
+    assert full.shape == (4, 60)
     with pytest.raises(ValueError, match="肌肉通道"):
         signal_features(x, t, [names[0]] * 4)
 
@@ -45,3 +45,13 @@ def test_predict_record_outputs_and_side_check(tmp_path):
     raw.rename(columns={raw.columns[1]: raw.columns[1].replace("R ", "L ", 1)}).to_csv(path, index=False)
     with pytest.raises(ValueError, match="同侧"):
         predict_record(path, artifact)
+
+
+## @brief 验证累计最大值按试验分别计算，整段输入时视为同一试验。
+def test_monotone_per_trial():
+    import pandas as pd
+    from emginsight.fatigue.full_dataset import monotone
+
+    frame = pd.DataFrame({"subject": ["1"] * 4 + ["2"] * 3, "trial": [1, 1, 2, 2, 1, 1, 1]})
+    np.testing.assert_array_equal(monotone([0, 2, 1, 0, 1, 0, 2], frame), [0, 2, 1, 1, 1, 1, 2])
+    np.testing.assert_array_equal(monotone([1, 0, 2, 1]), [1, 1, 2, 2])

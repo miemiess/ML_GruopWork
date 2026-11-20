@@ -197,7 +197,7 @@ predictions = predict_fatigue_signal(signal, time, model)  # 原始一维信号�
 
 在项目根目录执行 `python -m emginsight.fatigue.full_dataset`。程序扫描全部用户的 trial_1 至 trial_12，按原始时间戳对齐疲劳评分，在同一批窗口比较同侧四肌、单路主动力肌、时间和多数类。每条记录仅含同一侧的四路同步肌电。四路的列顺序按肌肉名称统一，左右侧同名肌肉共用特征位置。
 
-每路提取 log RMS、log MAV、log 平均波形长度、平均频率与中位频率，同时保留它们相对本记录首个连续完整窗的差。首窗仅作为个人参考，未假设参与者此时静息或无疲劳。训练标签只用评分完全覆盖且为同一等级的窗口。实际推理可覆盖过渡区，此类窗口的准确率未经本实验验证。
+每路提取 log RMS、log MAV、log 平均波形长度、平均频率与中位频率（第二版）：先在过去 15 窗（约 30 秒）内因果平滑，再减去本场开头 5 窗（约 10 秒）的个人基线，并加入 15 窗变化趋势，共 60 个特征。开头基线仅作为个人参考，未假设参与者此时静息或无疲劳；前 5 窗的基线只用已出现的窗口。评分在全部 156 场中单调不减，因此预测类别按时间取累计最大值。比较的输入有同侧四路、单路主动力肌、四路加运动时长，对照为仅运动时长和多数类。训练标签只用评分完全覆盖且为同一等级的窗口。实际推理可覆盖过渡区，此类窗口的准确率未经本实验验证。
 
 预测单个原始试验文件可用 `python -m emginsight.fatigue.full_dataset --predict "trial_5.csv" --output "prediction.csv"`。输出每个连续窗口的起止秒数和 0/1/2 预测评分。默认加载 `results/runs/fatigue/full_dataset/fatigue_model.joblib`，对应固定测试划分的模型。完整结果见[全试验报告](../../../results/fatigue/full_dataset/report.md)。
 

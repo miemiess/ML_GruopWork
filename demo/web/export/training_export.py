@@ -140,9 +140,37 @@ def fatigue():
     )
 
 
+def fatigue_full():
+    m = read_json("fatigue/full_dataset/metrics.json")
+    v1 = read_json("fatigue/full_dataset/metrics_v1.json") if (RESULTS / "fatigue/full_dataset/metrics_v1.json").exists() else None
+    scopes = {"four": "四路肌电", "agonist": "单路主动力肌", "four_time": "四路肌电 + 时长"}
+    models = {"logistic": "逻辑回归", "trees_leaf5": "极端随机树（叶 5）", "trees_leaf20": "极端随机树（叶 20）"}
+    candidates = [dict(label=f"{scopes[r.scope]} · {models.get(r.model, r.model)}", family=scopes[r.scope],
+                       score=r.validation_subject_macro_f1, group=scopes[r.scope])
+                  for r in read_csv("fatigue/full_dataset/validation.csv").itertuples()]
+    candidates.sort(key=lambda c: list(scopes.values()).index(c["family"]))
+    people = read_csv("fatigue/full_dataset/per_subject.csv")
+    cv = m["grouped_cv"]
+    heldout = [dict(name="四路肌电（第二版）", value=cv["four"]["macro_f1"], role="model")]
+    if v1:
+        heldout.append(dict(name="四路肌电（第一版）", value=v1["grouped_cv"]["four"]["macro_f1"], role="baseline"))
+    heldout += [dict(name="四路肌电 + 运动时长", value=cv["four_time"]["macro_f1"], role="baseline"),
+                dict(name="仅运动时长", value=cv["elapsed"]["macro_f1"], role="baseline"),
+                dict(name="多数类", value=cv["majority"]["macro_f1"], role="baseline")]
+    return dict(
+        title="全试验肌肉疲劳", metric=dict(label="四折 macro-F1", better="high", digits=3),
+        split=dict(subjects=m["groups"], counts={}),
+        families=list(scopes.values()), candidates=candidates, learning=None, heldout=heldout,
+        per_user=dict(label="每名参与者四折 macro-F1（对照：仅运动时长）",
+                      rows=[dict(subject=str(r.subject), model=r.four, baseline=r.elapsed) for r in people.itertuples()]),
+        sources=["fatigue/full_dataset/metrics.json", "fatigue/full_dataset/validation.csv",
+                 "fatigue/full_dataset/per_subject.csv", "fatigue/full_dataset/metrics_v1.json"],
+    )
+
+
 def export():
     data = {name: build() for name, build in
-            (("gesture", gesture), ("continuous", continuous), ("levels", levels), ("change", change), ("fatigue", fatigue))}
+            (("gesture", gesture), ("continuous", continuous), ("levels", levels), ("change", change), ("fatigue", fatigue), ("fatigue_full", fatigue_full))}
     source = {}
     for item in data.values():
         for path in item.pop("sources"):
