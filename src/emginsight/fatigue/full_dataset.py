@@ -1,4 +1,4 @@
-﻿"""全试验疲劳分类。运行 python -m emginsight.fatigue.full_dataset。"""
+"""全试验疲劳分类。运行 python -m emginsight.fatigue.full_dataset。"""
 from pathlib import Path
 import argparse
 import json
