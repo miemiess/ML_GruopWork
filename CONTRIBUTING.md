@@ -1,6 +1,6 @@
 # 怎么一起开发
 
-先在 [README](README.md) 选任务，在 [Issues](https://github.com/miemiess/ML_GruopWork/issues) 写“姓名、准备做什么、目前进度”。已有同类任务时先沟通。环境安装也在 README 中。
+基础工作已完成，剩余工作见 [README](README.md) 的“进度”。开始新工作前，在 [Issues](https://github.com/miemiess/ML_GruopWork/issues) 写“姓名、准备做什么、目前进度”，已有同类工作时先沟通。环境安装也在 README 中。
 
 下面以“手势实验”为例，分支名可换成自己的任务名。
 
