@@ -1,4 +1,3 @@
-.devIntro { padding-bottom: 21px; }
 .devSteps { display: grid; grid-template-columns: repeat(8,minmax(0,1fr)); gap: 6px; }
 .devSteps button { display: flex; gap: 8px; align-items: center; text-align: left; min-width: 0; padding: 8px; font-size: 13px; }
 .devSteps button span:first-child { color: var(--muted); font: 12px Consolas,monospace; }
@@ -32,7 +31,6 @@
   .devScene { grid-template-columns: minmax(0,1fr); gap: 10px; }
   .devFacts { grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); margin-top: 9px; }
   .devSteps button { flex-direction: column; align-items: flex-start; gap: 3px; }
-  .development .devIntro { padding-top: 20px; }
 }
 @media(max-width:600px) { .devSteps { grid-template-columns: repeat(4,minmax(0,1fr)); } }
 .devFrameBar { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:2px 2px 9px; border-bottom:1px solid #293749; }

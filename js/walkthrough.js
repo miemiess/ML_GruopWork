@@ -4,7 +4,7 @@ const FLOW_STAGES = [
   {
     title: "从连续信号取一个窗口",
     code: "windows = window_gesture_record(\n    record, window_size=200,\n    step_size=100, max_gap_ms=20\n)",
-    source: "uci_gesture/windowing.py",
+    source: "gesture/windowing.py",
     knowledge: "相邻窗口共享一半采样点。因此每新增 100 点，就能形成一个新的 200 点窗口。离线评估保留纯标签窗口，并先按用户划分数据，避免同一受试者同时进入训练和测试。"
   },
   {
@@ -22,8 +22,8 @@ const FLOW_STAGES = [
   {
     title: "从六类概率得到手势",
     code: "probs = forest.predict_proba(z)\ngesture = forest.classes_[argmax(probs)]",
-    source: "uci_gesture/experiment.py",
-    knowledge: "每棵树沿着特征阈值走到一个叶子，得到一组类别概率。100 棵树的概率取平均，最大的一类就是预测动作。树数和特征组合依据验证集表现选定。"
+    source: "gesture/experiment.py",
+    knowledge: "每棵树沿着特征阈值走到一个叶子，得到一组类别概率。各树的概率取平均，最大的一类就是预测动作。树数和特征组合依据验证集表现选定。"
   }
 ];
 
@@ -44,7 +44,8 @@ function createWalkthrough(pause, channel) {
       setText($("flowStageTitle"), stage.title);
       setText($("flowCode"), stage.code);
       setText($("flowKnowledge"), stage.knowledge);
-      $("flowSource").href = "./source/" + stage.source;
+      const sourceLink = $("flowSource");
+      sourceLink.href = sourceLink.dataset.sourceBase + stage.source;
       $("flowChannelControl").hidden = selected !== 1 && selected !== 2;
       buttons.forEach((button,i) => button.setAttribute("aria-pressed", i === selected));
     }

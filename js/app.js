@@ -5,7 +5,12 @@ const poses = [null,[0,0,.06],[0,0,1],[-1.1,0,.08],[.95,0,.05],[0,-.46,.06],[0,.
 const data = window.EMG_SESSION;
 if (!data) {
   $("missing").hidden=false;
-  document.querySelectorAll("button,select,input").forEach(el=>el.disabled=true);
+  document.querySelectorAll("#gestureReplay button,#gestureReplay select,#gestureReplay input").forEach(el=>el.disabled=true);
+  function missingView(){
+    const dev=location.hash==="#development"||location.hash.startsWith("#training");
+    $("gestureReplay").hidden=dev;$("gestureDevelopment").hidden=location.hash!=="#development";$("casePicker").hidden=true;
+  }
+  missingView();window.addEventListener("hashchange",missingView);
 } else init();
 
 function init() {
@@ -32,8 +37,22 @@ function init() {
     button.onclick=()=>selectGesture(label);
     controls.append(button);
   }
-  $("simMode").onclick=()=>switchMode(true);
-  $("replayMode").onclick=()=>switchMode(false);
+  function routeGesture(){
+    const dev=location.hash==="#development", sim=location.hash==="#simulation", train=location.hash.startsWith("#training");
+    stop(); walkthrough.reset();
+    // 再次显示画布之后恢复渲染，避免读取隐藏画布的零宽度。
+    $("gestureReplay").hidden=false;
+    switchMode(sim);
+    $("gestureReplay").hidden=dev||train;
+    $("gestureDevelopment").hidden=!dev;
+    $("sourceMode").textContent=train?"UCI / 训练过程":dev?"UCI / 开发过程":sim?"UCI / 交互模拟":"UCI / 离线回放";
+    $("casePicker").hidden=dev||sim||train;
+    for (const [id, active] of [["replayMode",!dev&&!sim&&!train],["simMode",sim],["gestureTrain",train],["gestureDev",dev]]) {
+      if(active) $(id).setAttribute("aria-current","page"); else $(id).removeAttribute("aria-current");
+    }
+    if(!train)(dev ? $("gestureDevelopment") : $("gestureReplay")).animate?.(
+      reduced ? [] : [{opacity:.4},{opacity:1}], {duration:200});
+  }
   channel.onchange=redraw;
   picker.onchange=()=>choose(+picker.value);
   slider.oninput=()=>{stop(); walkthrough.reset(); time=+slider.value; render(true)};
@@ -109,6 +128,7 @@ function init() {
     simId=requestAnimationFrame(simTick);
   }
   function redraw(){
+    if(!wave.clientWidth)return;
     if(simulation)renderSimulation(true);
     else {cacheWave();render(true)}
   }
@@ -212,6 +232,7 @@ function init() {
     });
   });
   choose(clips.findIndex(c=>c.label===2&&c.pred===2));
+  routeGesture(); window.addEventListener("hashchange",routeGesture);
   new ResizeObserver(redraw).observe(wave);
 }
 

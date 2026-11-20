@@ -15,6 +15,7 @@ else el("devMissing").hidden = false;
 function startDevelopment(data) {
   const row = data.sample;
   const example = "验证用户 "+row.subject+" · "+gesture(row.label);
+  const treeCount = data.forest_params.trees + " 棵树";
   const result = (id,pred)=>[
     [data.best[id].parameter+" · "+data.best[id].features, "该模型在验证集上的最佳配置"],
     [data.best[id].macro_f1.toFixed(4), "验证 macro-F1"],
@@ -36,15 +37,15 @@ function startDevelopment(data) {
     {tab:"kNN", title:"最近的邻居怎么投票？", description:"每个训练窗口是一条带动作标签的特征向量。按标准化特征空间的欧氏距离排序，从前 k 个训练窗口中取票数最多的动作。",
      caption:"每个圆点是一个真实训练窗口。滑动 k 改变参与投票的邻居数，较暗的点不计票。实验最终比较的是 k = 5 和 k = 15。",
      facts:result("knn",data.neighbors.prediction), draw:drawKnn},
-    {tab:"随机森林", title:"从一棵树走到一片森林", description:"树按特征阈值依次判断。当前窗口在每个节点选择左边或右边，走到叶子得到一组类别概率。森林平均 100 棵树的概率，再选出最高类。",
+    {tab:"随机森林", title:"从一棵树走到一片森林", description:"树按特征阈值依次判断。当前窗口在每个节点选择左边或右边，走到叶子得到一组类别概率。森林平均 "+treeCount+"的概率，再选出最高类。",
      caption:"点击前两次判断，观察当前特征如何跨过阈值。点击「汇总结果」看第 1 棵树和完整森林的输出。",
      facts:result("forest",data.forest.prediction), draw:drawForest},
     {tab:"模型选型", title:"把验证集成绩放在一起", description:"每种模型在同一批验证用户上比较参数及特征组合。验证 macro-F1 最高的方案被选中，再用留出的测试用户评估。",
      caption:"柱长从 0 开始，显示各模型最佳验证 macro-F1。展开表格可检查完整的 12 组配置。",
-     facts:[[data.best.forest.features+" · 100 棵树","最终配置"],[(100*data.test.accuracy).toFixed(2)+"%","留出测试准确率"],[data.test.macro_f1.toFixed(4),"留出测试 macro-F1"]], draw:drawScores},
+     facts:[[data.best.forest.features+" · "+treeCount,"最终配置"],[(100*data.test.accuracy).toFixed(2)+"%","留出测试准确率"],[data.test.macro_f1.toFixed(4),"留出测试 macro-F1"]], draw:drawScores},
     {tab:"产物与参数", title:"训练之后留下了什么？", description:"查看训练集的特征与类别关系、标准化参数，以及三个模型保存的信息。浏览器从训练产物复现分窗后的分类过程。",
      caption:"热图显示各类别的平均标准化特征。可切到标准化参数、逻辑回归权重或获选森林的第 1 棵树。",
-     facts:[["24 列 μ 与 σ","获选方案的标准化参数"],["权重、邻居与决策树","三种模型各自保留的训练信息"],["100 棵树","随网页导出的获选森林"]], draw:drawArtifacts}
+     facts:[["24 列 μ 与 σ","获选方案的标准化参数"],["权重、邻居与决策树","三种模型各自保留的训练信息"],[treeCount,"随网页导出的获选森林"]], draw:drawArtifacts}
   ];
   const canvas=el("devCanvas"), context=canvas.getContext("2d"), slider=el("devFeature");
   const channel=el("devChannel"), includeWL=el("devIncludeWL");
@@ -88,7 +89,7 @@ function startDevelopment(data) {
         : state.logistic==="scores" ? "标准化特征 × 权重 + 偏置 → 六个原始分数"
         : gesture(data.curve.prediction)+" 概率最高 · "+percent(data.curve.probabilities[data.curve.prediction-1]),
       "当前 k = "+state.k+" · "+gestures[winner]+" 得票最多（"+state.votes[winner]+" 票）",
-      ["从第 1 棵树的根节点开始","完成第 1 次阈值判断","完成第 2 次阈值判断","合并 100 棵树的概率"][depth],
+      ["从第 1 棵树的根节点开始","完成第 1 次阈值判断","完成第 2 次阈值判断","合并 "+treeCount+"的概率"][depth],
       "当前比较领先 · "+modelNames[scoreOrder[0][0]]+" · "+scoreOrder[0][1].macro_f1.toFixed(4),
       {relation:"按训练标签聚合 · 显示每类在各通道的标准化均值",scale:"各列的 μ 和 σ 来自训练窗口",
         weights:"逻辑回归权重 · kNN 的 k · 随机森林树数",tree:"获选森林 · 第 1 棵树的前两层分裂"}[state.artifact]
@@ -225,6 +226,7 @@ function startDevelopment(data) {
   };
   artifactMetric.onchange=artifactClass.onchange=()=>{readout();animate(480)};
   document.addEventListener("keydown",event=>{
+    if(el("gestureDevelopment")?.hidden)return;
     if(event.target.closest("input, textarea, select") || !["ArrowLeft","ArrowRight"].includes(event.key))return;
     event.preventDefault();
     show(step+(event.key==="ArrowRight"?1:-1));
@@ -377,7 +379,7 @@ function drawForest(ctx,data,p,{depth}){
   text(ctx,26,236,"当前窗 · "+node.feature+" = "+node.value.toFixed(2)+(node.value<=node.threshold?" ≤ ":" > ")+node.threshold.toFixed(2),muted,15);
   if(depth===3 && p>.7){
     text(ctx,26,271,"第 1 棵树 · 路径 "+forest.depth+" 层 · "+gestures[single]+" "+percent(forest.single[single]),bright,17);
-    text(ctx,26,307,"100 棵树平均 · "+gesture(forest.prediction)+" "+percent(forest.probabilities[forest.prediction-1]),mint,19);
+    text(ctx,26,307,data.forest_params.trees+" 棵树平均 · "+gesture(forest.prediction)+" "+percent(forest.probabilities[forest.prediction-1]),mint,19);
   }
 }
 function drawScores(ctx,_data,p,{scores}){

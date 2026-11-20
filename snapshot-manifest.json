@@ -1,0 +1,74 @@
+{
+  "gesture": {
+    "experiment": "results/gesture/classification",
+    "model_sha256": "99f0fff82108d7ae56942a084b2a32ee129e6079d7e746f259b28b51a5e63dd6",
+    "report_sha256": {
+      "model_card.json": "227fbc39c2445d8d91722f6ed8ebc5d30a7a319c5cfcf9bbd3e8d0071ada413d",
+      "metrics.json": "722e1e741d51bc3587cbabecd4a47651b66320c49d16e41d15d3b699000e0eac",
+      "test_predictions.csv": "1021df86d47ec3b616f46ead547c26e32451dbdacdf3f77165fecec7b8797499",
+      "validation.csv": "1c97c87606cc2f75bc2b07a8954382ecffb01192b11144776484c770874d9062"
+    }
+  },
+  "force": {
+    "experiment": "results/force/regression",
+    "model_sha256": "bafe0af0b0e3a5f9143bb4d6e6d7c101c67dcef62f6b52ebc1e4bde402c08a82",
+    "report_sha256": {
+      "model_card.json": "f7314e9be7b3d9fe769712dbb8f966a76ad63a681016589858ea422922cf6a9a",
+      "metrics.json": "e6b04ba8760ed7307826bd2fa14cd4982ff21cbc29c9fe2d66214cccc0f6f4e9",
+      "example_predictions.csv": "78c2d8f7de534f03007c415cd1b138a8408eb36b66cfb9f770275c0ec47ce0a8",
+      "validation.csv": "fbde0154fd24e952b04d4f909003cbe09f43addceef7c4ecb54f364c657fdf54",
+      "per_target.csv": "c62fbc1d20d61d0e9534b743aeb966c0a903cf9fc55f5c263cdb5d071108bb0c",
+      "per_user.csv": "c4fdc42b5715489d7592282bb9fbed918020cf5f705ddc57fda29bad8d377ea6"
+    }
+  },
+  "levels": {
+    "force/levels/metrics.json": "ef9b9915f644ecad7490308123009b64b1c9faf57df09a2965f3d94a47c125e2",
+    "force/levels/example_predictions.csv": "b95c7617f55588e7b7da761df56d8197677be339882c76cb6e490c4d819551cc",
+    "force/levels/validation.csv": "4209e76de11a12ca3cc6624d25b28de632e822b51355e51440dcbee642298a1d",
+    "force/levels/model_card.json": "f63d93a7eb4bccfa538edb859cbd38f549214d3ffc95a52e543e0de9eebfe6e8"
+  },
+  "change": {
+    "force/change/metrics.json": "c551125ae2f368ddd543dc75d2c9addcfdc788373d2e8447ceb780a7e30f07af",
+    "force/change/test_trials.csv": "fe5159b9d490d47a0e4e616f20918bae311f0211f39b51e0f14788f9124cf41d",
+    "force/change/validation.csv": "ed997b051bffffbcaeac11c0cae83885753aa6368763307b4a36c24c5fb29a02",
+    "force/change/test_changes.csv": "14bd20d40a90e049eeebc8dd67562c0bb065092082774314282cdbd6222331a4",
+    "force/change/model_card.json": "abdff50248bc982a4f7fce773cb8bbed335c6a6f2290d29c55d49909e9e703dd",
+    "model_sha256": "12be2f1d74a82b1a2e57713c8d592470058379dfd1c25e88faa2eb6952c08e32"
+  },
+  "fatigue": {
+    "fatigue/single_channel_biceps/metrics.json": "e0dcd074451d01458e313be40f4da9a5db78b7332fa15bb360ace0f4db58422f",
+    "fatigue/single_channel_biceps/test_predictions.csv": "92b7e57cef18e6965456b31a591bb771ba94f542d69799ac84bfef2260a86972",
+    "fatigue/single_channel_biceps/validation_candidates.csv": "8765b17152cc6a34c321a6260b0ee810f0fa32df92ee3d350dd3e992f03e54ab",
+    "model_sha256": "76d42b6983dfb16418b7a57ba3003b0f98087773a51933faf676547bf1863870"
+  },
+  "fatigue_full": {
+    "metrics.json": "79b8b63ec36fa8fb613a5962e8edf00d517f55065b3fbb81b490a2c2feea323c",
+    "metrics_v1.json": "e904d2d4ed1e131fb9963bebe35ca6aaa8e978d609ab3ca750ce541621c94ec4",
+    "model_card.json": "6ec29564df1aabafd5422318947e65b28843adf28df534fc9f521c1e1b3c5508",
+    "validation.csv": "51efe30dd0c7ab759f3583e598b5dc1c9c3c2fef6aa2627ad54985f726db80ae",
+    "per_subject.csv": "2383390e44a234b80cd490e09165432c05434332f1a9034b6839d075acd06133",
+    "test_predictions.csv": "dec5d40c75c7d3373bff1baa34b507b981a7abb6cddb2056716222486924161e"
+  },
+  "training": {
+    "gesture/classification/metrics.json": "722e1e741d51bc3587cbabecd4a47651b66320c49d16e41d15d3b699000e0eac",
+    "gesture/classification/validation.csv": "1c97c87606cc2f75bc2b07a8954382ecffb01192b11144776484c770874d9062",
+    "gesture/classification/test_predictions.csv": "1021df86d47ec3b616f46ead547c26e32451dbdacdf3f77165fecec7b8797499",
+    "learning_curve/gesture.csv": "4b5aab069d1683e83b307eb0184a0eef05f432481aa902b1c9018e4351e35892",
+    "force/regression/metrics.json": "e6b04ba8760ed7307826bd2fa14cd4982ff21cbc29c9fe2d66214cccc0f6f4e9",
+    "force/regression/validation.csv": "fbde0154fd24e952b04d4f909003cbe09f43addceef7c4ecb54f364c657fdf54",
+    "force/regression/per_user.csv": "c4fdc42b5715489d7592282bb9fbed918020cf5f705ddc57fda29bad8d377ea6",
+    "learning_curve/force.csv": "68a69932a0f2632be10ff04adc7c8db11b413d876d4d2a588005645663aaa67d",
+    "force/levels/metrics.json": "ef9b9915f644ecad7490308123009b64b1c9faf57df09a2965f3d94a47c125e2",
+    "force/levels/validation.csv": "4209e76de11a12ca3cc6624d25b28de632e822b51355e51440dcbee642298a1d",
+    "force/levels/per_user.csv": "d0c49826514cdaea9a77acb961f617994e75c680061e8e4cf5a8167617b45122",
+    "force/change/metrics.json": "c551125ae2f368ddd543dc75d2c9addcfdc788373d2e8447ceb780a7e30f07af",
+    "force/change/validation.csv": "ed997b051bffffbcaeac11c0cae83885753aa6368763307b4a36c24c5fb29a02",
+    "force/change/test_changes.csv": "14bd20d40a90e049eeebc8dd67562c0bb065092082774314282cdbd6222331a4",
+    "fatigue/single_channel_biceps/metrics.json": "e0dcd074451d01458e313be40f4da9a5db78b7332fa15bb360ace0f4db58422f",
+    "fatigue/single_channel_biceps/validation_candidates.csv": "8765b17152cc6a34c321a6260b0ee810f0fa32df92ee3d350dd3e992f03e54ab",
+    "fatigue/full_dataset/metrics.json": "79b8b63ec36fa8fb613a5962e8edf00d517f55065b3fbb81b490a2c2feea323c",
+    "fatigue/full_dataset/validation.csv": "51efe30dd0c7ab759f3583e598b5dc1c9c3c2fef6aa2627ad54985f726db80ae",
+    "fatigue/full_dataset/per_subject.csv": "2383390e44a234b80cd490e09165432c05434332f1a9034b6839d075acd06133",
+    "fatigue/full_dataset/metrics_v1.json": "e904d2d4ed1e131fb9963bebe35ca6aaa8e978d609ab3ca750ce541621c94ec4"
+  }
+}

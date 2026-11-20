@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EMGInsight · 手势信号实验台</title><link rel="stylesheet" href="style.css">
-<header><div class="brand"><b>∿</b> EMGInsight</div><span>手势信号实验台</span><small id="sourceMode">UCI / 离线回放</small><a class="projectNav" href="development.html">开发过程 ↗</a></header>
-<main><div class="intro"><div><p class="eyebrow">UCI GESTURES</p><h1>手势信号<span>实验台</span></h1></div><div class="modeControls"><div class="modes" role="group" aria-label="演示模式"><button id="replayMode" aria-pressed="true">观察案例</button><button id="simMode" aria-pressed="false">模拟</button></div><label id="casePicker">观察案例 <select id="case"></select></label></div></div>
-<div id="missing" hidden>请先在项目根目录运行 <code>.venv\Scripts\python.exe demo/gesture/prepare.py</code>，然后刷新。</div>
-<div id="simMissing" hidden>请运行 <code>.venv\Scripts\python.exe demo/gesture/prepare.py</code> 导出模拟所需的模型，然后刷新。</div>
+<title>EMGInsight · 手势信号实验台</title><link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/development.css"><link rel="stylesheet" href="css/lab.css"><link rel="stylesheet" href="css/training.css">
+<header class="labHeader" data-lab="gesture"></header><script src="js/lab.js"></script>
+<main><div class="intro"><div><p class="eyebrow">UCI GESTURES</p><h1>手势信号<span>实验台</span></h1></div><div class="modeControls"><nav class="modes labViews" aria-label="实验视图"><a id="replayMode" href="#replay">观察案例</a><a id="simMode" href="#simulation">模拟</a><a id="gestureTrain" href="#training">训练过程</a><a id="gestureDev" href="#development">开发过程</a></nav><label id="casePicker">观察案例 <select id="case"></select></label></div></div>
+<div id="gestureReplay"><div id="missing" hidden>请先在项目根目录运行 <code>.venv\Scripts\python.exe demo/web/export/prepare.py</code>，然后刷新。</div>
+<div id="simMissing" hidden>请运行 <code>.venv\Scripts\python.exe demo/web/export/prepare.py</code> 导出模拟所需的模型，然后刷新。</div>
 <section class="deck"><article class="scope"><div class="heading"><div><p class="eyebrow">SIGNAL MONITOR</p><h2 id="waveTitle">前臂肌电波形</h2></div><span id="user"></span></div><canvas id="wave" aria-label="八通道肌电信号与当前窗口"></canvas>
 <div class="transport"><button id="play">▶ 播放</button><label class="slider"><input id="time" type="range" min="0" step="1" aria-label="回放位置"></label><output id="clock"></output><button id="speed" title="切换播放速度">1×</button></div></article>
 <article class="pose">
@@ -35,13 +36,13 @@
       <button type="button"><span class="flowIndex">01</span><span><strong>读取与分窗</strong><small>8 路原始肌电 → 200 点</small></span></button>
       <button type="button"><span class="flowIndex">02</span><span><strong>提取特征</strong><small>200 × 8 → 24 个数</small></span></button>
       <button type="button"><span class="flowIndex">03</span><span><strong>标准化</strong><small>按训练集统计量换算</small></span></button>
-      <button type="button"><span class="flowIndex">04</span><span><strong>随机森林分类</strong><small>100 棵树 → 6 类概率</small></span></button>
+      <button type="button"><span class="flowIndex">04</span><span><strong>随机森林分类</strong><small>树的概率取平均 → 6 类概率</small></span></button>
     </div>
     <div class="flowInspector">
       <div class="heading flowInspectorHead"><h3 id="flowStageTitle"></h3><label id="flowChannelControl">通道 <span id="caseChannel"></span></label></div>
       <div id="flowEvidence" class="flowEvidence"></div>
       <div class="flowExplainers">
-        <div class="flowCode"><div class="flowCaption"><strong>关键代码示意</strong><a id="flowSource" target="_blank" rel="noopener">项目源码 ↗</a></div><pre><code id="flowCode"></code></pre></div>
+        <div class="flowCode"><div class="flowCaption"><strong>关键代码示意</strong><a id="flowSource" data-source-base="./source/" target="_blank" rel="noopener">项目源码 ↗</a></div><pre><code id="flowCode"></code></pre></div>
         <div class="flowKnowledge"><strong>机器学习原理</strong><p id="flowKnowledge"></p></div>
       </div>
     </div>
@@ -52,8 +53,78 @@
   <li><span class="traceMarker" aria-hidden="true"></span><div><strong>读取与分窗</strong><code>8 路信号 → 200 点窗口，步长 100</code><small id="traceWindow"></small></div></li>
   <li><span class="traceMarker" aria-hidden="true"></span><div><strong>提取特征</strong><code>每通道算 RMS、MAV、WL → 24 个特征</code><small id="traceFeatures"></small></div></li>
   <li><span class="traceMarker" aria-hidden="true"></span><div><strong>标准化</strong><code>用训练集的均值和标准差转换特征</code><small id="traceScale"></small></div></li>
-  <li><span class="traceMarker" aria-hidden="true"></span><div><strong>随机森林分类</strong><code>100 棵树的类别概率取平均 → 输出手势</code><small id="traceResult"></small></div></li>
+  <li><span class="traceMarker" aria-hidden="true"></span><div><strong>随机森林分类</strong><code>各树的类别概率取平均 → 输出手势</code><small id="traceResult"></small></div></li>
 </ol><small id="traceNote">高亮按回放节奏重现处理顺序，数值来自当前窗口。</small></article>
 <article id="testResults"><p class="eyebrow">TEST SET</p><h2>从误判回到波形</h2><small>行是真实动作，列是预测。点击计数查看片段。</small><div id="matrix"></div></article></section>
-<footer>数据 · Krilova 等，UCI EMG Data for Gestures，CC BY 4.0 <a href="https://doi.org/10.24432/C5ZP5C">数据来源 ↗</a></footer></main>
-<script src="session.js"></script><script src="simulator-data.js"></script><script src="simulation.js"></script><script src="hand.js"></script><script src="walkthrough.js"></script><script src="app.js"></script></html>
+</div><div id="trainingView" hidden></div><div id="gestureDevelopment" hidden>  <p id="devMissing" hidden>请先运行 <code>.venv\Scripts\python.exe demo/web/export/prepare.py</code> 生成实验数据。</p>
+  <section id="devPlayer" hidden aria-label="开发过程逐步演示">
+    <nav class="devSteps" id="devSteps" aria-label="开发阶段"></nav>
+    <div class="devScene">
+      <div class="devCopy">
+        <p class="eyebrow" id="devStageLabel"></p>
+        <h2 id="devTitle"></h2>
+        <p id="devDescription"></p>
+        <div id="devFacts" class="devFacts"></div>
+      </div>
+      <div class="devVisual">
+        <div class="devFrameBar"><small id="devInteraction"></small><button id="devReplay" type="button">↻ 重播图形</button></div>
+        <canvas id="devCanvas" role="img"></canvas>
+        <p id="devCaption"></p>
+        <div id="devGroups" class="devToolRow" role="group" aria-label="选择数据集" hidden>
+          <button type="button" data-group="train">训练集</button><button type="button" data-group="validation">验证集</button><button type="button" data-group="test">测试集</button>
+        </div>
+        <div id="devExtraction" class="devExtraction" hidden>
+          <div class="devToolRow devMetricButtons" role="group" aria-label="播放特征计算">
+            <button type="button" data-view="metric" data-value="rms">RMS</button>
+            <button type="button" data-view="metric" data-value="mav">MAV</button>
+            <button type="button" data-view="metric" data-value="wl">WL</button>
+          </div>
+          <label>观察通道 <select id="devChannel" aria-label="观察通道"></select></label>
+          <label><input id="devIncludeWL" type="checkbox"> 加入 WL</label>
+          <output id="devFeatureCount" aria-live="polite"></output>
+          <label class="devRange">查看前 <output id="devSampleCount"></output> 点 <input id="devSample" aria-label="波形采样点位置" type="range" min="1" max="200" value="200"></label>
+        </div>
+        <div id="devMatrix" class="devToolRow" role="group" aria-label="训练矩阵动画" hidden>
+          <button type="button" data-view="matrix" data-value="raw">组装 X_train</button>
+          <button type="button" data-view="matrix" data-value="scaled">应用标准化</button>
+        </div>
+        <div id="devLogic" hidden>
+          <div class="devToolRow" role="group" aria-label="逻辑回归计算步骤">
+            <button type="button" data-view="logistic" data-value="scores">① 线性打分</button>
+            <button type="button" data-view="logistic" data-value="softmax">② Softmax 概率</button>
+            <button type="button" data-view="logistic" data-value="curve">③ 改变特征</button>
+          </div>
+          <label id="devSweep" hidden>移动特征值 <input id="devFeature" aria-label="改变标准化特征值" type="range" min="0" max="80" value="40"></label>
+        </div>
+        <label id="devNeighbors" class="devRange" hidden>邻居数 k = <output id="devKnnCount"></output> <input id="devKnn" aria-label="参与投票的邻居数量" type="range" min="1" max="15" value="15"></label>
+        <div id="devBranches" class="devToolRow" role="group" aria-label="决策树路径阶段" hidden>
+          <button type="button" data-depth="0">起点</button><button type="button" data-depth="1">第 1 次判断</button><button type="button" data-depth="2">第 2 次判断</button><button type="button" data-depth="3">汇总结果</button>
+        </div>
+        <label id="devComparison" class="devToolRow" hidden>验证配置 <select id="devCompare">
+          <option value="all">各模型最佳配置</option><option>RMS+MAV</option><option>RMS+MAV+WL</option>
+        </select></label>
+        <div id="devArtifacts" hidden>
+          <div class="devToolRow" role="group" aria-label="选择实验产物">
+            <button type="button" data-view="artifact" data-value="relation">特征与类别</button>
+            <button type="button" data-view="artifact" data-value="scale">标准化参数</button>
+            <button type="button" data-view="artifact" data-value="weights">模型参数</button>
+            <button type="button" data-view="artifact" data-value="tree">决策树结构</button>
+          </div>
+          <div class="devToolRow">
+            <label id="devMetricControl">特征 <select id="devArtifactMetric"><option value="0">RMS</option><option value="1">MAV</option><option value="2">WL</option></select></label>
+            <label id="devClassControl" hidden>逻辑回归类别 <select id="devArtifactClass"></select></label>
+          </div>
+        </div>
+        <div id="devLive" class="devLive" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="devControls">
+      <button type="button" id="devPrev">← 上一步</button>
+      <span id="devPosition" aria-live="polite"></span>
+      <button type="button" id="devNext">下一步 →</button>
+      <a id="devFinish" href="#replay" hidden>体验随机森林 →</a>
+    </div>
+    <details id="devCandidates" hidden><summary>查看 12 组验证候选与测试结果</summary><div id="devTable"></div></details>
+  </section>
+</div><footer>数据 · Krilova 等，UCI EMG Data for Gestures，CC BY 4.0 <a href="https://doi.org/10.24432/C5ZP5C">数据来源 ↗</a></footer></main>
+<script src="data/session.js"></script><script src="data/simulator-data.js"></script><script src="js/simulation.js"></script><script src="js/hand.js"></script><script src="js/walkthrough.js"></script><script src="js/app.js"></script><script src="data/development-data.js"></script><script src="js/development_diagrams.js"></script><script src="js/development.js"></script><script src="data/training-data.js"></script><script src="js/training.js"></script></html>
