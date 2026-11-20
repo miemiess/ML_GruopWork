@@ -1,0 +1,54 @@
+{
+  "path": "results/runs/force/force_change_model.joblib",
+  "bytes": 551,
+  "sha256": "12be2f1d74a82b1a2e57713c8d592470058379dfd1c25e88faa2eb6952c08e32",
+  "estimator": "StandardScaler + Ridge",
+  "alpha": 100.0,
+  "target": "median of mean rest-referenced FORCE_7..10 during one hold",
+  "subjects": {
+    "train": [
+      "03",
+      "09",
+      "12",
+      "14",
+      "18",
+      "23"
+    ],
+    "validation": [
+      "26",
+      "36",
+      "49"
+    ],
+    "test": [
+      "15",
+      "17",
+      "53",
+      "05",
+      "46",
+      "42",
+      "04",
+      "16",
+      "11"
+    ]
+  },
+  "unit": "putEMG 原始刻度",
+  "features": [
+    "FORCE_1_pred",
+    "FORCE_2_pred",
+    "FORCE_3_pred",
+    "FORCE_4_pred",
+    "FORCE_5_pred",
+    "FORCE_6_pred",
+    "FORCE_7_pred",
+    "FORCE_8_pred",
+    "FORCE_9_pred",
+    "FORCE_10_pred"
+  ],
+  "protocols": [
+    "traj4-20",
+    "traj4-40"
+  ],
+  "stage1_sha256": "bafe0af0b0e3a5f9143bb4d6e6d7c101c67dcef62f6b52ebc1e4bde402c08a82",
+  "sklearn_version": "1.7.2",
+  "format_version": 1
+}

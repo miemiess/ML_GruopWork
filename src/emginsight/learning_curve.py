@@ -13,11 +13,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score
 
 from emginsight.models import MajorityClassifier, Standardizer
-from emginsight.putemg_force import experiment as force
-from emginsight.putemg_force.model import smooth, transform
-from emginsight.putemg_force.preprocessing import prepare_data
-from emginsight.putemg_force.targets import target_metrics
-from emginsight.uci_gesture import experiment as gesture
+from emginsight.force import regression as force
+from emginsight.force.model import smooth, transform
+from emginsight.force.preprocessing import prepare_data
+from emginsight.force.targets import target_metrics
+from emginsight.gesture import experiment as gesture
 
 SEED = 42
 REPEATS = 5
@@ -48,7 +48,7 @@ def subsets(subjects, sizes, repeats=REPEATS):
 def force_curve(root, cache):
     X, y_raw, tare, rest, index, groups, _ = prepare_data(root, cache)
     target = y_raw - tare
-    choice = json.loads(Path("results/putemg_force/regression/metrics.json").read_text(encoding="utf-8"))["selected"]
+    choice = json.loads(Path("results/force/regression/metrics.json").read_text(encoding="utf-8"))["selected"]
     inputs = transform(X, rest, choice["features"], choice["scale"])
     factory = {(n, p): f for n, p, f in force.model_candidates()}[(choice["model"], choice["parameter"])]
     val = (index.group == "validation").to_numpy()
@@ -93,15 +93,15 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--force-data", type=Path, default=Path("data/raw/EMG_data_for_putemgforce"))
     parser.add_argument("--gesture-data", type=Path, default=Path("data/raw/EMG_data_for_gestures-master"))
-    parser.add_argument("--cache-dir", type=Path, default=Path("results/runs/putemg_force"))
+    parser.add_argument("--cache-dir", type=Path, default=Path("results/runs/force"))
     parser.add_argument("--output-dir", type=Path, default=Path("results/learning_curve"))
     parser.add_argument("--only", choices=("force", "gesture"))
     args = parser.parse_args(argv)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     if args.only != "force":
-        gesture_curve(args.gesture_data).to_csv(args.output_dir / "uci_gesture.csv", index=False)
+        gesture_curve(args.gesture_data).to_csv(args.output_dir / "gesture.csv", index=False)
     if args.only != "gesture":
-        force_curve(args.force_data, args.cache_dir).to_csv(args.output_dir / "putemg_force.csv", index=False)
+        force_curve(args.force_data, args.cache_dir).to_csv(args.output_dir / "force.csv", index=False)
 
 
 if __name__ == "__main__":

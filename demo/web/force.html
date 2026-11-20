@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EMGInsight · 指力预测实验台</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/force.css"><link rel="stylesheet" href="css/lab.css"><link rel="stylesheet" href="css/training.css">
+<header class="labHeader" data-lab="force"></header><script src="js/lab.js"></script>
+<main>
+  <div class="intro"><div><p class="eyebrow">PUTEMG FORCE</p><h1>指力预测<span>实验台</span></h1></div>
+  <nav class="modes labViews" aria-label="实验视图"><a data-view="replay" href="#continuous/replay">观察案例</a><a data-view="training" href="#continuous/training">训练过程</a><a data-view="development" href="#continuous/development">开发过程</a></nav></div>
+  <nav class="modelRail" aria-label="选择指力模型">
+    <a data-model="continuous" href="#continuous/replay"><small>REGRESSION</small><strong>连续指力</strong><span>每窗十路力量</span></a>
+    <a data-model="levels" href="#levels/replay"><small>CLASSIFICATION</small><strong>力度三档</strong><span>静息 · 轻 · 重</span></a>
+    <a data-model="change" href="#change/replay"><small>LONGITUDINAL</small><strong>两日力量变化</strong><span>基线与复测之差</span></a>
+  </nav>
+  <div id="modelDemo" hidden></div>
+  <div id="trainingView" hidden></div>
+  <p id="error" hidden>缺少实验快照。请在项目根目录运行 <code>.venv\Scripts\python.exe demo/web/export/force_export.py</code> 后刷新。</p>
+  <section id="replay" class="deck" hidden>
+    <article><div class="heading"><div><p class="eyebrow">HELD-OUT RECORDING</p><h2>实测与预测曲线</h2></div><label>力量通道 <select id="target"></select></label></div>
+      <p class="sub" id="caseInfo"></p>
+      <p class="eyebrow">输入 · EMG_1 每窗 RMS</p>
+      <svg id="inputTrace" viewBox="0 0 640 64" role="img" aria-label="通道一的肌电强度特征，与下方力量曲线共用时间轴"></svg>
+      <div class="legend"><span>实测</span><span>森林预测 · 已平滑</span><span>训练均值基线</span></div>
+      <svg id="plot" viewBox="0 0 640 225" role="img" aria-label="当前力量通道随时间变化的三条曲线"></svg>
+      <div class="transport"><button id="play">▶ 播放</button><label class="slider"><input id="seek" type="range" min="0" step="1" aria-label="记录时间"></label><output id="clock"></output></div>
+    </article>
+    <article><p class="eyebrow">OUTPUT · 10 TARGETS</p><h2>当前窗口的十路输出</h2><p class="sub">点选通道可查看对应曲线。数值为相对静息零点的力量，物理单位未标定。</p>
+      <div id="channels"></div><p class="readout" id="difference"></p></article>
+  </section>
+  <section id="pipeline" class="panel" hidden><p class="eyebrow">WINDOW → FORCE</p><h2>这个窗口怎样得到预测</h2><div id="liveSteps" class="tiles"></div></section>
+  <section id="development" class="panel" hidden>
+    <p class="eyebrow">EXPERIMENT D · DEVELOPMENT</p><h2>从肌电记录到连续指力</h2><nav id="stages" aria-label="开发阶段"></nav>
+    <div id="scene"><h3 id="stageTitle"></h3><p id="story"></p><div id="evidence"></div><pre id="code"></pre><small id="source"></small></div>
+    <div class="stepControls"><button id="prev">← 上一步</button><output id="counter"></output><button id="next">下一步 →</button></div>
+  </section>
+  <footer>putEMG-Force · repeats_long · 项目 D 实验结果</footer>
+</main>
+<script src="data/force-data.js"></script><script src="js/force.js"></script><script src="data/model-data.js"></script><script src="js/model-demo.js"></script><script src="data/training-data.js"></script><script src="js/training.js"></script>
+</html>

@@ -24,4 +24,4 @@
 .\.venv\Scripts\python.exe -m emginsight.learning_curve
 ```
 
-需要原始数据和指力特征缓存。本机手势约 10 秒，指力约 8 分钟（含读取缓存）。输出为 [uci_gesture.csv](uci_gesture.csv) 和 [putemg_force.csv](putemg_force.csv)，每次抽样一行，记录所用用户编号。网页“训练过程”的第 2 步读取这两个文件。
+需要原始数据和指力特征缓存。本机手势约 10 秒，指力约 8 分钟（含读取缓存）。输出为 [gesture.csv](gesture.csv) 和 [force.csv](force.csv)，每次抽样一行，记录所用用户编号。网页“训练过程”的第 2 步读取这两个文件。

@@ -10,9 +10,9 @@
 docker build -f deploy/gesture/Dockerfile -t emginsight-gesture .
 ```
 
-构建前需准备 `results/runs/uci_gesture/gesture_model.joblib` 和 `results/uci_gesture/classification/model_card.json`。
+构建前需准备 `results/runs/gesture/gesture_model.joblib` 和 `results/gesture/classification/model_card.json`。
 
-- 准备好 UCI 数据后，运行 `python -m emginsight.uci_gesture.experiment` 生成；本机约 12 秒；或
+- 准备好 UCI 数据后，运行 `python -m emginsight.gesture.experiment` 生成；本机约 12 秒；或
 - 从组内分发处取得模型和对应的模型卡，按上述路径放置。
 
 `.dockerignore` 只放行源码、两个镜像共用的依赖清单 `deploy/requirements.txt` 和模型相关文件，原始数据不会进入镜像。镜像约 0.8 GB。
@@ -24,7 +24,7 @@ docker build -f deploy/gesture/Dockerfile -t emginsight-gesture .
 不用 Docker 时，在项目虚拟环境中运行同一入口：
 
 ```powershell
-.\.venv\Scripts\python.exe -m emginsight.uci_gesture.predict --input deploy/gesture/input --output-dir deploy/gesture/output
+.\.venv\Scripts\python.exe -m emginsight.gesture.predict --input deploy/gesture/input --output-dir deploy/gesture/output
 ```
 
 ### 输入格式
@@ -47,7 +47,7 @@ UCI 原始 txt（制表符或空格分隔）或 CSV（逗号分隔）均可。
 
 类别：0 未知、1 静息、2 握拳、3 腕屈、4 腕伸、5 桡偏、6 尺偏。
 
-**“未知”**：六类中最大概率低于 0.75 时输出 0。阈值在 C 实验验证用户上选出，保存在模型文件里。动作之间的过渡、没训练过的手势或模型拿不准的窗口会被标为未知。代价是部分真实手势也会被判为未知：测试用户上约 41%，被接受手势的准确率从 77.6% 升到 93.6%。需要六类结果时使用 `raw_prediction`。各项精度见[实验报告](../../results/uci_gesture/classification/report.md)。
+**“未知”**：六类中最大概率低于 0.75 时输出 0。阈值在 C 实验验证用户上选出，保存在模型文件里。动作之间的过渡、没训练过的手势或模型拿不准的窗口会被标为未知。代价是部分真实手势也会被判为未知：测试用户上约 41%，被接受手势的准确率从 77.6% 升到 93.6%。需要六类结果时使用 `raw_prediction`。各项精度见[实验报告](../../results/gesture/classification/report.md)。
 
 ## 3. 一致性验证
 

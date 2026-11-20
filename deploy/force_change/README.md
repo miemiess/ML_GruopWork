@@ -4,14 +4,14 @@
 
 ## 1. 准备模型
 
-本机已有 `results/runs/putemg_force/force_model.joblib` 和 `force_change_model.joblib`。从新检出复现时，可放入组内分发的这两个文件及匹配的模型卡，或按顺序运行：
+本机已有 `results/runs/force/force_model.joblib` 和 `force_change_model.joblib`。从新检出复现时，可放入组内分发的这两个文件及匹配的模型卡，或按顺序运行：
 
 ```powershell
-.\.venv\Scripts\python.exe -m emginsight.putemg_force.experiment
-.\.venv\Scripts\python.exe -m emginsight.putemg_force.change_experiment
+.\.venv\Scripts\python.exe -m emginsight.force.regression
+.\.venv\Scripts\python.exe -m emginsight.force.change_experiment
 ```
 
-第一条生成冻结模型和每条记录的特征缓存。第二条拟合、验证、测试并回读第二阶段模型，输出[实验报告与模型卡](../../results/putemg_force/change/report.md)。更新模型或源码后，从项目根目录构建镜像：
+第一条生成冻结模型和每条记录的特征缓存。第二条拟合、验证、测试并回读第二阶段模型，输出[实验报告与模型卡](../../results/force/change/report.md)。更新模型或源码后，从项目根目录构建镜像：
 
 ```powershell
 docker compose -f deploy/force_change/docker-compose.yml build
@@ -24,7 +24,7 @@ docker compose -f deploy/force_change/docker-compose.yml build
 预训练模型支持 `traj4-20` 和 `traj4-40`，分别对应独立第四组指令的 20% 和 40% MVC 保持段。同一次比较选择一个协议。两天的 MVC 各自测定。用户 04 的 40% 示例可这样准备：
 
 ```powershell
-Copy-Item results/putemg_force/change/visits.csv deploy/force_change/input/
+Copy-Item results/force/change/visits.csv deploy/force_change/input/
 Copy-Item data/raw/EMG_data_for_putemgforce/emg_force_04/*repeats_long*.csv deploy/force_change/input/
 ```
 
@@ -39,7 +39,7 @@ docker compose -f deploy/force_change/docker-compose.yml run --rm predict
 本地 Python 使用相同入口：
 
 ```powershell
-.\.venv\Scripts\python.exe -m emginsight.putemg_force.change_predict --trials deploy/force_change/input/visits.csv --output-dir deploy/force_change/output
+.\.venv\Scripts\python.exe -m emginsight.force.change_predict --trials deploy/force_change/input/visits.csv --output-dir deploy/force_change/output
 ```
 
 | output 文件 | 用途 |
@@ -52,10 +52,10 @@ docker compose -f deploy/force_change/docker-compose.yml run --rm predict
 
 ## 4. 使用个人牛顿标定
 
-公共模型输出 putEMG 原始刻度。采到配对测力计读数后，可按[个人标定清单格式](../../src/emginsight/putemg_force/README.md#准备两份清单)准备 `input/calibration.csv`。在项目根目录运行：
+公共模型输出 putEMG 原始刻度。采到配对测力计读数后，可按[个人标定清单格式](../../src/emginsight/force/README.md#准备两份清单)准备 `input/calibration.csv`。在项目根目录运行：
 
 ```powershell
-.\.venv\Scripts\python.exe -m emginsight.putemg_force.change fit --trials deploy/force_change/input/calibration.csv --calibration deploy/force_change/input/personal.joblib
+.\.venv\Scripts\python.exe -m emginsight.force.change fit --trials deploy/force_change/input/calibration.csv --calibration deploy/force_change/input/personal.joblib
 docker compose -f deploy/force_change/docker-compose.yml run --rm predict --trials /data/input/visits.csv --model /data/input/personal.joblib --card /data/input/personal.card.json --output-dir /data/output/personal
 ```
 

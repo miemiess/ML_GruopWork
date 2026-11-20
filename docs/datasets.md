@@ -26,12 +26,12 @@
 - 默认只对实验记录分窗，10 份 bias/mvc 校准记录不作为训练样本；13 份实验记录共生成 39020 个窗口。
 - 三用户默认每组一人，seed=42 对应训练 05、验证 04、测试 03；同一用户的不同日期与实验类型不跨组。
 - 用户 03 仅包含 repeats_long，另外两名用户包含三种实验类型。正式评估前需统一记录类型或补齐数据，并扩大用户覆盖。
-- [外部调用说明](../src/emginsight/putemg_force/README.md)、[实际验证报告](../results/putemg_force/processing_check.json)。原始数据继续被 Git 忽略。
+- [外部调用说明](../src/emginsight/force/README.md)、[实际验证报告](../results/force/processing_check.json)。原始数据继续被 Git 忽略。
 
 ## Zenodo 疲劳本地进度（2026-11-13）
 
 - 已解压肌电及评分，共 13 名用户、156 份试验。按用户＋试验编号配对，MVC 校准文件不作为试验样本。
-- 模块 `emginsight.zenodo_fatigue` 支持读取、独立评分时间对齐、用户划分及纯等级分窗。默认按协议取主动力肌，每窗 5036 点、步长 2518 点。
+- 模块 `emginsight.fatigue` 支持读取、独立评分时间对齐、用户划分及纯等级分窗。默认按协议取主动力肌，每窗 5036 点、步长 2518 点。
 - 全部试验可读取；默认分组为 8/3/2 人，产出 13732/6738/2540 个窗口，用户不重叠，评分 0/1/2 均保留。
 - 处理器在内存中记录并剔除 46 行肌电补零尾行、8 行同评分但时间倒退/重复的评分尾行，涉及 44 份记录，原始文件不变。其他异常不自动修复。
-- [调用说明](../src/emginsight/zenodo_fatigue/README.md)、[完整检查报告](../results/zenodo_fatigue/processing_check.json)。时间基准、主观评分解释与通道选择应在最终实验中披露。
+- [调用说明](../src/emginsight/fatigue/README.md)、[完整检查报告](../results/fatigue/processing_check.json)。时间基准、主观评分解释与通道选择应在最终实验中披露。

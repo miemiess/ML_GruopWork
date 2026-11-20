@@ -63,7 +63,6 @@ htmlcov/
 *.gz
 
 # 本地配置与 Notebook
-/configs/*.local.toml
 .ipython/
 .jupyter/
 

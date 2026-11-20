@@ -10,9 +10,9 @@
 docker build -f deploy/force/Dockerfile -t emginsight-force .
 ```
 
-构建前需准备 `results/runs/putemg_force/` 中的 `force_model.joblib`（连续力量）和 `force_level_model.joblib`（三档）。模型卡分别位于 `results/putemg_force/regression/model_card.json` 和 `results/putemg_force/levels/model_card.json`。回归目录下还需要 `monitoring_reference.json`。
+构建前需准备 `results/runs/force/` 中的 `force_model.joblib`（连续力量）和 `force_level_model.joblib`（三档）。模型卡分别位于 `results/force/regression/model_card.json` 和 `results/force/levels/model_card.json`。回归目录下还需要 `monitoring_reference.json`。
 
-- 依次运行 `python -m emginsight.putemg_force.experiment` 和 `python -m emginsight.putemg_force.levels` 训练生成；或
+- 依次运行 `python -m emginsight.force.regression` 和 `python -m emginsight.force.levels` 训练生成；或
 - 从组内分发处取得模型和对应的模型卡，按上述路径放置。
 
 `.dockerignore` 只放行源码、两个镜像共用的依赖清单 `deploy/requirements.txt` 和模型相关文件，原始数据不会进入镜像。镜像约 0.9 GB，本机首次构建约 45 秒。
@@ -24,7 +24,7 @@ docker build -f deploy/force/Dockerfile -t emginsight-force .
 不用 Docker 时，在项目虚拟环境中运行同一入口：
 
 ```powershell
-.\.venv\Scripts\python.exe -m emginsight.putemg_force.predict --input deploy/force/input --output-dir deploy/force/output
+.\.venv\Scripts\python.exe -m emginsight.force.predict --input deploy/force/input --output-dir deploy/force/output
 ```
 
 ### 输入格式
@@ -49,7 +49,7 @@ docker build -f deploy/force/Dockerfile -t emginsight-force .
 - `<文件名>_levels.png`：三档时间线和各档概率。
 - `summary.json`：在[通用汇总字段](../README.md#结果)之外，包含漂移检查和三档预测信息。
 
-预测值是**相对静息的 putEMG 原始力量数值，不是牛顿**；它反映趋势和相对大小，幅度通常偏小。三档按每个人自己的最大力定义：轻约 25% MVC，重约 50% MVC。测试用户上三档 macro-F1 为 0.511，“轻”常被判为静息。各项精度见[回归报告](../../results/putemg_force/regression/report.md)和[三档报告](../../results/putemg_force/levels/report.md)。
+预测值是**相对静息的 putEMG 原始力量数值，不是牛顿**；它反映趋势和相对大小，幅度通常偏小。三档按每个人自己的最大力定义：轻约 25% MVC，重约 50% MVC。测试用户上三档 macro-F1 为 0.511，“轻”常被判为静息。各项精度见[回归报告](../../results/force/regression/report.md)和[三档报告](../../results/force/levels/report.md)。
 
 ## 3. 一致性验证
 

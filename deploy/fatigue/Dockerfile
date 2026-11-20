@@ -6,9 +6,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY pyproject.toml README.md ./
 COPY src ./src
 RUN pip install --no-cache-dir --no-deps .
-COPY results/runs/full_fatigue/fatigue_model.joblib /app/model/fatigue_model.joblib
-COPY results/zenodo_fatigue/full_dataset/model_card.json /app/model/model_card.json
+COPY results/runs/fatigue/full_dataset/fatigue_model.joblib /app/model/fatigue_model.joblib
+COPY results/fatigue/full_dataset/model_card.json /app/model/model_card.json
 RUN useradd --create-home --uid 1000 app
 USER app
-ENTRYPOINT ["python","-m","emginsight.zenodo_fatigue.predict","--model","/app/model/fatigue_model.joblib","--card","/app/model/model_card.json"]
+ENTRYPOINT ["python","-m","emginsight.fatigue.predict","--model","/app/model/fatigue_model.joblib","--card","/app/model/model_card.json"]
 CMD ["--help"]
