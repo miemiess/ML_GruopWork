@@ -1,0 +1,7 @@
+scope,model,validation_subject_macro_f1
+four,logistic,0.3544367237526016
+four,trees_leaf20,0.3300313533241255
+agonist,logistic,0.3256674518814562
+agonist,trees_leaf20,0.30417687072394
+four,trees_leaf5,0.3024389482849163
+agonist,trees_leaf5,0.281869070154723

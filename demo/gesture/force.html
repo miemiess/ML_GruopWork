@@ -2,11 +2,18 @@
 <html lang="zh-CN">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EMGInsight · 指力预测实验台</title>
-<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="force.css">
-<header><div class="brand"><b>∿</b> EMGInsight</div><span>指力预测实验台</span><small>putEMG / 离线回放</small><a class="projectNav" href="index.html">手势信号实验台 →</a></header>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="force.css"><link rel="stylesheet" href="lab.css"><link rel="stylesheet" href="training.css">
+<header class="labHeader" data-lab="force"></header><script src="lab.js"></script>
 <main>
-  <div class="intro"><div><p class="eyebrow">PUTEMG FORCE · REGRESSION</p><h1>指力预测<span>实验台</span></h1></div>
-  <nav class="modes" aria-label="实验视图"><a href="#replay">观察案例</a><a href="#development">开发过程</a></nav></div>
+  <div class="intro"><div><p class="eyebrow">PUTEMG FORCE</p><h1>指力预测<span>实验台</span></h1></div>
+  <nav class="modes labViews" aria-label="实验视图"><a data-view="replay" href="#continuous/replay">观察案例</a><a data-view="training" href="#continuous/training">训练过程</a><a data-view="development" href="#continuous/development">开发过程</a></nav></div>
+  <nav class="modelRail" aria-label="选择指力模型">
+    <a data-model="continuous" href="#continuous/replay"><small>REGRESSION</small><strong>连续指力</strong><span>每窗十路力量</span></a>
+    <a data-model="levels" href="#levels/replay"><small>CLASSIFICATION</small><strong>力度三档</strong><span>静息 · 轻 · 重</span></a>
+    <a data-model="change" href="#change/replay"><small>LONGITUDINAL</small><strong>两日力量变化</strong><span>基线与复测之差</span></a>
+  </nav>
+  <div id="modelDemo" hidden></div>
+  <div id="trainingView" hidden></div>
   <p id="error" hidden>缺少实验快照。请在项目根目录运行 <code>.venv\Scripts\python.exe demo/gesture/force_export.py</code> 后刷新。</p>
   <section id="replay" class="deck" hidden>
     <article><div class="heading"><div><p class="eyebrow">HELD-OUT RECORDING</p><h2>实测与预测曲线</h2></div><label>力量通道 <select id="target"></select></label></div>
@@ -28,5 +35,5 @@
   </section>
   <footer>putEMG-Force · repeats_long · 项目 D 实验结果</footer>
 </main>
-<script src="force-data.js"></script><script src="force.js"></script>
+<script src="force-data.js"></script><script src="force.js"></script><script src="model-data.js"></script><script src="model-demo.js"></script><script src="training-data.js"></script><script src="training.js"></script>
 </html>

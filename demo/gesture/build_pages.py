@@ -3,6 +3,8 @@
 import json
 from pathlib import Path
 from shutil import copyfile
+from model_export import export as export_models
+from training_export import export as export_training
 
 from snapshots import (
     FORCE_REPORT, FORCE_REPORT_FILES, GESTURE_REPORT, GESTURE_REPORT_FILES, HERE, ROOT,
@@ -13,7 +15,8 @@ OUTPUT = ROOT / "build/pages"
 PAGES = (
     "index.html", "style.css", "app.js", "hand.js", "simulation.js", "walkthrough.js",
     "development.html", "development.css", "development.js", "development_diagrams.js",
-    "force.html", "force.css", "force.js",
+    "force.html", "force.css", "force.js", "fatigue.html", "lab.css", "lab.js", "model-demo.js",
+    "training.css", "training.js", "fatigue-single.html", "full-fatigue.js",
 )
 GESTURE_SNAPSHOTS = ("session.js", "simulator-data.js", "development-data.js")
 FORCE_SNAPSHOTS = ("force-data.js",)
@@ -39,7 +42,9 @@ def build():
     force = experiment_source(FORCE_REPORT, FORCE_REPORT_FILES)
     check_snapshots(GESTURE_SNAPSHOTS, gesture, "python demo/gesture/prepare.py")
     check_snapshots(FORCE_SNAPSHOTS, force, "python demo/gesture/force_export.py")
-    assets = PAGES + GESTURE_SNAPSHOTS + FORCE_SNAPSHOTS
+    model_sources = export_models()
+    model_sources.update(export_training())
+    assets = PAGES + GESTURE_SNAPSHOTS + FORCE_SNAPSHOTS + ("model-data.js", "training-data.js", "full-fatigue-data.js")
     files = {Path(name) for name in assets}
     files.update(Path("source") / name for name in SOURCE_FILES)
     files.update((Path(".nojekyll"), Path("snapshot-manifest.json")))
@@ -64,7 +69,7 @@ def build():
         destination.parent.mkdir(parents=True, exist_ok=True)
         copyfile(ROOT / "src/emginsight" / name, destination)
     (OUTPUT / ".nojekyll").touch()
-    manifest = {"uci_gesture": gesture, "putemg_force": force}
+    manifest = {"uci_gesture": gesture, "putemg_force": force, **model_sources}
     (OUTPUT / "snapshot-manifest.json").write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8",
     )

@@ -175,3 +175,48 @@ pytest 使用 importlib 模式，支持不同工程下重复使用 `test_reading
 用已训练模型预测原始 CSV，运行 `python -m emginsight.putemg_force.predict --input 文件或目录 --output-dir 输出目录`。
 Docker 打包与输入输出格式见[部署说明](../../../deploy/force/README.md)。
 三档力量分类：`python -m emginsight.putemg_force.levels`（需先完成回归实验），见[三档报告](../../../results/putemg_force/levels/report.md)。
+
+## 个人动作力量变化（两步回归）
+
+公共数据实验依次运行 `experiment`、`change_experiment`、`change_predict`。训练好的 `force_change_model.joblib` 可以直接比较两日的 putEMG 原始刻度。[独立用户的验证与测试](../../../results/putemg_force/change/report.md) · [Docker 与完整输出](../../../deploy/force_change/README.md)。下文适用于有个人测力计参考值的牛顿标定。
+
+第一步沿用 24 路肌电模型，预测十路指力。第二步把同一次动作保持段内的十路预测分别取中位数，用标准化岭回归拟合同步测力计读数（N）。每天重复动作时，先估算每次动作的力量，再取当天中位数。患者端只显示“复测日中位数 − 基线日中位数”，正号表示这次动作估计用力更大。
+
+### 准备两份清单
+
+把同一人的匿名编号、手侧、动作和测量协议固定下来，例如用 `left-pinch-v1` 表示左手在约定姿势、设备和电极位置下完成的捏力任务。将原始肌电 CSV 和下面两份清单放在本地，例如 `deploy/force/input/personal/`。每份原始 CSV 仍需 24 路肌电、约 5120 Hz 和开头 4 秒静息。
+
+**标定清单 `calibration.csv`** 每行代表一次动作。以下为格式示例，`实测值` 须换成同一保持段内已调零、已标定测力计的牛顿读数中位数。时间从该肌电记录开头算起，两台设备的时间需对齐。putEMG 的原始 FORCE、动作指令和 MVC 百分比均不能填作牛顿参考。
+
+```csv
+patient,protocol,date,record,start_s,end_s,reference_n,split
+P01,left-pinch-v1,2026-06-01,cal.csv,8,11,实测值,fit
+P01,left-pinch-v1,2026-06-01,cal.csv,18,21,实测值,fit
+P01,left-pinch-v1,2026-06-02,check1.csv,8,11,实测值,check
+P01,left-pinch-v1,2026-06-03,check2.csv,8,11,实测值,check
+```
+
+拟合日采集多次动作，覆盖预期的力量范围。随后至少留出两个日期核对跨日变化；留出日与正式比较日使用相同的动作要求、出力指令和重复方案。每次重复各占一行。清单中的时间应位于稳定保持段内，足以覆盖 200 ms 窗及因果平滑历史。
+
+**比较清单 `visits.csv`** 只列基线日和本次复测日，两天都在拟合日之后。程序按日期排序，随访时只需要肌电。
+
+```csv
+patient,protocol,date,record,start_s,end_s
+P01,left-pinch-v1,2026-06-04,baseline.csv,8,11
+P01,left-pinch-v1,2026-06-04,baseline.csv,18,21
+P01,left-pinch-v1,2026-06-11,followup.csv,8,11
+P01,left-pinch-v1,2026-06-11,followup.csv,18,21
+```
+
+### 在项目根目录运行
+
+```powershell
+$records = 'deploy/force/input/personal'
+$cal = 'deploy/force/output/personal/P01-left-pinch.joblib'
+.\.venv\Scripts\python.exe -m emginsight.putemg_force.change fit --trials "$records/calibration.csv" --calibration $cal
+.\.venv\Scripts\python.exe -m emginsight.putemg_force.change change --trials "$records/visits.csv" --calibration $cal
+```
+
+`fit` 保存个人模型及同名的 `.card.json` 模型卡。卡片中的 `validation` 给出十路融合、单独标定 FORCE_8、始终预测零变化的误差（N）。每个留出日都与最早的留出日比较。十路的平均绝对误差须低于零变化基线，`change` 才会显示数值。两天留出数据只能提供一次变化对照。
+
+`change` 成功时只输出一行，例如 `本次动作力量较基线的估计变化　+3.2 N`（格式示例）。现有公开数据没有这个个人标定所需的配对牛顿真值。实际用于患者前还需在目标人群验证跨日误差和重复测量波动。一次标准动作的力量变化，不能直接换算成康复百分比。

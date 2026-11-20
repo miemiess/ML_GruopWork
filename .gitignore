@@ -42,6 +42,10 @@ htmlcov/
 !/deploy/force/input/.gitkeep
 /deploy/force/output/*
 !/deploy/force/output/.gitkeep
+/deploy/force_change/input/*
+!/deploy/force_change/input/.gitkeep
+/deploy/force_change/output/*
+!/deploy/force_change/output/.gitkeep
 /deploy/gesture/input/*
 !/deploy/gesture/input/.gitkeep
 /deploy/gesture/output/*
@@ -72,3 +76,7 @@ Desktop.ini
 
 # 本地参考项目，不作为当前仓库的子模块发布。
 /Example_from_other/
+/deploy/fatigue/input/*
+!/deploy/fatigue/input/.gitkeep
+/deploy/fatigue/output/*
+!/deploy/fatigue/output/.gitkeep

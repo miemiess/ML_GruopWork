@@ -131,7 +131,7 @@ def load_fatigue_record(
         end = len(frame)
         while end > 1 and any(
             frame[time_name].iloc[end - 1] == 0 and frame[signal_name].iloc[end - 1] == 0
-            and frame[time_name].iloc[end - 2] > 0
+            and frame[time_name].iloc[:end - 1].max() > 0
             for time_name, signal_name in zip(time_columns, selected)
         ):
             end -= 1

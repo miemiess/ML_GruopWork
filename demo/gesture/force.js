@@ -43,9 +43,9 @@
       `<path d="M46 ${y(v)}h581" stroke="#343b48"/><text x="39" y="${y(v)+4}" text-anchor="end">${fixed(v,0)}</text>`).join("");
     $("plot").innerHTML = grid + `<text x="46" y="217">${fixed(data.time[0],1)} s</text><text x="627" y="217" text-anchor="end">${fixed(data.time[last],1)} s</text>
       <path d="M46 ${y(data.base[j])}h581" stroke="#a7afbc" stroke-dasharray="5 5"/>
-      <path d="${path(truth)}" fill="none" stroke="#9ae3cb" stroke-width="1.4"/>
-      <path d="${path(pred)}" fill="none" stroke="#d5c8fc" stroke-width="1.7"/>
-      <line id="cursor" y1="12" y2="192" stroke="#fff" opacity=".7"/><circle id="dot" r="4" fill="#d5c8fc"/>`;
+      <path d="${path(truth)}" fill="none" stroke="#8b96a8" stroke-width="1.4"/>
+      <path d="${path(pred)}" fill="none" stroke="#b3f690" stroke-width="1.7"/>
+      <line id="cursor" y1="12" y2="192" stroke="#fff" opacity=".7"/><circle id="dot" r="4" fill="#b3f690"/>`;
     refreshWindow();
   }
   function refreshWindow() {
@@ -96,9 +96,9 @@
     const min = Math.min(...direct,...averaged), range = Math.max(...direct,...averaged)-min || 1;
     const points = values => values.map((v,j)=>`${10+j*500/Math.max(1,rows.length-1)},${84-(v-min)*72/range}`).join(" ");
     return `<figure class="diagram"><svg viewBox="0 0 520 96" role="img" aria-label="同一段记录平滑前后的力量预测">
-      <polyline fill="none" stroke="#9ae3cb" stroke-width="2" points="${points(direct)}"/>
-      <polyline fill="none" stroke="#d5c8fc" stroke-width="3" points="${points(averaged)}"/></svg>
-      <figcaption>${names[target]} · ${fixed(data.time[begin],1)}–${fixed(data.time[index],1)} s　薄荷绿为森林直接输出，淡紫为五窗平滑结果。</figcaption></figure>`;
+      <polyline fill="none" stroke="#8b96a8" stroke-width="2" points="${points(direct)}"/>
+      <polyline fill="none" stroke="#b3f690" stroke-width="3" points="${points(averaged)}"/></svg>
+      <figcaption>${names[target]} · ${fixed(data.time[begin],1)}–${fixed(data.time[index],1)} s　灰色为森林直接输出，薄荷绿为五窗平滑结果。</figcaption></figure>`;
   }
   function renderStage() {
     const s = stages[stage], ev = $("evidence");
@@ -118,11 +118,12 @@
         [f,fixed(data.features[index][j],4),fixed(data.rest[j],4),fixed(data.z[index][j],3)]));
     } else if (stage === 3) {
       const winner = m.selected;
-      ev.innerHTML = tiles([tile("全局最低验证 RMSE",fixed(winner.mean_rmse),
+      ev.innerHTML = '<div id="devChart" class="devChart"></div>' + tiles([tile("全局最低验证 RMSE",fixed(winner.mean_rmse),
         winner.scale+" · "+winner.features+" · "+winner.parameter+" · "+winner.smoothing+" 窗")]) +
         '<label>比较特征尺度 <select id="scale"><option>raw</option><option>log</option><option>log_rest</option></select></label>' +
         table(["模型","特征","参数","平滑窗","验证 RMSE"],data.validation.filter(r=>r.scale===scale)
           .sort((a,b)=>a.mean_rmse-b.mean_rmse).map(r=>[r.model==="ridge"?"岭回归":"随机森林",r.features,r.parameter,r.smoothing,fixed(r.mean_rmse)]));
+      window.TrainingView?.chart($("devChart"), "continuous", "search");
       $("scale").value = scale; $("scale").onchange = e => {scale=e.target.value; renderStage(); $("scale").focus();};
     } else if (stage === 4) {
       const start = Math.max(0,index-m.selected.smoothing+1);
@@ -133,13 +134,14 @@
       ev.innerHTML = tiles([tile("测试平均 RMSE",fixed(m.test.model.rmse),"基线 "+fixed(m.test.baseline.rmse)),
         tile("测试平均 MAE",fixed(m.test.model.mae),"基线 "+fixed(m.test.baseline.mae)),
         tile("测试平均 R²",fixed(m.test.model.r2,3),"基线 "+fixed(m.test.baseline.r2,3))]) +
-        '<label>查看结果 <select id="by"><option>按力量通道</option><option>按测试用户</option></select></label><div id="scores"></div>';
+        '<div id="devChart" class="devChart"></div><label>查看结果 <select id="by"><option>按力量通道</option><option>按测试用户</option></select></label><div id="scores"></div>';
       const scores = () => {
         const byUser = $("by").selectedIndex === 1;
         $("scores").innerHTML = table([byUser?"用户":"目标","模型 RMSE","基线 RMSE","模型 R²"],data[byUser?"per_user":"per_target"]
           .map(r=>[byUser?r.subject:r.target,fixed(r.rmse_model),fixed(r.rmse_baseline),fixed(r.r2_model,3)]));
       };
       $("by").onchange=scores; scores();
+      window.TrainingView?.chart($("devChart"), "continuous", "users");
     }
   }
   function setStage(i) {
@@ -149,12 +151,9 @@
   stages.forEach((s,j) => {const b=document.createElement("button"); b.textContent=s[0]; b.onclick=()=>setStage(j); $("stages").append(b);});
   $("prev").onclick=()=>setStage(stage-1); $("next").onclick=()=>setStage(stage+1);
   function view() {
-    const dev = location.hash === "#development";
-    stop(); $("development").hidden=!dev; $("replay").hidden=dev; $("pipeline").hidden=dev;
-    document.querySelectorAll(".modes a").forEach((a,j)=> {
-      if (j===Number(dev)) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
-    });
-    if (dev) renderStage();
+    const {model,development:dev,training}=modelRoute(), continuous=model==="continuous"&&!training;
+    stop(); $("development").hidden=!continuous||!dev; $("replay").hidden=!continuous||dev; $("pipeline").hidden=!continuous||dev;
+    if (continuous && dev) renderStage();
   }
   selectTarget(target); view(); window.addEventListener("hashchange",view);
 })();

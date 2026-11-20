@@ -1,0 +1,12 @@
+name: emginsight-fatigue
+services:
+  predict:
+    image: emginsight-fatigue:latest
+    build:
+      context: ../..
+      dockerfile: deploy/fatigue/Dockerfile
+    pull_policy: never
+    volumes:
+      - ./input:/data/input:ro
+      - ./output:/data/output
+    command: ["--input","/data/input","--output-dir","/data/output"]

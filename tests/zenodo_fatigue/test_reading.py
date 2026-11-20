@@ -67,15 +67,17 @@ def test_terminal_repairs_are_audited(make_pair):
 ## @brief 验证只有主肌的末尾时间/信号补零时也能有限修正。
 # @param make_pair 合成配对文件工厂。
 # @return None: 仅移除补零尾行，其他原始列存在非零值时也不误判为内部时间异常。
-def test_partial_channel_zero_tail(make_pair):
+@pytest.mark.parametrize("tail_rows", [1, 2])
+def test_partial_channel_zero_tail(make_pair, tail_rows):
     emg, label = make_pair()
     frame = pd.read_csv(emg)
-    frame.loc[len(frame)] = [.12, 24., 0., 0.]
+    for i in range(tail_rows):
+        frame.loc[len(frame)] = [.12 + i * .01, 24., 0., 0.]
     frame.to_csv(emg, index=False)
     record = load_fatigue_record(emg, label)
     assert len(record.time) == 12
-    assert record.repairs["emg_zero_tail_rows"] == 1
-    assert len(pd.read_csv(emg)) == 13
+    assert record.repairs["emg_zero_tail_rows"] == tail_rows
+    assert len(pd.read_csv(emg)) == 12 + tail_rows
 
 
 ## @brief 验证中间倒退、不同评分尾行、非法标签或不同步通道不会被自动修复。

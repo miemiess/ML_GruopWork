@@ -1,0 +1,78 @@
+/* 训练过程视图：沿用实验台的深色面板、薄荷绿强调色和圆角体系。 */
+.trainView{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:clamp(16px,2.2vw,30px);display:grid;gap:20px}
+.tvSteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:6px;counter-reset:s}
+.tvSteps button{width:100%;display:flex;align-items:center;gap:9px;text-align:left;background:#141922;border-color:transparent;padding:10px 12px;color:var(--muted);position:relative}
+.tvSteps button span{font:12px Consolas,monospace;color:#6f7b8c}
+.tvSteps button[data-done="true"]{color:#c9d4c4}.tvSteps button[data-done="true"] span{color:#7fa173}
+.tvSteps button[aria-current]{background:#243329;border-color:#5c7d5f;color:var(--mint)}
+.tvSteps button[aria-current] span{color:var(--mint)}
+.tvStage{display:grid;grid-template-columns:minmax(240px,.82fr) minmax(0,2fr);gap:clamp(16px,2.6vw,36px);align-items:start}
+.tvCount{margin:0 0 8px;color:var(--muted);font:12px/1.5 Consolas,"Microsoft YaHei",monospace;letter-spacing:.04em}
+.tvTitle{font-size:clamp(22px,2.2vw,30px);line-height:1.25;margin:0 0 14px}
+.tvLead{margin:0 0 14px;line-height:1.75;font-size:15px;color:#dfe4ea}.tvLead b{color:var(--mint);font-weight:600}
+.tvWhy{margin:0;padding:12px 14px;border-left:2px solid #4c5a6b;background:#151a23;border-radius:0 8px 8px 0;color:var(--muted);font-size:13.5px;line-height:1.7}
+.tvFigureWrap,.tvEmbed{position:relative;min-width:0;background:#141922;border-radius:12px;padding:12px 14px 6px}
+.tvEmbed{margin-top:14px}
+.tvBar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.tvActions{display:flex;gap:6px}.tvActions button{padding:5px 10px;font-size:13px}
+.tvLegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
+.tvKey{display:inline-flex;align-items:center;gap:6px}
+.tvKey i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c)}
+.tvKey i.line{width:16px;height:0;border-radius:0;border-top:2px solid var(--c);background:none}
+.tvKey i.dash{width:16px;height:0;border-radius:0;border-top:2px dashed var(--c);background:none}
+.tvKey i.ring{background:none;border:2px solid var(--c);width:7px;height:7px}
+.tvFigure svg{display:block;width:100%;height:auto;overflow:visible}
+.tvFigure .tvTable{max-height:340px}
+.tvAxis{margin:2px 0 4px;color:#7f8b9c;font-size:12px;min-height:1em}
+.tvTip{position:absolute;left:0;top:0;z-index:3;max-width:min(360px,80%);pointer-events:none;background:#0c0f15;border:1px solid #3d4757;border-radius:8px;padding:7px 10px;font-size:12.5px;line-height:1.5;color:#eef1f4;box-shadow:0 6px 18px #0008}
+.tvNav{display:flex;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:16px}
+.tvProgress{flex:1;height:3px;border-radius:3px;background:#2a3240;overflow:hidden}
+.tvProgress i{display:block;height:100%;background:var(--mint);transition:width .35s ease}
+.tvNext:not(:disabled){background:var(--mint);color:#172314;border-color:transparent;font-weight:600}
+.tvMissing{padding:18px;border-radius:10px;background:#3d3326}
+
+/* SVG 文本与标记 */
+.tvGrid{stroke:#2b3240;stroke-width:1}
+.tvTick{fill:#8793a4;font:11px Consolas,"Microsoft YaHei",monospace}
+.tvGroup{fill:#b5bfcc;font-weight:600}
+.tvLabel,.tvHead{fill:#c5ccd6;font:600 13px "Segoe UI","Microsoft YaHei",sans-serif}
+.tvHead{font-size:15px}
+.tvId{fill:#0f141b;font:600 10px Consolas,monospace;pointer-events:none}
+.tvRowLabel{fill:#c5ccd6;font:13px "Segoe UI","Microsoft YaHei",sans-serif}
+.tvStrong{fill:#eef6e9;font-weight:600}
+.tvValue{fill:#eef1f4;font:600 13px Consolas,monospace}
+.tvDirect{font:600 12px "Segoe UI","Microsoft YaHei",sans-serif}
+.tvCallout{fill:var(--mint);font:600 13px "Segoe UI","Microsoft YaHei",sans-serif}
+[data-tip]{cursor:pointer}
+.tvFigure circle[data-tip]:hover{stroke:#fff}
+
+/* 动画：.play 加在 svg 上后进入终态；减少动态效果时直接显示终态。 */
+.tvFade{opacity:0;transition:opacity .45s ease var(--d,0ms)}
+.play .tvFade{opacity:1}
+.tvMove{transform:translate(var(--x0),var(--y0));transition:transform .75s cubic-bezier(.2,.75,.25,1) var(--d,0ms)}
+.play .tvMove{transform:translate(var(--x1),var(--y1))}
+.tvGrow{transform:scaleX(0);transform-box:fill-box;transform-origin:left;transition:transform .8s cubic-bezier(.2,.75,.25,1) var(--d,0ms)}
+.play .tvGrow{transform:none}
+.tvDraw{stroke-dashoffset:1;transition:stroke-dashoffset 1.5s ease-in-out var(--d,0ms)}
+.tvDraw.tvSolid{stroke-dasharray:1}
+.tvDraw:not(.tvSolid){stroke-dasharray:.012 .01}
+.play .tvDraw.tvSolid{stroke-dashoffset:0}
+.tvDraw:not(.tvSolid){opacity:0;transition:opacity .6s ease 1.2s}
+.play .tvDraw:not(.tvSolid){opacity:1}
+.tvScanRect{transform:scaleX(0);transform-box:fill-box;transform-origin:left;transition:transform var(--t) linear}
+.play .tvScanRect{transform:none}
+.tvScanLine{stroke:#e9f7e1;stroke-width:1;opacity:.55;transform:translateX(var(--x0));transition:transform var(--t) linear,opacity .3s ease var(--t)}
+.play .tvScanLine{transform:translateX(var(--x1));opacity:0}
+.tvWin{opacity:0;transition:opacity .35s ease var(--d,0ms)}
+.play .tvWin{opacity:1}
+.play .tvWin circle{animation:tvPulse 1.6s ease-out calc(var(--d,0ms) + 200ms) 2}
+@keyframes tvPulse{0%{stroke-width:2}40%{stroke-width:5;stroke-opacity:.5}100%{stroke-width:2}}
+.tvPool{transition:opacity .4s ease 1.6s}.play .tvPool{opacity:.35}
+
+@media(max-width:900px){.tvStage{grid-template-columns:1fr}}
+@media(max-width:560px){.tvSteps{grid-template-columns:repeat(3,1fr)}.tvSteps button{padding:8px;font-size:13px;flex-direction:column;align-items:flex-start;gap:2px}.tvNav button{padding:8px 10px}}
+@media(prefers-reduced-motion:reduce){.tvFade,.tvMove,.tvGrow,.tvDraw,.tvScanRect,.tvScanLine,.tvWin,.tvPool,.tvProgress i{transition:none!important;animation:none!important}}
+.tvStill .tvFade,.tvStill .tvMove,.tvStill .tvGrow,.tvStill .tvDraw,.tvStill .tvScanRect,.tvStill .tvScanLine,.tvStill .tvWin,.tvStill .tvPool{transition:none!important;animation:none!important}
+.tvCallout,.tvDirect,.tvGroup{paint-order:stroke;stroke:#141922;stroke-width:5px;stroke-linejoin:round}
+/* 窄屏时图表保持可读的最小宽度，只在图表内部横向滚动 */
+@media(max-width:700px){.tvFigure{overflow-x:auto;-webkit-overflow-scrolling:touch}.tvFigure svg{min-width:620px}.tvFigure .tvTable{min-width:0}}

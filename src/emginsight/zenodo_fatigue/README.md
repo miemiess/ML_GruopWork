@@ -190,3 +190,13 @@ predictions = predict_fatigue_signal(signal, time, model)  # 原始一维信号�
 [详细报告](../../../results/zenodo_fatigue/single_channel_biceps/report.md)、
 [逐窗测试预测](../../../results/zenodo_fatigue/single_channel_biceps/test_predictions.csv)、
 [预测曲线](../../../results/zenodo_fatigue/single_channel_biceps/test_predictions.png)。
+## 全试验疲劳分类
+
+在项目根目录执行 `python -m emginsight.zenodo_fatigue.full_dataset`。程序扫描全部用户的 trial_1 至 trial_12，按原始时间戳对齐疲劳评分，在同一批窗口比较同侧四肌、单路主动力肌、时间和多数类。每条记录仅含同一侧的四路同步肌电。四路的列顺序按肌肉名称统一，左右侧同名肌肉共用特征位置。
+
+每路提取 log RMS、log MAV、log 平均波形长度、平均频率与中位频率，同时保留它们相对本记录首个连续完整窗的差。首窗仅作为个人参考，未假设参与者此时静息或无疲劳。训练标签只用评分完全覆盖且为同一等级的窗口。实际推理可覆盖过渡区，此类窗口的准确率未经本实验验证。
+
+预测单个原始试验文件可用 `python -m emginsight.zenodo_fatigue.full_dataset --predict "trial_5.csv" --output "prediction.csv"`。输出每个连续窗口的起止秒数和 0/1/2 预测评分。默认加载 `results/runs/full_fatigue/fatigue_model.joblib`，对应固定测试划分的模型。完整结果见[全试验报告](../../../results/zenodo_fatigue/full_dataset/report.md)。
+
+
+批量推理入口为 `python -m emginsight.zenodo_fatigue.predict`。输入规范、Docker 和输出文件见[部署说明](../../../deploy/fatigue/README.md)。

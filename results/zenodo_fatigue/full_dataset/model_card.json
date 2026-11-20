@@ -1,0 +1,78 @@
+{
+  "sha256": "5cba301b26b42f37315efb22b590639b6075f6f7d3a23ceb20cfe2296d24f886",
+  "path": "results/runs/full_fatigue/fatigue_model.joblib",
+  "sklearn": "1.7.2",
+  "selected": "logistic",
+  "groups": {
+    "train": [
+      "1",
+      "9",
+      "4",
+      "7",
+      "6",
+      "12",
+      "3",
+      "2"
+    ],
+    "validation": [
+      "11",
+      "13",
+      "8"
+    ],
+    "test": [
+      "10",
+      "5"
+    ]
+  },
+  "channels": [
+    "BICEPS BRACHII",
+    "DELTOID ANTERIOR",
+    "DELTOID MEDIUS",
+    "DELTOID POSTERIOR"
+  ],
+  "fs_hz": 1259.0,
+  "window": 5036,
+  "step": 2518,
+  "features": [
+    "BICEPS BRACHII_log_rms",
+    "BICEPS BRACHII_delta_log_rms",
+    "BICEPS BRACHII_log_mav",
+    "BICEPS BRACHII_delta_log_mav",
+    "BICEPS BRACHII_log_mean_waveform_length",
+    "BICEPS BRACHII_delta_log_mean_waveform_length",
+    "BICEPS BRACHII_mean_frequency_hz",
+    "BICEPS BRACHII_delta_mean_frequency_hz",
+    "BICEPS BRACHII_median_frequency_hz",
+    "BICEPS BRACHII_delta_median_frequency_hz",
+    "DELTOID ANTERIOR_log_rms",
+    "DELTOID ANTERIOR_delta_log_rms",
+    "DELTOID ANTERIOR_log_mav",
+    "DELTOID ANTERIOR_delta_log_mav",
+    "DELTOID ANTERIOR_log_mean_waveform_length",
+    "DELTOID ANTERIOR_delta_log_mean_waveform_length",
+    "DELTOID ANTERIOR_mean_frequency_hz",
+    "DELTOID ANTERIOR_delta_mean_frequency_hz",
+    "DELTOID ANTERIOR_median_frequency_hz",
+    "DELTOID ANTERIOR_delta_median_frequency_hz",
+    "DELTOID MEDIUS_log_rms",
+    "DELTOID MEDIUS_delta_log_rms",
+    "DELTOID MEDIUS_log_mav",
+    "DELTOID MEDIUS_delta_log_mav",
+    "DELTOID MEDIUS_log_mean_waveform_length",
+    "DELTOID MEDIUS_delta_log_mean_waveform_length",
+    "DELTOID MEDIUS_mean_frequency_hz",
+    "DELTOID MEDIUS_delta_mean_frequency_hz",
+    "DELTOID MEDIUS_median_frequency_hz",
+    "DELTOID MEDIUS_delta_median_frequency_hz",
+    "DELTOID POSTERIOR_log_rms",
+    "DELTOID POSTERIOR_delta_log_rms",
+    "DELTOID POSTERIOR_log_mav",
+    "DELTOID POSTERIOR_delta_log_mav",
+    "DELTOID POSTERIOR_log_mean_waveform_length",
+    "DELTOID POSTERIOR_delta_log_mean_waveform_length",
+    "DELTOID POSTERIOR_mean_frequency_hz",
+    "DELTOID POSTERIOR_delta_mean_frequency_hz",
+    "DELTOID POSTERIOR_median_frequency_hz",
+    "DELTOID POSTERIOR_delta_median_frequency_hz"
+  ]
+}

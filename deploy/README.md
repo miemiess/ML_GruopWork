@@ -1,11 +1,13 @@
 # Docker 批量预测
 
-手势与指力各有一个 Compose 入口。启动 Docker Desktop 后，在项目根目录构建需要的镜像；构建前请先按任务说明准备模型文件和模型卡。
+各任务分别提供 Compose 入口。启动 Docker Desktop 后，在项目根目录构建需要的镜像；构建前请先按任务说明准备模型文件和模型卡。
 
 | 任务 | 输入与目录 | 配置与模型准备 |
 | --- | --- | --- |
 | 手势 | 八通道 UCI TXT 或 CSV，放进 `deploy/gesture/input/` | [手势部署说明](gesture/README.md) · [Compose 文件](gesture/docker-compose.yml) |
 | 指力 | 24 通道 putEMG-Force CSV，放进 `deploy/force/input/` | [指力部署说明](force/README.md) · [Compose 文件](force/docker-compose.yml) |
+| 两日指力变化 | 两日 24 通道记录和 `visits.csv` 动作清单，放进 `deploy/force_change/input/` | [模型准备、单值输出与运行说明](force_change/README.md) · [Compose 文件](force_change/docker-compose.yml) |
+| 自感疲劳 | 同侧四路 Zenodo 原始 CSV，放进 `deploy/fatigue/input/` | [模型与运行说明](fatigue/README.md) · [Compose 文件](fatigue/docker-compose.yml) |
 
 ## 在 VS Code 运行
 
@@ -28,8 +30,9 @@ docker compose -f deploy/force/docker-compose.yml run --rm predict --input "/dat
 
 ## 结果
 
-两项任务都输出逐窗预测 CSV、任务专用曲线图和 `summary.json`。两份汇总都包含 `task`、`model`、`counts`（总数、成功数、失败数）以及 `files`（每个输入文件的处理结果）。
+手势、连续指力与疲劳任务均输出逐窗预测 CSV、曲线图和 `summary.json`。汇总包含 `task`、`model`、`counts`（总数、成功数、失败数）以及 `files`（每个输入文件的处理结果）。
 
-- 成功的文件有 `status: "ok"`、窗口数、时长、处理耗时和每窗的特征提取与推理耗时。有实测值或标签时附对照指标。
+- 疲劳任务按文件汇总窗口数、各预测类别计数及每窗耗时。
+- 手势与连续指力任务中，成功的文件有 `status: "ok"`、窗口数、时长、处理耗时和每窗的特征提取与推理耗时。有实测值或标签时附对照指标。
 - 失败的文件有 `status: "error"` 和原因。程序继续处理其他输入，最后以退出码 `1` 结束。
 - 手势另外记录置信度和各预测类别占比；指力另外记录静息肌电漂移和三档预测信息。

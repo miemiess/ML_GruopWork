@@ -124,6 +124,22 @@ def plot_levels(frame, classes, path, title):
     figure.savefig(path, dpi=100)
 
 
+## @brief 提取一条记录的部署特征，批处理和个人力量标定共用静息检查。
+# @param path 原始肌电 CSV 路径。
+# @param record 已读取的记录。
+# @param model 第一阶段力量模型。
+# @param has_traj 是否有用于核对静息状态的指令列。
+# @return tuple 逐窗特征、静息特征矩阵和每窗记录编号。
+def inference_features(path, record, model, has_traj):
+    config = model.preprocessing
+    calibration = int(config["calibration_seconds"] * FS)
+    if has_traj and not calibration_is_rest(path, calibration):
+        raise ValueError(f"开头 {config['calibration_seconds']} 秒内 TRAJ 有出力指令，不能作为静息校准段。")
+    item = record_features(record, config["window_size"], config["step_size"], calibration)
+    rest = np.broadcast_to(item["rest"], item["X"].shape)
+    return item, rest, np.full(len(item["X"]), record.record_id)
+
+
 ## @brief 预测一份 CSV：校准检查、特征提取、模型推理，并写出逐窗结果与曲线。
 # @param path 输入 CSV。
 # @param model 已读取的 ForceModel。
@@ -135,17 +151,11 @@ def predict_file(path, model, output, reference=None, level_model=None):
     started = time.perf_counter()
     record, has_force, has_traj, mvc = read_input(path, model.targets)
     loaded = time.perf_counter()
-    window, step = model.preprocessing["window_size"], model.preprocessing["step_size"]
-    calibration = int(model.preprocessing["calibration_seconds"] * FS)
+    step = model.preprocessing["step_size"]
     notes = []
-    if has_traj:
-        if not calibration_is_rest(path, calibration):
-            raise ValueError(f"开头 {CALIBRATION_SECONDS} 秒内 TRAJ 有出力指令，不能作为静息校准段。")
-    else:
+    if not has_traj:
         notes.append(f"无 TRAJ 列，按约定假设开头 {CALIBRATION_SECONDS} 秒为静息。")
-    item = record_features(record, window, step, calibration)
-    rest = np.broadcast_to(item["rest"], item["X"].shape)
-    records = np.full(len(item["X"]), record.record_id)
+    item, rest, records = inference_features(path, record, model, has_traj)
     pred = model.predict(item["X"], rest, records)
     if level_model is not None:
         level_proba = level_model.predict_proba(item["X"], rest, records)

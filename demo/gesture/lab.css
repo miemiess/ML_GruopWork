@@ -1,0 +1,47 @@
+@media(prefers-reduced-motion:no-preference){main{animation:labReveal .22s ease-out}}
+.labHeader {gap:clamp(12px,2.4vw,34px);min-height:72px;height:auto;padding-block:12px;flex-wrap:wrap}
+.labHeader .brand {white-space:nowrap}
+.labNav,.labViews {display:flex;align-items:center;gap:4px}
+.labNav {padding:4px;border:1px solid var(--line);background:#141922;border-radius:12px}
+.labNav a,.labViews a {display:inline-flex;align-items:center;gap:7px;text-decoration:none;border-radius:8px;padding:8px 13px;color:var(--muted);transition:background .18s,color .18s}
+.labNav svg {width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.labNav a:first-child {color:#bbdfb0}
+.labNav a[aria-current],.labViews a[aria-current] {background:#314238;color:#d7f8ca}
+.labNav a:hover,.labViews a:hover {background:#293440;color:#fff}
+.modelRail {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:20px}
+.modelRail a {position:relative;padding:14px 18px;display:grid;gap:3px;align-content:center;text-decoration:none;color:inherit;background:#181d26;border:1px solid var(--line);border-radius:12px;transition:background .2s,border-color .2s}
+.modelRail a[aria-current] {background:#202f2a;border-color:#74967d}
+.modelRail a[aria-current]::after {content:"";position:absolute;right:14px;top:16px;width:7px;height:7px;border-radius:50%;background:var(--mint)}
+.modelRail small {font-size:10px;letter-spacing:.12em}.modelRail strong{font-size:17px}.modelRail span{font-size:12px;color:var(--muted)}
+.modelRail a:hover {border-color:#89958f}
+.caseGrid {display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:14px}
+.modelCard {min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(16px,2.2vw,32px)}
+.caseTools,.sceneControls,.demoNav {display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.caseTools {justify-content:space-between;margin-bottom:18px}.caseTools label{font-size:13px;color:var(--muted)}
+.casePlot {display:block;width:100%;margin:18px 0 8px;background:#141922;border-radius:8px}
+.casePlot text {fill:var(--muted);font:11px Consolas,monospace}
+.demoValue {font:600 clamp(28px,4vw,55px)/1.15 "Segoe UI","Microsoft YaHei",sans-serif;margin:12px 0 20px;color:var(--mint)}
+.demoDetail {color:var(--muted);font-size:14px;line-height:1.65}
+.barRow {display:grid;grid-template-columns:minmax(64px,1fr) minmax(60px,2fr) auto;align-items:center;gap:10px;margin:11px 0;font-size:13px}
+.barRow i {display:block;background:#2a3241;border-radius:4px;height:6px;overflow:hidden}
+.barRow b {display:block;width:var(--width);height:100%;background:#a3dcb1;transition:width .2s}
+.sceneControls {border-top:1px solid var(--line);margin-top:17px;padding-top:13px;justify-content:space-between}
+.demoNav {margin-bottom:14px}.demoNav button[aria-current]{background:var(--mint);color:#142119}
+.exampleScrub {display:grid;gap:8px;margin-top:14px;color:var(--muted);font-size:13px}.exampleScrub input{width:100%;accent-color:var(--mint)}
+.demoScene {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:22px}
+.demoScene pre {font-size:13px;overflow-wrap:anywhere}.demoScene h3 {font-size:24px;margin:8px 0}
+.labReveal {animation:labReveal .24s ease-out}@keyframes labReveal {from{opacity:.25;transform:translateY(5px)}to{opacity:1;transform:none}}
+.casePlot line,.casePlot path,.casePlot polyline {vector-effect:non-scaling-stroke}
+@media(max-width:760px){.caseGrid,.demoScene{grid-template-columns:1fr}.labHeader small{display:none}.labHeader{gap:7px}.labNav a{font-size:13px;padding:7px}.modelRail{gap:5px}.modelRail a{padding:10px}.modelRail strong{font-size:14px}.modelRail small{font-size:8px;letter-spacing:0}.modelRail span{font-size:11px}.modelRail a[aria-current]::after{display:none}}
+@media(prefers-reduced-motion:reduce){.labReveal,::view-transition-group(*){animation:none!important}}
+.bandLegend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted)}
+.bandLegend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.casePlot rect{shape-rendering:crispEdges}
+/* 指力台图例沿用新配色：实测为中性灰虚线，模型为薄荷绿 */
+.legend span:before{border-color:#8b96a8!important;border-top-style:solid!important}
+.legend span:nth-child(2):before{border-color:#b3f690!important;border-top-style:solid!important}
+.legend span:nth-child(3):before{border-color:#a7afbc!important;border-top-style:dashed!important}
+/* 收紧标题区：把首屏留给实验内容 */
+.intro{padding:22px 0 18px}
+.intro h1{font-size:clamp(28px,3.2vw,44px);letter-spacing:-.04em}
+.devChart{margin:4px 0 14px}

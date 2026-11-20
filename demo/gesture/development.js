@@ -226,6 +226,7 @@ function startDevelopment(data) {
   };
   artifactMetric.onchange=artifactClass.onchange=()=>{readout();animate(480)};
   document.addEventListener("keydown",event=>{
+    if(el("gestureDevelopment")?.hidden)return;
     if(event.target.closest("input, textarea, select") || !["ArrowLeft","ArrowRight"].includes(event.key))return;
     event.preventDefault();
     show(step+(event.key==="ArrowRight"?1:-1));

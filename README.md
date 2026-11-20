@@ -13,10 +13,11 @@
 | 目标 | 入口 |
 | --- | --- |
 | 看网页 | [GitHub Pages 已发布版本](https://miemiess.github.io/ML_GruopWork/) · [本地手势与指力演示、导出和发布](demo/gesture/README.md) |
-| 用 Docker 预测自己的文件 | [手势和指力的运行说明](deploy/README.md)。将合规数据放进对应的输入目录，再在 VS Code 对 Compose 文件执行 **Compose Up**。 |
+| 用 Docker 预测自己的文件 | [手势、指力和疲劳的运行说明](deploy/README.md)。将合规数据放进对应的输入目录，再在 VS Code 对 Compose 文件执行 **Compose Up**。 |
 | 复现手势实验 | `python -m emginsight.uci_gesture.experiment` · [C 实验报告](results/uci_gesture/classification/report.md) |
 | 复现指力实验 | `python -m emginsight.putemg_force.experiment` 训练连续回归，`python -m emginsight.putemg_force.levels` 训练整手三档分类。见[回归报告](results/putemg_force/regression/report.md)与[三档报告](results/putemg_force/levels/report.md)。 |
-| 复现疲劳实验 | `python -m emginsight.zenodo_fatigue.single_channel` · [右肱二头肌单通道实验](results/zenodo_fatigue/single_channel_biceps/report.md)。目前提供实验命令和本地预测入口。 |
+| 复现疲劳实验 | `python -m emginsight.zenodo_fatigue.full_dataset` · [全试验四路与单路对照](results/zenodo_fatigue/full_dataset/report.md) · [原右肱二头肌实验](results/zenodo_fatigue/single_channel_biceps/report.md) |
+| 比较两天的动作力量 | `python -m emginsight.putemg_force.change_experiment` · [两步模型与测试结果](results/putemg_force/change/report.md) · [用 Docker 预测](deploy/force_change/README.md) |
 | 跑测试 | 安装下文的 Python 环境后，在项目根目录运行 `python -m pytest`。 |
 
 复现实验前，把公开数据解压到各任务的本地目录。[数据准备说明](docs/datasets.md)
@@ -29,7 +30,7 @@
 | **~~B. 公共特征与算法~~**     | 提取 RMS、MAV、WL，使用 scikit-learn 实现 kNN、逻辑回归、岭回归以及多数类和均值基线。 | 其他组员能直接调用的函数或模型，用小数据验证计算正确，并附使用例子。   |
 | **~~C. 手势识别实验~~**       | 使用 UCI 数据，调用 A/B 的代码比较分类模型，分析哪些手势容易混淆。 | [实验结果、混淆矩阵与复现命令](results/uci_gesture/classification/report.md) |
 | **~~D. 手指力量实验~~**   | 使用 putEMG-Force，从肌电预测选定的实测力量，比较均值基线与回归模型。                                                              | [连续力量回归](results/putemg_force/regression/report.md)、[三档力量分类](results/putemg_force/levels/report.md) |
-| **E. 疲劳分类实验**       | 使用 Zenodo 数据，核对信号与评分时间对齐，预测 0/1/2 自感疲劳等级。                                                                | [已有单通道评估、指标与实验限制](results/zenodo_fatigue/single_channel_biceps/report.md) |
+| **E. 疲劳分类实验**       | 使用 Zenodo 数据，核对信号与评分时间对齐，预测 0/1/2 自感疲劳等级。 | [全试验比较、独立用户验证与实验限制](results/zenodo_fatigue/full_dataset/report.md) |
 | **F. 结果整理与展示**     | 汇总三个任务；在各数据集内部比较全通道与减少通道的效果；整理报告、图表和简单离线演示。                                             | 有来源的结果对比、最终报告，以及别人按说明能运行的演示。               |
 
 **怎么认领：** 在 [Issues](https://github.com/miemiess/ML_GruopWork/issues) 先看有没有人正在做，没有就新建一条，例如“进行中：B / RMS 特征”，写上姓名和准备做的内容。卡住或完成时更新这条 Issue；不用另外维护任务表。
@@ -52,7 +53,7 @@ tests/             按工程组织测试，例如 uci_gesture/test_reading.py
 results/           结果表与图；大型运行文件放 runs/，不上传
 docs/              实验记录与最终报告
 demo/gesture/      手势与指力网页、快照导出和静态发布
-deploy/            手势与指力 Docker 推理
+deploy/            手势、指力与疲劳 Docker 推理
 ```
 
 各任务的训练、预测入口在对应的 Python 模块中。Notebook 可以调用同一套公共函数进行数据探索。

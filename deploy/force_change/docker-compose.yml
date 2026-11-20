@@ -1,0 +1,11 @@
+name: emginsight-force-change
+services:
+  predict:
+    image: emginsight-force-change:latest
+    build:
+      context: ../..
+      dockerfile: deploy/force_change/Dockerfile
+    pull_policy: never
+    volumes:
+      - ./input:/data/input:ro
+      - ./output:/data/output

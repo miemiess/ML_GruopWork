@@ -4,11 +4,15 @@
 !README.md
 !src/
 !deploy/requirements.txt
+!results/runs/full_fatigue/fatigue_model.joblib
+!results/zenodo_fatigue/full_dataset/model_card.json
 !results/runs/putemg_force/force_model.joblib
 !results/putemg_force/regression/model_card.json
 !results/putemg_force/regression/monitoring_reference.json
 !results/runs/putemg_force/force_level_model.joblib
 !results/putemg_force/levels/model_card.json
+!results/runs/putemg_force/force_change_model.joblib
+!results/putemg_force/change/model_card.json
 !results/runs/uci_gesture/gesture_model.joblib
 !results/uci_gesture/classification/model_card.json
 **/__pycache__
