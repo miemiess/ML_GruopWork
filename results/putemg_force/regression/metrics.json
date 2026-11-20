@@ -1,0 +1,138 @@
+{
+  "seed": 42,
+  "subjects": {
+    "train": [
+      "24",
+      "50",
+      "30",
+      "34",
+      "51",
+      "07",
+      "54",
+      "27",
+      "10",
+      "35",
+      "19",
+      "08",
+      "29",
+      "45",
+      "43",
+      "38",
+      "22",
+      "33",
+      "25",
+      "48",
+      "13",
+      "06",
+      "47",
+      "39",
+      "20",
+      "31"
+    ],
+    "validation": [
+      "09",
+      "18",
+      "14",
+      "36",
+      "12",
+      "49",
+      "26",
+      "23",
+      "03"
+    ],
+    "test": [
+      "15",
+      "17",
+      "53",
+      "05",
+      "46",
+      "42",
+      "04",
+      "16",
+      "11"
+    ]
+  },
+  "trial": "repeats_long",
+  "force_unit": "putEMG-Force 原始力量数值（数据集未给出物理单位，不是牛顿）",
+  "targets": [
+    "FORCE_1",
+    "FORCE_2",
+    "FORCE_3",
+    "FORCE_4",
+    "FORCE_5",
+    "FORCE_6",
+    "FORCE_7",
+    "FORCE_8",
+    "FORCE_9",
+    "FORCE_10"
+  ],
+  "python": "3.12.14",
+  "sklearn_version": "1.7.2",
+  "window": {
+    "size": 1024,
+    "step": 512,
+    "nominal_fs_hz": 5120.0,
+    "filter_hz": [
+      20.0,
+      500.0
+    ],
+    "target": "窗口内实测力量均值减去同记录开头静息段中位数"
+  },
+  "calibration_seconds": 4.0,
+  "windows": {
+    "train": 175652,
+    "validation": 59709,
+    "test": 63215
+  },
+  "records": {
+    "train": 50,
+    "validation": 17,
+    "test": 18
+  },
+  "skipped": [],
+  "selected": {
+    "scale": "log_rest",
+    "features": "RMS+MAV+WL",
+    "model": "forest",
+    "parameter": "trees=100",
+    "smoothing": 5,
+    "mean_rmse": 71.72842285932902,
+    "mean_mae": 52.565205008415944,
+    "mean_r2": 0.2877816150371353
+  },
+  "test": {
+    "windows": 63215,
+    "model": {
+      "mae": 53.41956179611691,
+      "rmse": 73.21169411794152,
+      "r2": 0.23763158325905537,
+      "pearson_r": 0.4760074525550089
+    },
+    "baseline": {
+      "mae": 62.37260514991226,
+      "rmse": 83.46108418020881,
+      "r2": -0.005847513007478833
+    },
+    "users_model_better_rmse": 9,
+    "users_model_r2_positive": 7,
+    "users": 9
+  },
+  "test_raw_force_without_tare": {
+    "model": {
+      "mae": 55.26941740010303,
+      "rmse": 76.60209884668178,
+      "r2": 0.17344458466626317,
+      "pearson_r": 0.4197368873403401
+    },
+    "baseline": {
+      "mae": 63.11262666721293,
+      "rmse": 84.68697204406314,
+      "r2": -0.016003112119813846
+    }
+  },
+  "curve_example": {
+    "subject": "46",
+    "record": "emg_force-46-repeats_long-2018-04-20-17-36-28-641",
+    "rule": "测试用户按平均 R² 排序取中位数，仅用于展示"
+  }
+}

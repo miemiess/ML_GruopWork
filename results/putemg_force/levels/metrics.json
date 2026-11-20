@@ -1,0 +1,123 @@
+{
+  "seed": 42,
+  "subjects": {
+    "train": [
+      "24",
+      "50",
+      "30",
+      "34",
+      "51",
+      "07",
+      "54",
+      "27",
+      "10",
+      "35",
+      "19",
+      "08",
+      "29",
+      "45",
+      "43",
+      "38",
+      "22",
+      "33",
+      "25",
+      "48",
+      "13",
+      "06",
+      "47",
+      "39",
+      "20",
+      "31"
+    ],
+    "validation": [
+      "09",
+      "18",
+      "14",
+      "36",
+      "12",
+      "49",
+      "26",
+      "23",
+      "03"
+    ],
+    "test": [
+      "15",
+      "17",
+      "53",
+      "05",
+      "46",
+      "42",
+      "04",
+      "16",
+      "11"
+    ]
+  },
+  "trial": "repeats_long",
+  "python": "3.12.14",
+  "sklearn_version": "1.7.2",
+  "levels": {
+    "0": "静息",
+    "1": "轻",
+    "2": "重"
+  },
+  "label_definition": {
+    "thresholds_of_mvc": [
+      0.125,
+      0.375
+    ],
+    "baseline_seconds": 10.0,
+    "baseline_percentile": 10,
+    "aggregate": "第二强传感器"
+  },
+  "label_share": {
+    "train": [
+      93559,
+      50871,
+      31222
+    ],
+    "validation": [
+      31970,
+      17432,
+      10307
+    ],
+    "test": [
+      33388,
+      18205,
+      11622
+    ]
+  },
+  "selected": {
+    "scale": "log_rest",
+    "features": "RMS+MAV+WL",
+    "model": "forest",
+    "parameter": "trees=100,balanced",
+    "smoothing": 5,
+    "accuracy": 0.6368051717496525,
+    "macro_f1": 0.563443327239885
+  },
+  "test": {
+    "model": {
+      "accuracy": 0.594574072609349,
+      "macro_f1": 0.5105521838891547
+    },
+    "majority": {
+      "accuracy": 0.5281657834374753,
+      "macro_f1": 0.2304138242773689
+    },
+    "regression_to_levels": {
+      "accuracy": 0.5792296132247093,
+      "macro_f1": 0.37582308519505686
+    },
+    "label_vs_instruction_agreement": 0.7387012576129083,
+    "model_vs_instruction": {
+      "accuracy": 0.5862690817052915,
+      "macro_f1": 0.4682462842136177
+    }
+  },
+  "skipped": [],
+  "curve_example": {
+    "subject": "46",
+    "record": "emg_force-46-repeats_long-2018-04-20-17-36-28-641",
+    "rule": "测试用户按 macro-F1 排序取中位数，仅用于展示"
+  }
+}

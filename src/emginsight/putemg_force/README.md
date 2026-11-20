@@ -9,6 +9,10 @@ src/emginsight/putemg_force/
   splitting.py     按用户划分，排除校准记录
   windowing.py     分批分窗与窗口回归目标
   example.py       可运行的中文检查报告
+  experiment.py    D 任务：跨用户十路力量回归实验
+  model.py         获选模型的特征变换、因果平滑、保存与读取
+  predict.py       批处理预测入口：原始 CSV → 十路力量预测与三档力量
+  levels.py        补充实验：整只手三档力量分类（静息 / 轻 / 重）
   README.md       本文档
 
 tests/putemg_force/
@@ -17,6 +21,7 @@ tests/putemg_force/
   test_splitting.py
   test_windowing.py
   test_example.py
+  test_experiment.py
 ```
 
 ## 数据放置
@@ -153,3 +158,20 @@ pytest 使用 importlib 模式，支持不同工程下重复使用 `test_reading
 或者补齐用户 03 的其他类型，并事先明确试验范围。不要根据测试成绩选择类型或用户划分。
 三组间记录数与采样点数不必相等，比例按用户数计算。
 力量单位、通道物理含义和校准仍需确认，之后与 D 工作负责人对接。
+
+## D 任务力量回归实验
+
+```powershell
+.venv\Scripts\python.exe -m emginsight.putemg_force.experiment
+```
+
+只使用全部用户的 `repeats_long` 记录，按用户 0.6/0.2/0.2 划分（44 人时为 26/9/9）。每条记录固定因果 20–500 Hz 带通后分窗；
+开头 4 秒（确认 `TRAJ_*` 全为 0）用作静息校准，得到力量零点和静息肌电特征，这段窗口不参与训练与评估。
+提取公共 RMS/MAV/WL，比较特征尺度、岭回归、随机森林与因果平滑，按验证用户平均 RMSE 选型，对比训练集均值基线。
+特征缓存在 `results/runs/putemg_force/`（Git 忽略）。结果、限制和复现说明见[实验报告](../../../results/putemg_force/regression/report.md)。
+获选模型保存为 `results/runs/putemg_force/force_model.joblib`（`--model-path` 可改），用 `load_force_model` 读取，
+会核对 SHA-256 与 scikit-learn 版本。文件说明和校验值见[模型卡](../../../results/putemg_force/regression/model_card.json)。
+滤波、分窗和静息校准由 `preprocessing.py` 为训练与推理共同提供。
+用已训练模型预测原始 CSV，运行 `python -m emginsight.putemg_force.predict --input 文件或目录 --output-dir 输出目录`。
+Docker 打包与输入输出格式见[部署说明](../../../deploy/force/README.md)。
+三档力量分类：`python -m emginsight.putemg_force.levels`（需先完成回归实验），见[三档报告](../../../results/putemg_force/levels/report.md)。
