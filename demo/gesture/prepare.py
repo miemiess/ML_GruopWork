@@ -1,17 +1,19 @@
 """从本地 UCI 原始数据和 C 实验生成可离线打开的演示数据。"""
+import argparse
 import json
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 from emginsight.features import extract_time_features
 from emginsight.uci_gesture import load_uci_gesture_record
-from emginsight.uci_gesture.experiment import prepare_data, select_model
+from emginsight.uci_gesture.experiment import LABELS, prepare_data
+from emginsight.uci_gesture.model import load_gesture_model
 
-ROOT = Path(__file__).resolve().parents[2]
+from snapshots import GESTURE_REPORT, GESTURE_REPORT_FILES, ROOT, experiment_source, write_snapshot
+
 RAW = ROOT / "data/raw/EMG_data_for_gestures-master"
-RESULTS = ROOT / "results/uci_gesture/classification"
+MODEL = ROOT / "results/runs/uci_gesture/gesture_model.joblib"
 
 
 def export_simulator(train, model, scaler, columns):
@@ -42,17 +44,7 @@ def export_simulator(train, model, scaler, columns):
 
 
 ## @brief 为每种实际出现的真值/预测组合选取一段真实记录。
-def main():
-    data, _, _ = prepare_data(RAW)
-    scores, (model, scaler, columns) = select_model(data["train"], data["validation"])
-    summary = json.loads((RESULTS / "metrics.json").read_text(encoding="utf8"))
-    selected = scores.loc[scores.macro_f1.idxmax()]
-    if selected.model != "forest" or selected.parameter != summary["selected"]["parameter"] or len(columns) != 24:
-        raise ValueError("当前演示需要 C 实验选出的 24 特征随机森林。请核对实验配置。")
-    _, index = data["test"]
-    saved = pd.read_csv(RESULTS / "test_predictions.csv", dtype={"subject": str})
-    pd.testing.assert_frame_equal(index.reset_index(drop=True), saved[index.columns].reset_index(drop=True))
-    np.testing.assert_array_equal(model.predict(scaler.transform(data["test"][0][:, columns])), saved.prediction)
+def export_clips(saved, model, scaler, columns):
     clips = []
     for (label, prediction), matches in saved.groupby(["label", "prediction"]):
         preferred = matches[matches.subject == "09"]
@@ -80,16 +72,57 @@ def main():
                           record=target.record, focus=int(time[start + 199]), frames=frames,
                           t=time[left:right].astype(int).tolist(), truth=record.labels[left:right].tolist(),
                           channels=record.signal[left:right].T.tolist()))
+    return clips
+
+
+## @brief 复用获选手势模型，按实验记录生成回放、模拟和可选教学快照。
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--skip-development", action="store_true", help="只导出手势回放和交互模拟。")
+    args = parser.parse_args(argv)
+
+    source = experiment_source(GESTURE_REPORT, GESTURE_REPORT_FILES)
+    bundle = load_gesture_model(MODEL, source["model_sha256"])
+    model, scaler, columns = bundle.model, bundle.scaler, np.asarray(bundle.columns)
+    summary = json.loads((GESTURE_REPORT / "metrics.json").read_text(encoding="utf-8"))
+    scores = pd.read_csv(GESTURE_REPORT / "validation.csv")
+    best = scores.loc[scores.macro_f1.idxmax()]
+    selected = summary["selected"]
+    settings = bundle.preprocessing
+    if not (
+        best.model == selected["model"] == "forest"
+        and best.features == selected["features"] == bundle.features == "RMS+MAV+WL"
+        and best.parameter == selected["parameter"] == f"trees={getattr(model, 'n_estimators', None)}"
+        and np.array_equal(columns, np.arange(24))
+        and bundle.classes == LABELS
+        and tuple(settings[key] for key in ("window_size", "step_size", "max_gap_ms", "channels")) == (200, 100, 20, 8)
+    ):
+        raise ValueError("演示需要与 C 实验表格匹配的八通道、24 特征随机森林模型。")
+
+    data, groups, _ = prepare_data(RAW)
+    if {group: list(users) for group, users in groups.items()} != summary["subjects"] or (
+        groups["train"] != bundle.train_subjects
+    ):
+        raise ValueError("手势原始数据、模型和实验报告的用户划分不一致。")
+    test, index = data["test"]
+    saved = pd.read_csv(GESTURE_REPORT / "test_predictions.csv", dtype={"subject": str})
+    pd.testing.assert_frame_equal(index, saved[index.columns])
+    # 回放和教学使用 C 实验的六类评估口径，与部署时附加的未知拒识阈值独立。
+    np.testing.assert_array_equal(model.predict(scaler.transform(test[:, columns])), saved.prediction)
+
+    clips = export_clips(saved, model, scaler, columns)
     payload = dict(clips=clips, selected=summary["selected"], test=summary["test"]["prediction"],
-                   matrix=pd.crosstab(saved.label, saved.prediction).reindex(index=range(1,7), columns=range(1,7), fill_value=0).values.tolist())
-    dest = Path(__file__).with_name("session.js")
-    dest.write_text("window.EMG_SESSION=" + json.dumps(payload, separators=(",", ":"), allow_nan=False) + ";", encoding="utf8")
+                   matrix=pd.crosstab(saved.label, saved.prediction)
+                   .reindex(index=LABELS, columns=LABELS, fill_value=0).values.tolist())
     simulator = export_simulator(data["train"], model, scaler, columns)
-    dest.with_name("simulator-data.js").write_text(
-        "window.EMG_SIMULATOR=" + json.dumps(simulator, separators=(",", ":"), allow_nan=False) + ";",
-        encoding="utf8",
-    )
-    print(f"{len(clips)} clips -> {dest}")
+    if not args.skip_development:
+        from development_export import export_development
+
+        development = export_development(data, scores, model, scaler, columns, summary, RAW)
+        write_snapshot("development-data.js", "EMG_DEVELOPMENT", development, source)
+    write_snapshot("session.js", "EMG_SESSION", payload, source)
+    write_snapshot("simulator-data.js", "EMG_SIMULATOR", simulator, source)
+    print(f"已导出手势回放 {len(clips)} 个案例及交互模拟。")
 
 
 if __name__ == "__main__":

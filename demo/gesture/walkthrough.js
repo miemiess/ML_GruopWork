@@ -23,7 +23,7 @@ const FLOW_STAGES = [
     title: "从六类概率得到手势",
     code: "probs = forest.predict_proba(z)\ngesture = forest.classes_[argmax(probs)]",
     source: "uci_gesture/experiment.py",
-    knowledge: "每棵树沿着特征阈值走到一个叶子，得到一组类别概率。100 棵树的概率取平均，最大的一类就是预测动作。树数和特征组合依据验证集表现选定。"
+    knowledge: "每棵树沿着特征阈值走到一个叶子，得到一组类别概率。各树的概率取平均，最大的一类就是预测动作。树数和特征组合依据验证集表现选定。"
   }
 ];
 
@@ -44,7 +44,8 @@ function createWalkthrough(pause, channel) {
       setText($("flowStageTitle"), stage.title);
       setText($("flowCode"), stage.code);
       setText($("flowKnowledge"), stage.knowledge);
-      $("flowSource").href = "../../src/emginsight/" + stage.source;
+      const sourceLink = $("flowSource");
+      sourceLink.href = sourceLink.dataset.sourceBase + stage.source;
       $("flowChannelControl").hidden = selected !== 1 && selected !== 2;
       buttons.forEach((button,i) => button.setAttribute("aria-pressed", i === selected));
     }

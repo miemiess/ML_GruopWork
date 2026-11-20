@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EMGInsight · 手势识别开发过程</title>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="development.css?v=pipeline">
+<header><div class="brand"><b>∿</b> EMGInsight</div><span>手势识别开发过程</span><small><a class="projectNav" href="index.html">← 返回手势演示</a></small><a class="projectNav" href="force.html">指力预测实验台 →</a></header>
+<main class="development">
+  <div class="intro devIntro"><div><p class="eyebrow">UCI GESTURES · C EXPERIMENT</p><h1>怎么选出<span>随机森林</span></h1></div></div>
+  <p id="devMissing" hidden>请先运行 <code>.venv\Scripts\python.exe demo/gesture/prepare.py</code> 生成实验数据。</p>
+  <section id="devPlayer" hidden aria-label="开发过程逐步演示">
+    <nav class="devSteps" id="devSteps" aria-label="开发阶段"></nav>
+    <div class="devScene">
+      <div class="devCopy">
+        <p class="eyebrow" id="devStageLabel"></p>
+        <h2 id="devTitle"></h2>
+        <p id="devDescription"></p>
+        <div id="devFacts" class="devFacts"></div>
+      </div>
+      <div class="devVisual">
+        <div class="devFrameBar"><small id="devInteraction"></small><button id="devReplay" type="button">↻ 重播图形</button></div>
+        <canvas id="devCanvas" role="img"></canvas>
+        <p id="devCaption"></p>
+        <div id="devGroups" class="devToolRow" role="group" aria-label="选择数据集" hidden>
+          <button type="button" data-group="train">训练集</button><button type="button" data-group="validation">验证集</button><button type="button" data-group="test">测试集</button>
+        </div>
+        <div id="devExtraction" class="devExtraction" hidden>
+          <div class="devToolRow devMetricButtons" role="group" aria-label="播放特征计算">
+            <button type="button" data-view="metric" data-value="rms">RMS</button>
+            <button type="button" data-view="metric" data-value="mav">MAV</button>
+            <button type="button" data-view="metric" data-value="wl">WL</button>
+          </div>
+          <label>观察通道 <select id="devChannel" aria-label="观察通道"></select></label>
+          <label><input id="devIncludeWL" type="checkbox"> 加入 WL</label>
+          <output id="devFeatureCount" aria-live="polite"></output>
+          <label class="devRange">查看前 <output id="devSampleCount"></output> 点 <input id="devSample" aria-label="波形采样点位置" type="range" min="1" max="200" value="200"></label>
+        </div>
+        <div id="devMatrix" class="devToolRow" role="group" aria-label="训练矩阵动画" hidden>
+          <button type="button" data-view="matrix" data-value="raw">组装 X_train</button>
+          <button type="button" data-view="matrix" data-value="scaled">应用标准化</button>
+        </div>
+        <div id="devLogic" hidden>
+          <div class="devToolRow" role="group" aria-label="逻辑回归计算步骤">
+            <button type="button" data-view="logistic" data-value="scores">① 线性打分</button>
+            <button type="button" data-view="logistic" data-value="softmax">② Softmax 概率</button>
+            <button type="button" data-view="logistic" data-value="curve">③ 改变特征</button>
+          </div>
+          <label id="devSweep" hidden>移动特征值 <input id="devFeature" aria-label="改变标准化特征值" type="range" min="0" max="80" value="40"></label>
+        </div>
+        <label id="devNeighbors" class="devRange" hidden>邻居数 k = <output id="devKnnCount"></output> <input id="devKnn" aria-label="参与投票的邻居数量" type="range" min="1" max="15" value="15"></label>
+        <div id="devBranches" class="devToolRow" role="group" aria-label="决策树路径阶段" hidden>
+          <button type="button" data-depth="0">起点</button><button type="button" data-depth="1">第 1 次判断</button><button type="button" data-depth="2">第 2 次判断</button><button type="button" data-depth="3">汇总结果</button>
+        </div>
+        <label id="devComparison" class="devToolRow" hidden>验证配置 <select id="devCompare">
+          <option value="all">各模型最佳配置</option><option>RMS+MAV</option><option>RMS+MAV+WL</option>
+        </select></label>
+        <div id="devArtifacts" hidden>
+          <div class="devToolRow" role="group" aria-label="选择实验产物">
+            <button type="button" data-view="artifact" data-value="relation">特征与类别</button>
+            <button type="button" data-view="artifact" data-value="scale">标准化参数</button>
+            <button type="button" data-view="artifact" data-value="weights">模型参数</button>
+            <button type="button" data-view="artifact" data-value="tree">决策树结构</button>
+          </div>
+          <div class="devToolRow">
+            <label id="devMetricControl">特征 <select id="devArtifactMetric"><option value="0">RMS</option><option value="1">MAV</option><option value="2">WL</option></select></label>
+            <label id="devClassControl" hidden>逻辑回归类别 <select id="devArtifactClass"></select></label>
+          </div>
+        </div>
+        <div id="devLive" class="devLive" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="devControls">
+      <button type="button" id="devPrev">← 上一步</button>
+      <span id="devPosition" aria-live="polite"></span>
+      <button type="button" id="devNext">下一步 →</button>
+      <a id="devFinish" href="index.html" hidden>体验随机森林 →</a>
+    </div>
+    <details id="devCandidates" hidden><summary>查看 12 组验证候选与测试结果</summary><div id="devTable"></div></details>
+  </section>
+  <footer>数据来自 UCI EMG Data for Gestures。<a href="https://doi.org/10.24432/C5ZP5C">数据来源 ↗</a></footer>
+</main>
+<script src="development-data.js?v=pipeline"></script><script src="development_diagrams.js?v=pipeline"></script><script src="development.js?v=pipeline"></script>
+</html>

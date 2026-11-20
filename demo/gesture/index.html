@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EMGInsight · 手势信号实验台</title><link rel="stylesheet" href="style.css">
-<header><div class="brand"><b>∿</b> EMGInsight</div><span>手势信号实验台</span><small id="sourceMode">UCI / 离线回放</small></header>
+<header><div class="brand"><b>∿</b> EMGInsight</div><span>手势信号实验台</span><small id="sourceMode">UCI / 离线回放</small><a class="projectNav" href="development.html">开发过程 ↗</a><a class="projectNav" href="force.html">指力预测实验台 →</a></header>
 <main><div class="intro"><div><p class="eyebrow">UCI GESTURES</p><h1>手势信号<span>实验台</span></h1></div><div class="modeControls"><div class="modes" role="group" aria-label="演示模式"><button id="replayMode" aria-pressed="true">观察案例</button><button id="simMode" aria-pressed="false">模拟</button></div><label id="casePicker">观察案例 <select id="case"></select></label></div></div>
 <div id="missing" hidden>请先在项目根目录运行 <code>.venv\Scripts\python.exe demo/gesture/prepare.py</code>，然后刷新。</div>
 <div id="simMissing" hidden>请运行 <code>.venv\Scripts\python.exe demo/gesture/prepare.py</code> 导出模拟所需的模型，然后刷新。</div>
@@ -35,13 +35,13 @@
       <button type="button"><span class="flowIndex">01</span><span><strong>读取与分窗</strong><small>8 路原始肌电 → 200 点</small></span></button>
       <button type="button"><span class="flowIndex">02</span><span><strong>提取特征</strong><small>200 × 8 → 24 个数</small></span></button>
       <button type="button"><span class="flowIndex">03</span><span><strong>标准化</strong><small>按训练集统计量换算</small></span></button>
-      <button type="button"><span class="flowIndex">04</span><span><strong>随机森林分类</strong><small>100 棵树 → 6 类概率</small></span></button>
+      <button type="button"><span class="flowIndex">04</span><span><strong>随机森林分类</strong><small>树的概率取平均 → 6 类概率</small></span></button>
     </div>
     <div class="flowInspector">
       <div class="heading flowInspectorHead"><h3 id="flowStageTitle"></h3><label id="flowChannelControl">通道 <span id="caseChannel"></span></label></div>
       <div id="flowEvidence" class="flowEvidence"></div>
       <div class="flowExplainers">
-        <div class="flowCode"><div class="flowCaption"><strong>关键代码示意</strong><a id="flowSource" target="_blank" rel="noopener">项目源码 ↗</a></div><pre><code id="flowCode"></code></pre></div>
+        <div class="flowCode"><div class="flowCaption"><strong>关键代码示意</strong><a id="flowSource" data-source-base="../../src/emginsight/" target="_blank" rel="noopener">项目源码 ↗</a></div><pre><code id="flowCode"></code></pre></div>
         <div class="flowKnowledge"><strong>机器学习原理</strong><p id="flowKnowledge"></p></div>
       </div>
     </div>
@@ -52,7 +52,7 @@
   <li><span class="traceMarker" aria-hidden="true"></span><div><strong>读取与分窗</strong><code>8 路信号 → 200 点窗口，步长 100</code><small id="traceWindow"></small></div></li>
   <li><span class="traceMarker" aria-hidden="true"></span><div><strong>提取特征</strong><code>每通道算 RMS、MAV、WL → 24 个特征</code><small id="traceFeatures"></small></div></li>
   <li><span class="traceMarker" aria-hidden="true"></span><div><strong>标准化</strong><code>用训练集的均值和标准差转换特征</code><small id="traceScale"></small></div></li>
-  <li><span class="traceMarker" aria-hidden="true"></span><div><strong>随机森林分类</strong><code>100 棵树的类别概率取平均 → 输出手势</code><small id="traceResult"></small></div></li>
+  <li><span class="traceMarker" aria-hidden="true"></span><div><strong>随机森林分类</strong><code>各树的类别概率取平均 → 输出手势</code><small id="traceResult"></small></div></li>
 </ol><small id="traceNote">高亮按回放节奏重现处理顺序，数值来自当前窗口。</small></article>
 <article id="testResults"><p class="eyebrow">TEST SET</p><h2>从误判回到波形</h2><small>行是真实动作，列是预测。点击计数查看片段。</small><div id="matrix"></div></article></section>
 <footer>数据 · Krilova 等，UCI EMG Data for Gestures，CC BY 4.0 <a href="https://doi.org/10.24432/C5ZP5C">数据来源 ↗</a></footer></main>

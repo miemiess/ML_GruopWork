@@ -1,14 +1,14 @@
-# UCI 手势信号实验台
+# EMGInsight 网页演示
 
-组员可直接访问 [GitHub Pages 在线演示](https://miemiess.github.io/ML_GruopWork/)。
+访问 [GitHub Pages 已发布版本](https://miemiess.github.io/ML_GruopWork/)，或生成本地快照后打开同目录的 `index.html`，从顶部切换手势与指力实验台。
 
-双击同目录的 `index.html`。首次在另一台电脑运行时，在项目根目录准备与 C 实验相同的 UCI 数据及 Python 环境，然后执行：
+## 手势信号实验台
 
-```powershell
-.\.venv\Scripts\python.exe demo/gesture/prepare.py
-```
+在顶部选择「开发过程」，用「下一步」查看按用户划分、时域特征提取、逻辑回归概率曲线、kNN 邻居投票、随机森林的决策树及验证集选型。特征页可切换真实窗口的八个通道，并查看加入 WL 后如何从 16 维扩展到 24 维。三个模型的解释图使用同一个验证窗口。逻辑回归曲线只改变一项特征，其余保持窗口中的实际值。
 
-导出器调用 C 实验的 `prepare_data` 和 `select_model`，复算完整测试集的预测并核对已保存的逐窗结果。`session.js` 保存回放片段，`simulator-data.js` 保存模拟所需的训练信号模板、标准化参数和决策树。两个文件随 GitHub Pages 发布，开发分支通过脚本在本地生成。生成后页面可离线打开。
+每一步都可单独重播。点击数据组可查看规模，拖动波形可逐点累积特征，拖动概率曲线可改变单项特征，调整 k 可看邻居票数变化。决策树支持分次查看两个判断和森林结果，选型图可按特征组合切换验证记录。
+
+特征页可点选 RMS、MAV 或 WL，查看真实采样值怎样一步步转换成特征。下一页组装 `X_train`，并用训练集的均值与标准差逐列转换。逻辑回归可切换线性得分、Softmax 概率和单特征曲线。最后一页保留训练特征与类别的热图、标准化参数、模型参数和随机森林的第一棵树节选。
 
 默认定位到测试用户 09 的握拳窗口。拖动时间轴到最左侧再播放，即可观察这段记录中的静息、未标注区间及握拳。点击混淆矩阵可选取对应真值与预测的一个真实窗口。左侧手模始终显示，有标签时模拟对应动作，未标注时显示自然姿势。右侧展示模型根据肌电窗口预测的姿势。两侧随同一时间轴更新。
 
@@ -17,3 +17,23 @@
 切换到「模拟」，用 INPUT 手模下方的按钮选择六种动作。网页按虚拟 1 kHz 连续生成八路信号，切换时平滑混合两个动作的波形。每类模板取自最接近该类特征中位数的一个训练窗口。浏览器按 200 点窗长、100 点步长计算 RMS、MAV、WL，经训练集参数标准化后，使用 C 实验的随机森林推理。OUTPUT 手模跟随模型预测，混合过渡区间也会送进模型。
 
 信号来自 Krilova 等的 [UCI EMG Data for Gestures](https://doi.org/10.24432/C5ZP5C)，授权 CC BY 4.0。
+
+## 指力预测实验台
+
+打开同目录的 `force.html`，或从手势实验台顶部切换。案例回放取自 D 实验选定的测试用户 46。拖动时间轴或点选 FORCE_1 至 FORCE_10，可以比较实测、已平滑预测与训练均值基线。开发过程的特征和五窗平滑示例沿用当前窗口，可切换尺度浏览全部 72 个验证候选，最后按目标或按用户查看留出结果。
+
+## 生成快照和发布
+
+在项目根目录运行以下命令。手势导出需要 [C 实验](../../results/uci_gesture/classification/report.md)使用的 UCI 原始数据、获选模型和结果表。指力导出需要 [D 回归实验](../../results/putemg_force/regression/report.md)保存的模型、案例特征缓存和结果表。
+
+```powershell
+.\.venv\Scripts\python.exe demo/gesture/prepare.py
+.\.venv\Scripts\python.exe demo/gesture/force_export.py
+.\.venv\Scripts\python.exe demo/gesture/build_pages.py
+```
+
+- `prepare.py` 读取模型卡验证保存的随机森林，并按已保存的逐窗预测核对回放数据。教学页读取 `validation.csv`，只拟合展示用的逻辑回归和 kNN 候选。只需刷新回放和模拟时，可加 `--skip-development`。
+- `force_export.py` 读取回归模型和缓存，核对案例的窗口位置、调零后实测值及五窗平滑预测。
+- `build_pages.py` 校验快照里的模型和报告校验值，打包两套网页、所需快照、源码示例和 `snapshot-manifest.json` 到 `build/pages/`。可打开其中的 `index.html` 离线预览。发布 GitHub Pages 时，用这个目录的内容更新 `gh-pages` 站点根目录。
+
+网页源码和导出脚本由主分支维护。四份生成的 JavaScript 快照在本地被 Git 忽略，随静态网站一同发布。发布目录列出的校验值可以追溯到对应的模型和实验报告。
