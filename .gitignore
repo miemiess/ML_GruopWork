@@ -38,6 +38,14 @@ htmlcov/
 # 本地运行结果与模型二进制文件
 /results/runs/*
 !/results/runs/.gitkeep
+/deploy/force/input/*
+!/deploy/force/input/.gitkeep
+/deploy/force/output/*
+!/deploy/force/output/.gitkeep
+/deploy/gesture/input/*
+!/deploy/gesture/input/.gitkeep
+/deploy/gesture/output/*
+!/deploy/gesture/output/.gitkeep
 *.pkl
 *.pickle
 *.joblib

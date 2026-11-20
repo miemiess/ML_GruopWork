@@ -1,0 +1,10 @@
+name: emginsight-force
+
+services:
+  predict:
+    image: emginsight-force:latest
+    pull_policy: never
+    volumes:
+      - ./input:/data/input:ro
+      - ./output:/data/output
+    command: ["--input", "/data/input", "--output-dir", "/data/output"]

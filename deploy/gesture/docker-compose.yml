@@ -1,0 +1,10 @@
+name: emginsight-gesture
+
+services:
+  predict:
+    image: emginsight-gesture:latest
+    pull_policy: never
+    volumes:
+      - ./input:/data/input:ro
+      - ./output:/data/output
+    command: ["--input", "/data/input", "--output-dir", "/data/output"]

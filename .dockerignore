@@ -1,0 +1,15 @@
+# 只把预测镜像需要的文件送入构建上下文，避免把数十 GB 的原始数据打包进去。
+*
+!pyproject.toml
+!README.md
+!src/
+!deploy/requirements.txt
+!results/runs/putemg_force/force_model.joblib
+!results/putemg_force/regression/model_card.json
+!results/putemg_force/regression/monitoring_reference.json
+!results/runs/putemg_force/force_level_model.joblib
+!results/putemg_force/levels/model_card.json
+!results/runs/uci_gesture/gesture_model.joblib
+!results/uci_gesture/classification/model_card.json
+**/__pycache__
+**/*.pyc
