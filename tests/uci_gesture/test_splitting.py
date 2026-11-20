@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 
 from emginsight.uci_gesture import GestureRecord
-from emginsight.uci_gesture import split_records_by_subject, split_subject_ids
+from emginsight.common.splitting import split_records_by_subject, split_subject_ids
 
 
 ## @brief 验证 36 名用户全部分配且三组无交集，重复编号不增加用户数。

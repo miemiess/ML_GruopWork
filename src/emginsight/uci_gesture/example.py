@@ -7,9 +7,8 @@ from pathlib import Path
 
 import numpy as np
 
-from emginsight.uci_gesture import (
-    load_uci_gesture_record, split_subject_ids, window_gesture_record,
-)
+from emginsight.common.splitting import split_subject_ids
+from emginsight.uci_gesture import load_uci_gesture_record, window_gesture_record
 
 
 ## @brief 将处理报告以中文形式打印，解释窗口、标签和异常统计。

@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score, f1_score
 
-from emginsight._batch import expand_inputs, run_batch
+from emginsight.common.batch import expand_inputs, run_batch
 
 from .model import LEVEL_NAMES_EN, load_force_model, load_level_model
 from .preprocessing import BAND_HZ, CALIBRATION_SECONDS, FS, calibration_is_rest, record_features

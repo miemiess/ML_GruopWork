@@ -7,8 +7,8 @@ from time import perf_counter
 import joblib
 import sklearn
 from matplotlib.figure import Figure
-from emginsight._batch import expand_inputs, run_batch
-from emginsight.models.artifacts import file_sha256
+from emginsight.common.batch import expand_inputs, run_batch
+from emginsight.common.artifacts import file_sha256
 from .full_dataset import REPORT, RUN, predict_record
 
 

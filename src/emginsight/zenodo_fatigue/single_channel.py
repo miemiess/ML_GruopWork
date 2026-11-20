@@ -11,10 +11,10 @@ import subprocess
 import numpy as np
 import pandas as pd
 import scipy
-from scipy.signal import butter, sosfilt
+from emginsight.common.signal import bandpass
 
 from .reading import discover_fatigue_pairs, load_fatigue_record
-from .splitting import split_subject_ids
+from emginsight.common.splitting import split_subject_ids
 from .windowing import window_fatigue_record
 
 
@@ -32,7 +32,7 @@ def filter_single_channel(signal):
     signal = np.asarray(signal, dtype=float)
     if signal.ndim != 1 or not np.isfinite(signal).all():
         raise ValueError("输入必须为有限的一维肌电信号。")
-    return sosfilt(butter(4, [20, 450], fs=FS, btype="bandpass", output="sos"), signal)
+    return bandpass(signal, FS, (20, 450))
 
 
 ## @brief 从一批单路窗口提取幅度及频率特征，不包含时间或用户身份。

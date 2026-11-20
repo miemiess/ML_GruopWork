@@ -8,7 +8,8 @@ import sys
 
 import numpy as np
 
-from emginsight.putemg_force import load_putemg_force_record, split_subject_ids, iter_force_windows
+from emginsight.common.splitting import split_subject_ids
+from emginsight.putemg_force import iter_force_windows, load_putemg_force_record
 
 
 ## @brief 读取本地 CSV 并逐批分窗，中文汇报数据形状、力量范围及划分限制。

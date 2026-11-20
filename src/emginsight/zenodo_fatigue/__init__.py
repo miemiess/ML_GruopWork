@@ -1,9 +1,8 @@
-"""Zenodo 自感疲劳数据处理的统一调用入口。"""
+"""Zenodo 自感疲劳数据的读取、标签对齐与分窗（数据集专用）。用户划分见 emginsight.common。"""
 
-from .reading import FatigueRecord, FatiguePair, discover_fatigue_pairs, load_fatigue_record
+from .reading import FatiguePair, FatigueRecord, discover_fatigue_pairs, load_fatigue_record
 from .alignment import align_fatigue_labels
-from .splitting import split_subject_ids, split_fatigue_records_by_subject
 from .windowing import FatigueWindows, window_fatigue_record
 
-__all__ = ["FatigueRecord", "FatiguePair", "FatigueWindows", "discover_fatigue_pairs", "load_fatigue_record",
-           "align_fatigue_labels", "split_subject_ids", "split_fatigue_records_by_subject", "window_fatigue_record"]
+__all__ = ["FatiguePair", "FatigueRecord", "FatigueWindows", "align_fatigue_labels", "discover_fatigue_pairs",
+           "load_fatigue_record", "window_fatigue_record"]

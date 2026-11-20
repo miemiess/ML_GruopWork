@@ -7,9 +7,10 @@ import pandas as pd
 import pytest
 
 from emginsight.putemg_force import load_force_model
-from emginsight.putemg_force.experiment import (
-    CALIBRATION_SECONDS, FEATURE_SCALES, SMOOTHING, TARGETS, run, smooth, target_metrics,
-)
+from emginsight.putemg_force.experiment import SMOOTHING, run
+from emginsight.putemg_force.model import FEATURE_SCALES, smooth
+from emginsight.putemg_force.preprocessing import CALIBRATION_SECONDS
+from emginsight.putemg_force.targets import TARGETS, target_metrics
 
 CALIBRATION = int(CALIBRATION_SECONDS * 5120)
 

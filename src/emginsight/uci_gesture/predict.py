@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score, f1_score
 
-from emginsight._batch import expand_inputs, run_batch
+from emginsight.common.batch import expand_inputs, run_batch
 
 from .model import LABEL_NAMES_EN, UNKNOWN, load_gesture_model
 from .rejection import rejection_scores

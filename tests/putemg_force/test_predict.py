@@ -6,7 +6,9 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from emginsight.putemg_force.experiment import CALIBRATION_SECONDS, TARGETS, run
+from emginsight.putemg_force.experiment import run
+from emginsight.putemg_force.preprocessing import CALIBRATION_SECONDS
+from emginsight.putemg_force.targets import TARGETS
 from emginsight.putemg_force.predict import drift_check, main
 
 CALIBRATION = int(CALIBRATION_SECONDS * 5120)

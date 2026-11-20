@@ -11,63 +11,17 @@ import sklearn
 from matplotlib.figure import Figure
 from sklearn.ensemble import RandomForestRegressor
 
+from emginsight.common.plotting import use_chinese_font
 from emginsight.models import MeanRegressor, RidgeRegressor, Standardizer
-from emginsight.putemg_force import load_putemg_force_record, split_subject_ids
 from emginsight.putemg_force.model import (
     FEATURE_SCALES, FEATURE_SETS, ForceModel, load_force_model, save_force_model, smooth, transform,
 )
 from emginsight.putemg_force.preprocessing import (
-    BAND_HZ, CALIBRATION_SECONDS, FS, calibration_is_rest, filter_emg, record_features,
+    BAND_HZ, CALIBRATION_SECONDS, FORCE_UNIT, FS, SEED, TRIAL, prepare_data,
 )
 from emginsight.putemg_force.targets import TARGETS, target_metrics
 
-SEED = 42
-TRIAL = "repeats_long"
 SMOOTHING = (1, 3, 5)
-CACHE_VERSION = "v2"
-FORCE_UNIT = "putEMG-Force 原始力量数值（数据集未给出物理单位，不是牛顿）"
-
-
-## @brief 先按用户划分，再逐条读取并缓存每份记录的特征，不同时驻留多份原始记录。
-# @param root 已解压的 putEMG-Force 根目录。
-# @param cache 特征缓存目录；None 表示不缓存。
-# @param window_size 每窗点数。
-# @param step_size 窗口步长。
-# @return tuple 特征、原始目标、零点、静息特征、窗口索引表、用户分组和跳过记录。
-def prepare_data(root, cache=None, window_size=1024, step_size=512):
-    paths = sorted(root.rglob(f"emg_force-*-{TRIAL}-*.csv"))
-    if not paths:
-        raise ValueError(f"找不到 {TRIAL} 力量记录，请检查数据目录 {root}")
-    groups = split_subject_ids(sorted({path.name.split("-")[1] for path in paths}), seed=SEED)
-    owner = {subject: group for group, subjects in groups.items() for subject in subjects}
-    calibration = int(CALIBRATION_SECONDS * FS)
-    parts, frames, skipped = [], [], []
-    for path in paths:
-        cached = cache / f"{CACHE_VERSION}-{window_size}-{step_size}" / f"{path.stem}.npz" if cache else None
-        if cached is not None and cached.exists():
-            item = dict(np.load(cached))
-        else:
-            if not calibration_is_rest(path, calibration):
-                skipped.append({"record": path.stem, "reason": f"开头 {CALIBRATION_SECONDS} 秒内有出力指令或缺少 TRAJ"})
-                continue
-            record = load_putemg_force_record(path, targets=TARGETS)
-            item = record_features(record, window_size, step_size, calibration)
-            del record
-            if cached is not None:
-                cached.parent.mkdir(parents=True, exist_ok=True)
-                np.savez_compressed(cached, **item)
-        subject, session = path.name.split("-")[1], "-".join(path.stem.split("-")[3:6])
-        n = len(item["y"])
-        parts.append((item["X"], item["y"], np.tile(item["tare"], (n, 1)), np.tile(item["rest"], (n, 1))))
-        frames.append(pd.DataFrame({"subject": subject, "session": session, "record": path.stem,
-                                    "group": owner[subject], "start_sample": item["starts"], "time_s": item["time_s"]}))
-        print(f"已处理 {path.name}：{n} 窗", flush=True)
-    X, y, tare, rest = (np.concatenate(values) for values in zip(*parts))
-    index = pd.concat(frames, ignore_index=True)
-    for group in groups:
-        if not (index.group == group).any():
-            raise ValueError(f"{group} 没有可用窗口。")
-    return X, y, tare, rest, index, groups, skipped
 
 
 ## @brief 统计训练记录静息段对数 RMS 的分布，供部署时检查佩戴或设备漂移。
@@ -211,9 +165,7 @@ def plot_users(users, path):
 # @param step_size 窗口步长，默认 512。
 # @param model_path 获选模型文件路径；None 表示不保存。
 def run(root, output, cache=None, window_size=1024, step_size=512, model_path=None):
-    import matplotlib
-    matplotlib.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei", "Noto Sans CJK SC", "DejaVu Sans"]
-    matplotlib.rcParams["axes.unicode_minus"] = False
+    use_chinese_font()
     X, y_raw, tare, rest, index, groups, skipped = prepare_data(root, cache, window_size, step_size)
     y = y_raw - tare
     scores, choice = select_model(X, y, rest, index)

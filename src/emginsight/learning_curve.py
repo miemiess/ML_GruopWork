@@ -15,6 +15,7 @@ from sklearn.metrics import accuracy_score, f1_score
 from emginsight.models import MajorityClassifier, Standardizer
 from emginsight.putemg_force import experiment as force
 from emginsight.putemg_force.model import smooth, transform
+from emginsight.putemg_force.preprocessing import prepare_data
 from emginsight.putemg_force.targets import target_metrics
 from emginsight.uci_gesture import experiment as gesture
 
@@ -45,7 +46,7 @@ def subsets(subjects, sizes, repeats=REPEATS):
 # @param cache 特征缓存目录。
 # @return DataFrame 每次抽样一行。
 def force_curve(root, cache):
-    X, y_raw, tare, rest, index, groups, _ = force.prepare_data(root, cache)
+    X, y_raw, tare, rest, index, groups, _ = prepare_data(root, cache)
     target = y_raw - tare
     choice = json.loads(Path("results/putemg_force/regression/metrics.json").read_text(encoding="utf-8"))["selected"]
     inputs = transform(X, rest, choice["features"], choice["scale"])

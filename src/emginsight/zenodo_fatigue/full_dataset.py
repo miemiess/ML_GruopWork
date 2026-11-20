@@ -19,9 +19,9 @@ from threadpoolctl import threadpool_limits
 from .reading import discover_fatigue_pairs, load_fatigue_record
 from .single_channel import (FS, WINDOW, STEP, FEATURE_NAMES, classification_metrics,
                              filter_single_channel, extract_single_channel_features)
-from .splitting import split_subject_ids
+from emginsight.common.splitting import split_subject_ids
 from .windowing import window_fatigue_record
-from emginsight.models.artifacts import file_sha256
+from emginsight.common.artifacts import file_sha256
 
 MUSCLES = ("BICEPS BRACHII", "DELTOID ANTERIOR", "DELTOID MEDIUS", "DELTOID POSTERIOR")
 ROOT = Path("data/raw/EMG_data_for_ZenodoTired")

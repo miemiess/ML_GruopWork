@@ -5,7 +5,8 @@ import json
 import numpy as np
 import pandas as pd
 
-from emginsight.putemg_force.experiment import CALIBRATION_SECONDS, TARGETS
+from emginsight.putemg_force.preprocessing import CALIBRATION_SECONDS
+from emginsight.putemg_force.targets import TARGETS
 from emginsight.putemg_force import experiment
 from emginsight.putemg_force.levels import LEVELS, level_labels, run
 from emginsight.putemg_force.predict import main as predict_main

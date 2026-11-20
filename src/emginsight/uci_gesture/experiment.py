@@ -16,7 +16,8 @@ from sklearn.metrics import (
 
 from emginsight.features import extract_time_features
 from emginsight.models import KNNClassifier, LogisticRegression, MajorityClassifier, Standardizer
-from emginsight.uci_gesture import load_uci_gesture_record, split_subject_ids, window_gesture_record
+from emginsight.common.splitting import split_subject_ids
+from emginsight.uci_gesture import load_uci_gesture_record, window_gesture_record
 from emginsight.uci_gesture.model import GestureModel, load_gesture_model, save_gesture_model
 from emginsight.uci_gesture.rejection import apply_threshold, choose_threshold, rejection_scores, status_windows
 

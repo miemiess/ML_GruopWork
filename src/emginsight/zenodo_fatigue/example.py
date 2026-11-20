@@ -7,9 +7,10 @@ import sys
 
 import numpy as np
 
+from emginsight.common.splitting import split_subject_ids
 from emginsight.zenodo_fatigue import (
     discover_fatigue_pairs, load_fatigue_record, align_fatigue_labels,
-    split_subject_ids, window_fatigue_record,
+    window_fatigue_record,
 )
 
 

@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import sklearn
 
-from emginsight.models.artifacts import load_model_file, save_model_file
+from emginsight.common.artifacts import load_model_file, save_model_file
 
 FEATURE_SETS = {"RMS+MAV": (0, 1), "RMS+MAV+WL": (0, 1, 2)}
 FEATURE_SCALES = ("raw", "log", "log_rest")

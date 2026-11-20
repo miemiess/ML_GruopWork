@@ -3,9 +3,8 @@
 import numpy as np
 import pytest
 
-from emginsight.uci_gesture import (
-    GestureRecord, split_records_by_subject, window_gesture_record,
-)
+from emginsight.common.splitting import split_records_by_subject
+from emginsight.uci_gesture import GestureRecord, window_gesture_record
 
 
 ## @brief 构造具有已知数值的测试记录。

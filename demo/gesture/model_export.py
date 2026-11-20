@@ -3,7 +3,7 @@ import json
 
 import numpy as np
 import pandas as pd
-from emginsight.putemg_force.change_model import FEATURES, load_change_model
+from emginsight.putemg_force.change import FEATURES, load_change_model
 
 from snapshots import ROOT, file_sha256, write_snapshot
 

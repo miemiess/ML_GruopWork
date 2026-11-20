@@ -17,8 +17,9 @@ from sklearn.metrics import (
     ConfusionMatrixDisplay, accuracy_score, confusion_matrix, f1_score, precision_recall_fscore_support,
 )
 
+from emginsight.common.plotting import use_chinese_font
 from emginsight.models import LogisticRegression, MajorityClassifier, Standardizer
-from emginsight.putemg_force.experiment import SEED, TRIAL, prepare_data
+from emginsight.putemg_force.preprocessing import SEED, TRIAL, prepare_data
 from emginsight.putemg_force.model import (
     FEATURE_SETS, LEVEL_NAMES, LEVEL_NAMES_EN, ForceLevelModel, load_force_model, load_level_model,
     save_level_model, smooth, transform,
@@ -109,9 +110,7 @@ def plot_timeline(frame, path, title):
 # @param window_size 每窗点数。
 # @param step_size 窗口步长。
 def run(root, output, cache=None, model_path=None, regression_model=None, window_size=1024, step_size=512):
-    import matplotlib
-    matplotlib.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei", "Noto Sans CJK SC", "DejaVu Sans"]
-    matplotlib.rcParams["axes.unicode_minus"] = False
+    use_chinese_font()
     X, y_raw, tare, rest, index, groups, skipped = prepare_data(root, cache, window_size, step_size)
     force = y_raw - tare
     test = (index.group == "test").to_numpy()

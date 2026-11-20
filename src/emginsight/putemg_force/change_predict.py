@@ -4,11 +4,9 @@ import argparse
 import json
 from pathlib import Path
 
-import pandas as pd
 from matplotlib.figure import Figure
 
-from .change import read_trials, trial_features
-from .change_model import FEATURES, RESULTS, RUNS, load_change_model
+from .change import FEATURES, RESULTS, RUNS, load_change_model, read_trials, trial_features
 from .model import load_force_model
 
 

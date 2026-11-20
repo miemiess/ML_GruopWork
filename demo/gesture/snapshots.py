@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from emginsight.models.artifacts import file_sha256
+from emginsight.common.artifacts import file_sha256
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]

@@ -6,7 +6,7 @@ import numpy as np
 import sklearn
 
 from emginsight.features import extract_time_features
-from emginsight.models.artifacts import load_model_file, save_model_file
+from emginsight.common.artifacts import load_model_file, save_model_file
 
 FORMAT_VERSION = 2
 UNKNOWN = 0
