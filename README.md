@@ -4,7 +4,9 @@
 
 用传统机器学习分析表面肌电（sEMG），完成手势识别、手指力量估计和肌肉疲劳分类。希望为辅助交互、假肢与康复研究提供参考。项目仅做离线研究。
 
-成员：Ma Mingyang、Han Yuchen、Zhou Yin、Wei Xin、Gao Ruiyan、Li Ji。**不固定分工，大家按兴趣和进度选择任务，也可以合作完成。**
+**Codabench Track 4 参赛成员**：Ma Mingyang、Han Yuchen、Zhou Ying。参见[赛道训练与提交说明](competition/emg_pose/README.md)。
+
+课程项目的原始署名见文末项目提案。
 
 三个数据集的读取、用户划分和分窗已完成。公共特征、模型和示例见[调用说明](docs/shared_features_models.md)，实际提交步骤见[贡献指南](CONTRIBUTING.md)。
 
