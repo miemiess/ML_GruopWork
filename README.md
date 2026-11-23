@@ -32,6 +32,7 @@
 | 用 Docker 预测自己的文件 | [部署说明](deploy/README.md)：把数据放进对应的 `input/`，对 Compose 文件执行 **Compose Up**。手势、指力、两日变化、疲劳各一个镜像。 |
 | 复现实验 | `python -m emginsight.gesture.experiment`<br>`python -m emginsight.force.regression` · `python -m emginsight.force.levels` · `python -m emginsight.force.change_experiment`<br>`python -m emginsight.fatigue.full_dataset` · `python -m emginsight.learning_curve` |
 | 跑测试 | `python -m pytest` |
+| 设备端（ESP32-S3 + ADS1292 采集肱二头肌肌电） | [设备端说明](hardware/README.md)：ESP-IDF v6.1，在 `hardware/` 中执行 `idf.py build`。与 Zenodo 疲劳数据结合的方案见[实施计划](hardware/docs/实施计划-硬件与Zenodo数据结合.md)。 |
 
 复现前把公开数据解压到 `data/raw/` 下的对应目录，见[数据准备说明](docs/datasets.md)。模型文件较大，不上传 Git，由各实验命令生成到 `results/runs/`。
 
@@ -53,6 +54,7 @@ demo/web/      网页：页面、css/、js/，export/ 导出快照并打包到 b
 deploy/        四个 Docker 推理镜像
 docs/          数据说明、实验记录模板、开发日志、课程说明与提案
 data/          本地原始数据（不上传）
+hardware/      设备端：ESP32-S3 + ADS1292 固件（ESP-IDF 工程）、设备端文档；厂商资料在 vendor/（不上传）
 ```
 
 与数据集无关、多个任务共用的代码放在 `common/`、`features/`、`models/`；只属于某个数据集的读取、标签和实验流程放在对应任务包里，任务包之间不互相引用。详见[代码说明](src/emginsight/README.md)。

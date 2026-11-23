@@ -79,3 +79,9 @@ Desktop.ini
 !/deploy/fatigue/input/.gitkeep
 /deploy/fatigue/output/*
 !/deploy/fatigue/output/.gitkeep
+
+# ESP32 设备端（hardware/）：编译产物与本地厂商资料（约 700 MB，不上传）
+/hardware/vendor/
+/hardware/sdkconfig.old
+/hardware/managed_components/
+/hardware/dependencies.lock

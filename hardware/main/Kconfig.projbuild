@@ -1,0 +1,105 @@
+menu "ADS1292 Configuration"
+
+    comment "Default pins use the RGB-LCD/camera group: do not plug in an RGB LCD or camera."
+
+    config ADS1292_PIN_SCLK
+        int "SCLK GPIO"
+        default 4
+    config ADS1292_PIN_MOSI
+        int "DIN (MOSI) GPIO"
+        default 5
+    config ADS1292_PIN_MISO
+        int "DOUT (MISO) GPIO"
+        default 6
+    config ADS1292_PIN_CS
+        int "CS GPIO"
+        default 7
+    config ADS1292_PIN_DRDY
+        int "DRDY GPIO"
+        default 15
+    config ADS1292_PIN_START
+        int "START GPIO (-1 = use START/STOP commands)"
+        default 16
+    config ADS1292_PIN_PWDN
+        int "PWDN GPIO (-1 = not connected)"
+        default 17
+    config ADS1292_PIN_CLKSEL
+        int "CLKSEL GPIO (-1 = not connected)"
+        default -1
+
+    config ADS1292_SPI_CLOCK_KHZ
+        int "SPI clock (kHz)"
+        range 100 8000
+        default 2000
+
+    choice ADS1292_DATA_RATE
+        prompt "Data rate"
+        default ADS1292_RATE_2000
+        help
+            Fatigue analysis needs 2000 SPS: the ADS1292 digital filter bandwidth
+            is about 0.262 x data rate, and the features use 20-450 Hz.
+        config ADS1292_RATE_500
+            bool "500 SPS"
+        config ADS1292_RATE_1000
+            bool "1000 SPS"
+        config ADS1292_RATE_2000
+            bool "2000 SPS"
+        config ADS1292_RATE_4000
+            bool "4000 SPS"
+    endchoice
+
+    config ADS1292_RATE_CODE
+        int
+        default 2 if ADS1292_RATE_500
+        default 3 if ADS1292_RATE_1000
+        default 4 if ADS1292_RATE_2000
+        default 5 if ADS1292_RATE_4000
+
+    choice ADS1292_GAIN
+        prompt "PGA gain"
+        default ADS1292_GAIN_6
+        help
+            Input range is +/-2.42 V / gain. Electrode DC offsets can reach a few
+            hundred mV, so start with gain 6 (+/-400 mV).
+        config ADS1292_GAIN_1
+            bool "1 (+/-2.4 V)"
+        config ADS1292_GAIN_2
+            bool "2 (+/-1.2 V)"
+        config ADS1292_GAIN_4
+            bool "4 (+/-600 mV)"
+        config ADS1292_GAIN_6
+            bool "6 (+/-400 mV)"
+        config ADS1292_GAIN_8
+            bool "8 (+/-300 mV)"
+        config ADS1292_GAIN_12
+            bool "12 (+/-200 mV)"
+    endchoice
+
+    config ADS1292_GAIN_CODE
+        int
+        default 1 if ADS1292_GAIN_1
+        default 2 if ADS1292_GAIN_2
+        default 4 if ADS1292_GAIN_4
+        default 0 if ADS1292_GAIN_6
+        default 5 if ADS1292_GAIN_8
+        default 6 if ADS1292_GAIN_12
+
+    choice ADS1292_INPUT
+        prompt "Channel input"
+        default ADS1292_INPUT_TEST
+        help
+            Bring-up order: TEST (1 Hz square, about +/-1 mV) -> SHORTED (offset
+            and noise) -> NORMAL (electrodes).
+        config ADS1292_INPUT_TEST
+            bool "Internal test signal"
+        config ADS1292_INPUT_SHORTED
+            bool "Inputs shorted"
+        config ADS1292_INPUT_NORMAL
+            bool "Electrodes"
+    endchoice
+
+    config ADS1292_RLD_ENABLE
+        bool "Enable right-leg drive"
+        default y
+
+endmenu
